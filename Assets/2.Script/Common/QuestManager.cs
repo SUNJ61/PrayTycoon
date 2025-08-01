@@ -1,0 +1,69 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class QuestManager : MonoBehaviour
+{
+    public static QuestManager instance;
+
+    Dictionary<string, bool> QuestCheck = new Dictionary<string, bool>();
+
+    [SerializeField] private List<GameObject> Stair;
+    [SerializeField] private List<GameObject> Gate;
+
+    void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else if (instance != this)
+            Destroy(instance);
+    }
+
+    void Start()
+    {
+        Stair = ObjectManager.instance.GetObject("Stair-Main");
+        Gate = ObjectManager.instance.GetObject("Gate");
+
+        QuestCheck.Add("Stair-Main", false);
+        QuestCheck.Add("Gate", false);
+    }
+
+    public void StairQuest(int credit)
+    {
+        //UI 버튼 활성화 아래의 해당 내용을 버튼을 누르면 발동하도록 변경 필요함.
+        if (CreaditManager.instance.UseCredit(credit))
+        {
+            Stair[0].gameObject.SetActive(true);
+            Stair[1].gameObject.SetActive(false);
+
+            QuestCheck["Stair-Main"] = true;
+        }
+        else
+        {
+            Debug.Log("크레딧 부족");
+        }
+    }
+
+    public void GateQuest(int credit)
+    {
+        if (CreaditManager.instance.UseCredit(credit))
+        {
+            Gate[0].gameObject.SetActive(false);
+            Gate[1].gameObject.SetActive(true);
+
+            QuestCheck["Gate"] = true;
+        }
+        else
+        {
+            Debug.Log("크레딧 부족");
+        }
+    }
+
+    public bool ClearCheck(string key)
+    {
+        bool clear;
+        clear = QuestCheck[key];
+
+        return clear;
+    }
+}
