@@ -28,4 +28,17 @@ public class ObjectManager : MonoBehaviour
 
         return list;
     }
+
+    public Dictionary<string, GameObject> GetDictionary(List<GameObject> list)
+    {
+        Dictionary<string, GameObject> dict = new Dictionary<string, GameObject>();
+
+        if (list != null)
+        {
+            foreach (GameObject item in list)
+                dict.Add(item.name, item);
+        }
+        
+        return dict;
+    }
 }
