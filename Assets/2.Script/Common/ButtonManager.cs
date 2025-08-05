@@ -33,6 +33,15 @@ public class ButtonManager : MonoBehaviour
 
     private void QuestButtonClick() //퀘스트 버튼 클릭시 발동하는 함수.
     {
+        if (CreaditManager.instance.UseCredit(QuestCredit[CurrentKey])) //현재 미션에 대해 크레딧이 소모 가능한지 구분하는 함수.
+        {
+            //미션 UI 닫고 계단 고치기.
+        }
+        else
+        {
+            //실패 UI 띄우기.
+        }
+
         //버튼이 현재 어떤 퀘스트를 진행 중인지 알아야함. (완)
         //버튼에 퀘스트에 필요한 크레딧을 전달 받고 해당 함수에서 퀘스트 매니저로 전달 필요. (완)
         //해당 결과로 오브젝트 변경이 필요. (계단이 변경되는 것, 퀘스트 감지 2d콜라이더가 꺼지는 것.)
