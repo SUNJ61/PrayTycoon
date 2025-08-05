@@ -6,6 +6,7 @@ public class QuestManager : MonoBehaviour
 {
     public static QuestManager instance;
 
+    Dictionary<string, int> QuestCredit = new Dictionary<string, int>();
     Dictionary<string, bool> QuestCheck = new Dictionary<string, bool>();
 
     [SerializeField] private List<GameObject> Stair;
@@ -28,19 +29,22 @@ public class QuestManager : MonoBehaviour
         QuestCheck.Add("Gate", false);
     }
 
-    public void StairQuest(int credit)
+    public void Quest(string key ,int credit)
     {
+        if (!QuestCredit.ContainsKey(key)) //해당 키에 대한 값이 없을 때만 딕셔너리에 데이터 저장.
+            QuestCredit.Add(key, credit);
+            
         //UI 버튼 활성화 아래의 해당 내용을 버튼을 누르면 발동하도록 변경 필요함.
         if (CreaditManager.instance.UseCredit(credit))
         {
             Stair[0].gameObject.SetActive(true);
             Stair[1].gameObject.SetActive(false);
 
-            QuestCheck["Stair-Main"] = true;
+            QuestCheck[key] = true;
         }
         else
         {
-            Debug.Log("크레딧 부족");
+            Debug.Log("크레딧 부족"); // 실패 UI 띄우기.
         }
     }
 

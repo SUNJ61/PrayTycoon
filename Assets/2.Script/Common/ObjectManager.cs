@@ -29,7 +29,7 @@ public class ObjectManager : MonoBehaviour
         return list;
     }
 
-    public Dictionary<string, GameObject> GetDictionary(List<GameObject> list)
+    public Dictionary<string, GameObject> GetDictionary(List<GameObject> list) //딕셔너리 자동 생성 함수, UI에 쓰려다 사용처를 잃음.
     {
         Dictionary<string, GameObject> dict = new Dictionary<string, GameObject>();
 
