@@ -29,7 +29,7 @@ public class QuestManager : MonoBehaviour
         QuestCheck.Add("Gate", false);
     }
 
-    public void Quest(string key ,int credit)
+    public void Quest(string key ,int credit) // UI 매니저와 버튼 매니저로 인해 사용 x
     {
         if (!QuestCredit.ContainsKey(key)) //해당 키에 대한 값이 없을 때만 딕셔너리에 데이터 저장.
             QuestCredit.Add(key, credit);
@@ -48,7 +48,7 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    public void GateQuest(int credit)
+    public void GateQuest(int credit) // UI 매니저와 버튼 매니저로 인해 사용 x
     {
         if (CreaditManager.instance.UseCredit(credit))
         {
@@ -63,7 +63,7 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    public bool ClearCheck(string key)
+    public bool ClearCheck(string key) // UI 매니저와 버튼 매니저로 인해 사용 x
     {
         bool clear;
         clear = QuestCheck[key];
