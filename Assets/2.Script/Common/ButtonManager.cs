@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,8 +10,13 @@ public class ButtonManager : MonoBehaviour
 
     private Dictionary<string, int> QuestCredit = new Dictionary<string, int>();
 
-    private Button QuestButton;
-    private Button FailButton;
+    private GameObject UI;
+
+    [SerializeField] private Button QuestButton;
+    [SerializeField] private Button CloseButton;
+    [SerializeField] private Button FailButton;
+
+    private BoxCollider2D CurrentCol;
 
     private string CurrentKey;
 
@@ -24,10 +30,14 @@ public class ButtonManager : MonoBehaviour
 
     void Start()
     {
-        QuestButton = GameObject.Find("QuestButton").GetComponent<Button>();
-        FailButton = GameObject.Find("FailButton").GetComponent<Button>();
+        UI = GameObject.Find("UI");
+
+        QuestButton = UI.transform.GetChild(1).GetChild(2).GetComponent<Button>();
+        CloseButton = UI.transform.GetChild(1).GetChild(3).GetComponent<Button>();
+        FailButton = UI.transform.GetChild(2).GetChild(2).GetComponent<Button>();
 
         QuestButton.onClick.AddListener(QuestButtonClick);
+        CloseButton.onClick.AddListener(CloseButtonClick);
         FailButton.onClick.AddListener(FailButtonClick);
     }
 
@@ -35,11 +45,14 @@ public class ButtonManager : MonoBehaviour
     {
         if (CreaditManager.instance.UseCredit(QuestCredit[CurrentKey])) //현재 미션에 대해 크레딧이 소모 가능한지 구분하는 함수.
         {
-            //미션 UI 닫고 계단 고치기.
+            UIManager.instance.QuestUIControl(false);
+            ObjectManager.instance.QuestObjectActive(CurrentKey);
         }
         else
         {
-            //실패 UI 띄우기.
+            UIManager.instance.QuestUIControl(false);
+            UIManager.instance.FailUIEdit(CurrentKey);
+            UIManager.instance.FailUIControl(true);
         }
 
         //버튼이 현재 어떤 퀘스트를 진행 중인지 알아야함. (완)
@@ -52,14 +65,20 @@ public class ButtonManager : MonoBehaviour
         //남은 퀘스트 매니저의 역할은 퀘스트가 완료 되었는지 확인하는 역할.
     }
 
-    private void FailButtonClick() //실패 버튼 클릭시 발동하는 함수.
+    private void CloseButtonClick() // 닫기 버튼 클릭시 발동하는 함수.
     {
-
+        UIManager.instance.QuestUIControl(false);
     }
 
-    public void QuestCheck(string key, int credit)
+    private void FailButtonClick() //실패 버튼 클릭시 발동하는 함수.
+    {
+        UIManager.instance.FailUIControl(false);
+    }
+
+    public void QuestCheck(string key, int credit, BoxCollider2D col) //플레이어 미션 키 업데이트, 미션에 필요한 크레딧 저장, 미션을 반응하게 하는 콜라이더 저장.
     {
         CurrentKey = key; //플레이어가 진행중인 미션을 업데이트.
+        CurrentCol = col;
 
         if (!QuestCredit.ContainsKey(key)) //해당 키에 대한 값이 없을 때만 딕셔너리에 데이터 저장.
             QuestCredit.Add(key, credit);

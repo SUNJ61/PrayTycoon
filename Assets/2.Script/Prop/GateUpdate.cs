@@ -8,6 +8,8 @@ public class GateUpdate : MonoBehaviour
 
     private int GateCredit = 5;
 
+    private string Key = "Gate";
+
     private void Start()
     {
         QuestTrigger = GetComponent<BoxCollider2D>();
@@ -15,9 +17,9 @@ public class GateUpdate : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        //기도력 소모해서 문여는 기능 구현. (UI 매니저를 통해 UI 띄우기, 버튼 누르면 기도력 소모해서 문열기.)
-        QuestManager.instance.GateQuest(GateCredit);
-        if (QuestManager.instance.ClearCheck("Gate"))
-            QuestTrigger.enabled = false;
+        UIManager.instance.QuestUIEdit(Key);
+        ButtonManager.instance.QuestCheck(Key, GateCredit, QuestTrigger);
+
+        UIManager.instance.QuestUIControl(true);
     }
 }
