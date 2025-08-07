@@ -11,6 +11,7 @@ public class ObjectManager : MonoBehaviour
 
     [SerializeField] private List<GameObject> Stair;
     [SerializeField] private List<GameObject> Gate;
+    [SerializeField] private List<GameObject> Grave;
 
     void Awake()
     {
@@ -24,9 +25,11 @@ public class ObjectManager : MonoBehaviour
     {
         Stair = GetObject("Stair-Main");
         Gate = GetObject("Gate");
+        Grave = GetObject("GraveStone");
 
         QuestOJ.Add("Stair-Main", Stair);
         QuestOJ.Add("Gate", Gate);
+        QuestOJ.Add("GraveStone", Grave);
     }
 
     public List<GameObject> GetObject(string Ob_Name, int index = -1) // 해당 이름을 가진 오브젝트 자식 오브젝트를 리스트에 담는 함수, 자식 index 입력이 없으면 부모에서 리스트 생성, 있으면 자식을 찾아 리스트 생성.
@@ -48,10 +51,8 @@ public class ObjectManager : MonoBehaviour
         return list;
     }
 
-    public void QuestObjectActive(string key) // 진행중인 퀘스트 오브젝트 관리 함수.
+    public void QuestObjectActive(string key, BoxCollider2D col = null) // 진행중인 퀘스트 오브젝트 관리 함수.
     {
-        BoxCollider2D col = QuestOJ[key][0].transform.parent.gameObject.GetComponent<BoxCollider2D>();
-
         QuestOJ[key][0].SetActive(false);
         QuestOJ[key][1].SetActive(true);
 
