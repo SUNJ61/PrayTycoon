@@ -11,6 +11,8 @@ public class SummonAltar : MonoBehaviour
     private Color curColor;
     private Color targetColor;
 
+    private string Key = "Summon";
+
     private void Awake()
     {
         targetColor = runes[0].color;

@@ -1153,6 +1153,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224937662}
   - component: {fileID: 224937663}
+  - component: {fileID: 224937664}
   m_Layer: 21
   m_Name: GraveStone
   m_TagString: Untagged
@@ -1223,6 +1224,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &224937664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224937661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67a3b79b2d1869c44b94dfd8ddc36878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &226066582
 GameObject:
   m_ObjectHideFlags: 0
@@ -5942,6 +5955,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Stair: []
   Gate: []
+  Grave: []
 --- !u!1 &616705350
 GameObject:
   m_ObjectHideFlags: 0
