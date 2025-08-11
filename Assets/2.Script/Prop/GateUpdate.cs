@@ -9,6 +9,7 @@ public class GateUpdate : MonoBehaviour
     private int GateCredit = 5;
 
     private string Key = "Gate";
+    private string CreditType = "Gold";
 
     private void Start()
     {
@@ -18,7 +19,7 @@ public class GateUpdate : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         UIManager.instance.QuestUIEdit(Key);
-        ButtonManager.instance.QuestCheck(Key, GateCredit, QuestTrigger);
+        QuestManager.instance.QuestCheck(Key, CreditType, GateCredit, QuestTrigger);
 
         UIManager.instance.QuestUIControl(true);
     }

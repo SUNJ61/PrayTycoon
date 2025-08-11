@@ -6,12 +6,29 @@ public class QuestManager : MonoBehaviour
 {
     public static QuestManager instance;
 
-    Dictionary<string, int> QuestCredit = new Dictionary<string, int>();
-    Dictionary<string, bool> QuestCheck = new Dictionary<string, bool>();
+    private Dictionary<string, int> QuestCredit = new Dictionary<string, int>();
+    public Dictionary<string, int> questCredit
+    {
+        get { return QuestCredit; }
+    }
+    private Dictionary<string, string> QuestCreditType = new Dictionary<string, string>();
+    public Dictionary<string, string> questCreditType
+    {
+        get { return QuestCreditType; }
+    }
 
-    [SerializeField] private List<GameObject> Stair;
-    [SerializeField] private List<GameObject> Gate;
+    private BoxCollider2D CurrentCol = null;
+    public BoxCollider2D currentCol
+    {
+        get { return CurrentCol; }
+    }
 
+    private string CurrentKey = null;
+    public string currentKey
+    {
+        get { return CurrentKey; }
+    }
+    
     void Awake()
     {
         if (instance == null)
@@ -20,54 +37,15 @@ public class QuestManager : MonoBehaviour
             Destroy(instance);
     }
 
-    void Start()
+    public void QuestCheck(string key, string creditType, int credit, BoxCollider2D col = null) //플레이어 미션 키 업데이트, 미션에 필요한 크레딧 저장, 미션을 반응하게 하는 콜라이더 저장. (퀘스트 매니저에 있어도 무방할듯?)
     {
-        Stair = ObjectManager.instance.GetObject("Stair-Main");
-        Gate = ObjectManager.instance.GetObject("Gate");
+        CurrentKey = key; //플레이어가 진행중인 미션을 업데이트.
+        CurrentCol = col; //진행중인 미션을 판단하는 콜라이더 업데이트.
 
-        QuestCheck.Add("Stair-Main", false);
-        QuestCheck.Add("Gate", false);
-    }
-
-    public void Quest(string key ,int credit) // UI 매니저와 버튼 매니저로 인해 사용 x
-    {
         if (!QuestCredit.ContainsKey(key)) //해당 키에 대한 값이 없을 때만 딕셔너리에 데이터 저장.
             QuestCredit.Add(key, credit);
-            
-        //UI 버튼 활성화 아래의 해당 내용을 버튼을 누르면 발동하도록 변경 필요함.
-        if (CreaditManager.instance.UseCredit(credit))
-        {
-            Stair[0].gameObject.SetActive(true);
-            Stair[1].gameObject.SetActive(false);
 
-            QuestCheck[key] = true;
-        }
-        else
-        {
-            Debug.Log("크레딧 부족"); // 실패 UI 띄우기.
-        }
-    }
-
-    public void GateQuest(int credit) // UI 매니저와 버튼 매니저로 인해 사용 x
-    {
-        if (CreaditManager.instance.UseCredit(credit))
-        {
-            Gate[0].gameObject.SetActive(false);
-            Gate[1].gameObject.SetActive(true);
-
-            QuestCheck["Gate"] = true;
-        }
-        else
-        {
-            Debug.Log("크레딧 부족");
-        }
-    }
-
-    public bool ClearCheck(string key) // UI 매니저와 버튼 매니저로 인해 사용 x
-    {
-        bool clear;
-        clear = QuestCheck[key];
-
-        return clear;
+        if (!QuestCreditType.ContainsKey(key))
+            QuestCreditType.Add(key, creditType);
     }
 }

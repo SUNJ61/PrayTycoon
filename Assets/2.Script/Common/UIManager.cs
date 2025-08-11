@@ -72,14 +72,14 @@ public class UIManager : MonoBehaviour
     {
         QuestText.Add("Stair-Main", "Q. 계단을 수리하시겠습니까?");
         QuestText.Add("Gate", "Q. 잠긴 문을 열겠습니까?");
-        QuestText.Add("GraveStone", "Q. 용병 무덤을 수리하시겠습니까?");
+        QuestText.Add("GraveStone", "Q. 무덤을 수리하시겠습니까?");
         QuestText.Add("Summon", "Q. 소환을 진행하시겠습니까?");
     }
 
     private void AddConditionText() //퀘스트 UI에 필요한 문구를 딕셔너리에 추가하는 함수.
     {
         ConditionText.Add("Stair-Main", "계단을 수리하기 위해서는\n5의 기도력이 필요합니다.");
-        ConditionText.Add("Gate", "문을 열기 위해서는\n5의 기도력이 필요합니다.");
+        ConditionText.Add("Gate", "문을 열기 위해서는\n5G의 골드가 필요합니다.");
         ConditionText.Add("GraveStone", "무덤을 수리하기 위해서는\n5의 석재가 필요합니다.");
         ConditionText.Add("Summon", "소환을 하기 위해서는\n5의 기도력이 필요합니다.");
     }
@@ -87,7 +87,7 @@ public class UIManager : MonoBehaviour
     private void AddFailText() //퀘스트에 실패한 문구를 딕셔너리에 추가하는 함수.
     {
         FailText.Add("Stair-Main", "기도력이 부족합니다.");
-        FailText.Add("Gate", "기도력이 부족합니다.");
+        FailText.Add("Gate", "골드가 부족합니다.");
         FailText.Add("GraveStone", "석재가 부족합니다.");
         FailText.Add("Summon", "기도력이 부족합니다.");
     }
