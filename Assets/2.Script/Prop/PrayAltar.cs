@@ -19,14 +19,14 @@ public class PrayAltar : MonoBehaviour
     {
         targetColor.a = 1.0f;
         StartCoroutine(PrayUpdate());
-        CreaditManager.instance.PrayCountCheck();
+        CreditManager.instance.PrayCountCheck();
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
         targetColor.a = 0.0f;
         StartCoroutine(PrayUpdate());
-        CreaditManager.instance.PrayCountCheck();
+        CreditManager.instance.PrayCountCheck();
     }
 
     private IEnumerator PrayUpdate()

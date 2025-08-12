@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CreaditManager : MonoBehaviour
+public class CreditManager : MonoBehaviour
 {
-    public static CreaditManager instance;
+    public static CreditManager instance;
 
     private Coroutine PrayCoroutine;
 

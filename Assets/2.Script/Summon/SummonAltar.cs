@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class SummonAltar : MonoBehaviour
 {
-
     public List<SpriteRenderer> runes;
-    private float lerpSpeed = 3;
 
     private Color curColor;
     private Color targetColor;
 
+    private float lerpSpeed = 3;
+
+    private int Credit = 5;
+
     private string Key = "Summon";
+    private string CreditType = "Pray";
 
     private void Awake()
     {
@@ -22,6 +25,10 @@ public class SummonAltar : MonoBehaviour
     {
         targetColor.a = 1.0f;
         StartCoroutine(RuneUpdate());
+
+        UIManager.instance.SummonUIEdit(Key);
+        QuestManager.instance.QuestCheck(Key, CreditType, Credit);
+        UIManager.instance.SummonUIControl(true);
     }
 
     private void OnTriggerExit2D(Collider2D other)
