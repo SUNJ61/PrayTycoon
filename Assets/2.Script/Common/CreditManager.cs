@@ -7,6 +7,10 @@ public class CreditManager : Singleton<CreditManager>
     private Coroutine PrayCoroutine;
 
     [SerializeField] private Dictionary<string, int> Credit = new Dictionary<string, int>();
+    public Dictionary<string, int> credit
+    {
+        get { return Credit; }
+    }
 
     private int PrayAdd = 5;
     private int PrayDelay = 1;
@@ -34,6 +38,7 @@ public class CreditManager : Singleton<CreditManager>
         while (true)
         {
             Credit["Pray"] += PrayAdd;
+            UIManager.Instance.CreditUIEdit();
             yield return new WaitForSeconds(PrayDelay);
         }
     }
@@ -44,6 +49,7 @@ public class CreditManager : Singleton<CreditManager>
             return false;
 
         Credit[key] -= consumeCredit; //조건문에서 걸러지지 않으면 재화 소비 가능.
+        UIManager.Instance.CreditUIEdit();
         return true;
     }
 
@@ -55,6 +61,8 @@ public class CreditManager : Singleton<CreditManager>
             Credit["Gold"] += AddGold;
         else
             Credit["Stone"] += AddStone;
+
+        UIManager.Instance.CreditUIEdit();
     }
 
     private void AddCreditDic() //추후 데이터 저장 시스템 필요. 시작 할 때마다 초기화 됨.

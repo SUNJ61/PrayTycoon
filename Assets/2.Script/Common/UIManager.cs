@@ -21,6 +21,10 @@ public class UIManager : Singleton<UIManager>
     private TextMeshProUGUI summon;
     private TextMeshProUGUI summonCondition;
 
+    public TextMeshProUGUI GoldUI;
+    public TextMeshProUGUI PrayUI;
+    public TextMeshProUGUI StoneUI;
+
     private GameObject UI;
     private GameObject QuestUI;
     private GameObject FailUI;
@@ -80,6 +84,13 @@ public class UIManager : Singleton<UIManager>
     {
         summon.text = SummonText[key];
         summonCondition.text = SummonConditonText[key];
+    }
+
+    public void CreditUIEdit()
+    {
+        GoldUI.text = CreditManager.Instance.credit["Gold"].ToString();
+        PrayUI.text = CreditManager.Instance.credit["Pray"].ToString();
+        StoneUI.text = CreditManager.Instance.credit["Stone"].ToString();
     }
 
 
