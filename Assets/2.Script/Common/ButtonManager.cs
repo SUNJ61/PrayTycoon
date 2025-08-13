@@ -51,9 +51,10 @@ public class ButtonManager : Singleton<ButtonManager>
     private void SummonButtonClick() //소환 버튼 클릭시 발동하는 함수.
     {
         if (CreditManager.Instance.UseCredit
-        (QuestManager.Instance.questCredit[QuestManager.Instance.currentKey], QuestManager.Instance.questCreditType[QuestManager.Instance.currentKey])) //현재 미션에 대해 크레딧이 소모 가능으로 판단하면 미션 업데이트.
+        (QuestManager.Instance.questCredit[QuestManager.Instance.currentKey], QuestManager.Instance.questCreditType[QuestManager.Instance.currentKey])) //현재 미션에 대해 크레딧이 소모 가능으로 판단하면 미션 업데이트. (소환 구분 법 필요.)
         {
             UIManager.Instance.SummonUIControl(false);
+            CreditManager.Instance.SummonCredit();
         }
         else
         {

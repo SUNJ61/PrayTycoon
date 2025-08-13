@@ -10,6 +10,8 @@ public class CreditManager : Singleton<CreditManager>
 
     private int PrayAdd = 5;
     private int PrayDelay = 1;
+    private int AddGold = 10;
+    private int AddStone = 10;
 
     void Start()
     {
@@ -43,6 +45,16 @@ public class CreditManager : Singleton<CreditManager>
 
         Credit[key] -= consumeCredit; //조건문에서 걸러지지 않으면 재화 소비 가능.
         return true;
+    }
+
+    public void SummonCredit() // 3:7확률로 랜덤 뽑기 함수.
+    {
+        float randomValue = Random.Range(0f, 100f);
+
+        if (randomValue > 70f)
+            Credit["Gold"] += AddGold;
+        else
+            Credit["Stone"] += AddStone;
     }
 
     private void AddCreditDic() //추후 데이터 저장 시스템 필요. 시작 할 때마다 초기화 됨.
