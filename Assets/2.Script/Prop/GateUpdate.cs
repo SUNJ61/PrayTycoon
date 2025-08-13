@@ -18,9 +18,9 @@ public class GateUpdate : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        UIManager.instance.QuestUIEdit(Key);
-        QuestManager.instance.QuestCheck(Key, CreditType, GateCredit, QuestTrigger);
+        UIManager.Instance.QuestUIEdit(Key);
+        QuestManager.Instance.QuestCheck(Key, CreditType, GateCredit, QuestTrigger);
 
-        UIManager.instance.QuestUIControl(true);
+        UIManager.Instance.QuestUIControl(true);
     }
 }

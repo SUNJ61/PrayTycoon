@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+public class UIManager : Singleton<UIManager>
 {
-    public static UIManager instance;
-
     private Dictionary<string, string> QuestText = new Dictionary<string, string>();
     private Dictionary<string, string> QuestConditionText = new Dictionary<string, string>();
     private Dictionary<string, string> FailText = new Dictionary<string, string>();
@@ -28,24 +26,16 @@ public class UIManager : MonoBehaviour
     private GameObject FailUI;
     private GameObject SummonUI;
 
-    void Awake()
-    {
-        if (instance == null)
-            instance = this;
-        else if (instance != this)
-            Destroy(instance);
-    }
-
     void Start()
     {
-        UI = GameObject.Find("UI");
+        UI = GameObject.Find("UI"); //퍼블릭으로 최적화 가능.
         QuestUI = UI.transform.GetChild(1).gameObject;
         FailUI = UI.transform.GetChild(2).gameObject;
         SummonUI = UI.transform.GetChild(3).gameObject;
 
-        QuestUI_List = ObjectManager.instance.GetObject("UI", 1);
-        FailUI_List = ObjectManager.instance.GetObject("UI", 2);
-        SummonUI_List = ObjectManager.instance.GetObject("UI", 3);
+        QuestUI_List = ObjectManager.Instance.GetObject("UI", 1);
+        FailUI_List = ObjectManager.Instance.GetObject("UI", 2);
+        SummonUI_List = ObjectManager.Instance.GetObject("UI", 3);
 
         quest = QuestUI_List[0].GetComponent<TextMeshProUGUI>();
         questCondition = QuestUI_List[1].GetComponent<TextMeshProUGUI>();

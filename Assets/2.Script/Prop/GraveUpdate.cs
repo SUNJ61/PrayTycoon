@@ -15,9 +15,9 @@ public class GraveUpdate : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) //수리 후와 수리 전을 구분해야함.
     {
-        UIManager.instance.QuestUIEdit(Key);
-        QuestManager.instance.QuestCheck(Key, CreditType, FixCredit);
+        UIManager.Instance.QuestUIEdit(Key);
+        QuestManager.Instance.QuestCheck(Key, CreditType, FixCredit);
 
-        UIManager.instance.QuestUIControl(true);
+        UIManager.Instance.QuestUIControl(true);
     }
 }

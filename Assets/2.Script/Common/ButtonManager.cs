@@ -1,13 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ButtonManager : MonoBehaviour
+public class ButtonManager : Singleton<ButtonManager>
 {
-    public static ButtonManager instance;
-
     private GameObject UI;
 
     [SerializeField] private Button QuestButton;
@@ -16,17 +15,9 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] private Button SummonButton;
     [SerializeField] private Button SummonCloseButton;
 
-    void Awake()
-    {
-        if (instance == null)
-            instance = this;
-        else if (instance != this)
-            Destroy(instance);
-    }
-
     void Start()
     {
-        UI = GameObject.Find("UI");
+        UI = GameObject.Find("UI"); //퍼블릭으로 잡기, 퍼블릭으로 연결하는게 메모리에 할당하는 방법이라, 순회 구조보다 더 가벼움.
 
         QuestButton = UI.transform.GetChild(1).GetChild(2).GetComponent<Button>();
         QuestCloseButton = UI.transform.GetChild(1).GetChild(3).GetComponent<Button>();
@@ -35,55 +26,40 @@ public class ButtonManager : MonoBehaviour
         SummonCloseButton = UI.transform.GetChild(3).GetChild(3).GetComponent<Button>();
 
         QuestButton.onClick.AddListener(QuestButtonClick);
-        QuestCloseButton.onClick.AddListener(QusetCloseButtonClick);
-        FailButton.onClick.AddListener(FailButtonClick);
+        QuestCloseButton.onClick.AddListener(() => UIManager.Instance.QuestUIControl(false));
+        FailButton.onClick.AddListener(() => UIManager.Instance.FailUIControl(false));
         SummonButton.onClick.AddListener(SummonButtonClick);
-        SummonCloseButton.onClick.AddListener(SummonCloseButtonClick);
+        SummonCloseButton.onClick.AddListener(() => UIManager.Instance.SummonUIControl(false));
     }
 
     private void QuestButtonClick() //퀘스트 버튼 클릭시 발동하는 함수.
     {
-        if (CreditManager.instance.UseCredit
-        (QuestManager.instance.questCredit[QuestManager.instance.currentKey], QuestManager.instance.questCreditType[QuestManager.instance.currentKey])) //현재 미션에 대해 크레딧이 소모 가능으로 판단하면 미션 업데이트.
+        if (CreditManager.Instance.UseCredit
+        (QuestManager.Instance.questCredit[QuestManager.Instance.currentKey], QuestManager.Instance.questCreditType[QuestManager.Instance.currentKey])) //현재 미션에 대해 크레딧이 소모 가능으로 판단하면 미션 업데이트.
         {
-            UIManager.instance.QuestUIControl(false);
-            ObjectManager.instance.QuestObjectActive(QuestManager.instance.currentKey, QuestManager.instance.currentCol);
+            UIManager.Instance.QuestUIControl(false);
+            ObjectManager.Instance.QuestObjectActive(QuestManager.Instance.currentKey, QuestManager.Instance.currentCol);
         }
         else // 현재 미션에 대해 크레딧 소모가 불가능 하면 실패 UI 출력.
         {
-            UIManager.instance.QuestUIControl(false);
-            UIManager.instance.FailUIEdit(QuestManager.instance.currentKey);
-            UIManager.instance.FailUIControl(true);
+            UIManager.Instance.QuestUIControl(false);
+            UIManager.Instance.FailUIEdit(QuestManager.Instance.currentKey);
+            UIManager.Instance.FailUIControl(true);
         }
     }
 
     private void SummonButtonClick() //소환 버튼 클릭시 발동하는 함수.
     {
-        if (CreditManager.instance.UseCredit
-        (QuestManager.instance.questCredit[QuestManager.instance.currentKey], QuestManager.instance.questCreditType[QuestManager.instance.currentKey])) //현재 미션에 대해 크레딧이 소모 가능으로 판단하면 미션 업데이트.
+        if (CreditManager.Instance.UseCredit
+        (QuestManager.Instance.questCredit[QuestManager.Instance.currentKey], QuestManager.Instance.questCreditType[QuestManager.Instance.currentKey])) //현재 미션에 대해 크레딧이 소모 가능으로 판단하면 미션 업데이트.
         {
-            UIManager.instance.SummonUIControl(false);
+            UIManager.Instance.SummonUIControl(false);
         }
         else
         {
-            UIManager.instance.SummonUIControl(false);
-            UIManager.instance.FailUIEdit(QuestManager.instance.currentKey);
-            UIManager.instance.FailUIControl(true);
+            UIManager.Instance.SummonUIControl(false);
+            UIManager.Instance.FailUIEdit(QuestManager.Instance.currentKey);
+            UIManager.Instance.FailUIControl(true);
         }
-    }
-
-    private void QusetCloseButtonClick() // 닫기 버튼 클릭시 발동하는 함수.
-    {
-        UIManager.instance.QuestUIControl(false);
-    }
-
-    private void FailButtonClick() //실패 버튼 클릭시 발동하는 함수.
-    {
-        UIManager.instance.FailUIControl(false);
-    }
-
-    private void SummonCloseButtonClick() // 닫기 버튼 클릭시 발동하는 함수.
-    {
-        UIManager.instance.SummonUIControl(false);
     }
 }

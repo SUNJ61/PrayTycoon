@@ -2,24 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CreditManager : MonoBehaviour
+public class CreditManager : Singleton<CreditManager>
 {
-    public static CreditManager instance;
-
     private Coroutine PrayCoroutine;
 
     [SerializeField] private Dictionary<string, int> Credit = new Dictionary<string, int>();
 
     private int PrayAdd = 5;
     private int PrayDelay = 1;
-
-    void Awake()
-    {
-        if (instance == null)
-            instance = this;
-        else if (instance != this)
-            Destroy(instance);
-    }
 
     void Start()
     {
@@ -46,21 +36,13 @@ public class CreditManager : MonoBehaviour
         }
     }
 
-    public bool UseCredit(int credit, string key)
+    public bool UseCredit(int consumeCredit, string key)
     {
-        bool CanUse;
+        if(!Credit.ContainsKey(key) || consumeCredit > Credit[key]) //딕셔너리에 key가 존재하지 않거나, 소모 재화가 보유 재화 보다 클 경우.
+            return false;
 
-        if (credit > Credit[key])
-            CanUse = false;
-        else if (credit <= Credit[key])
-        {
-            CanUse = true;
-            Credit[key] -= credit;
-        }
-        else
-            CanUse = false;
-
-        return CanUse;
+        Credit[key] -= consumeCredit; //조건문에서 걸러지지 않으면 재화 소비 가능.
+        return true;
     }
 
     private void AddCreditDic() //추후 데이터 저장 시스템 필요. 시작 할 때마다 초기화 됨.

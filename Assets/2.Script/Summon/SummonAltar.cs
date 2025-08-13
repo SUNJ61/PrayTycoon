@@ -26,9 +26,9 @@ public class SummonAltar : MonoBehaviour
         targetColor.a = 1.0f;
         StartCoroutine(RuneUpdate());
 
-        UIManager.instance.SummonUIEdit(Key);
-        QuestManager.instance.QuestCheck(Key, CreditType, Credit);
-        UIManager.instance.SummonUIControl(true);
+        UIManager.Instance.SummonUIEdit(Key);
+        QuestManager.Instance.QuestCheck(Key, CreditType, Credit);
+        UIManager.Instance.SummonUIControl(true);
     }
 
     private void OnTriggerExit2D(Collider2D other)

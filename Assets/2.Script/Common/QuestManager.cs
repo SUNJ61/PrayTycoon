@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QuestManager : MonoBehaviour
+public class QuestManager : Singleton<QuestManager>
 {
-    public static QuestManager instance;
-
     private Dictionary<string, int> QuestCredit = new Dictionary<string, int>();
     public Dictionary<string, int> questCredit
     {
@@ -27,14 +25,6 @@ public class QuestManager : MonoBehaviour
     public string currentKey
     {
         get { return CurrentKey; }
-    }
-    
-    void Awake()
-    {
-        if (instance == null)
-            instance = this;
-        else if (instance != this)
-            Destroy(instance);
     }
 
     public void QuestCheck(string key, string creditType, int credit, BoxCollider2D col = null) //플레이어 미션 키 업데이트, 미션에 필요한 크레딧 저장, 미션을 반응하게 하는 콜라이더 저장. (퀘스트 매니저에 있어도 무방할듯?)
