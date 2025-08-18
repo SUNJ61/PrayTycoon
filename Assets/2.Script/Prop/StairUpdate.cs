@@ -5,7 +5,10 @@ using UnityEngine;
 public class StairUpdate : MonoBehaviour
 {
     private BoxCollider2D QuestTrigger;
+
+    private int QuestID = 0;
     private int StairCredit = 5;
+
     private string Key = "Stair-Main";
     private string CreditType = "Pray";
 

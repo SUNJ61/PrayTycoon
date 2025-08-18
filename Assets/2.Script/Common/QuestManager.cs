@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 public class QuestManager : Singleton<QuestManager>
@@ -14,6 +15,7 @@ public class QuestManager : Singleton<QuestManager>
     {
         get { return QuestCreditType; }
     }
+    private Dictionary<int, IQuest> QuestObj = new Dictionary<int, IQuest>();
 
     private BoxCollider2D CurrentCol = null;
     public BoxCollider2D currentCol
@@ -37,5 +39,10 @@ public class QuestManager : Singleton<QuestManager>
 
         if (!QuestCreditType.ContainsKey(key))
             QuestCreditType.Add(key, creditType);
+    }
+
+    public void QuestState(bool Clear)
+    {
+        
     }
 }

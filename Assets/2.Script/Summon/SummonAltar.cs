@@ -11,6 +11,7 @@ public class SummonAltar : MonoBehaviour
 
     private float lerpSpeed = 3;
 
+    private int QuestID = 1;
     private int Credit = 5;
 
     private string Key = "Summon";
