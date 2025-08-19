@@ -15,6 +15,8 @@ public class ButtonManager : Singleton<ButtonManager>
     [SerializeField] private Button SummonButton;
     [SerializeField] private Button SummonCloseButton;
 
+    private int CurrentQuestId;
+
     void Start()
     {
         UI = GameObject.Find("UI"); //퍼블릭으로 잡기, 퍼블릭으로 연결하는게 메모리에 할당하는 방법이라, 순회 구조보다 더 가벼움.
@@ -38,6 +40,8 @@ public class ButtonManager : Singleton<ButtonManager>
         (QuestManager.Instance.questCredit[QuestManager.Instance.currentKey], QuestManager.Instance.questCreditType[QuestManager.Instance.currentKey])) //현재 미션에 대해 크레딧이 소모 가능으로 판단하면 미션 업데이트.
         {
             UIManager.Instance.QuestUIControl(false);
+            QuestManager.Instance.CompleteQuest(CurrentQuestId);
+
             ObjectManager.Instance.QuestObjectActive(QuestManager.Instance.currentKey, QuestManager.Instance.currentCol);
         }
         else // 현재 미션에 대해 크레딧 소모가 불가능 하면 실패 UI 출력.
@@ -62,5 +66,10 @@ public class ButtonManager : Singleton<ButtonManager>
             UIManager.Instance.FailUIEdit(QuestManager.Instance.currentKey);
             UIManager.Instance.FailUIControl(true);
         }
+    }
+
+    public void SetCurrentQuest(int questId)
+    {
+        CurrentQuestId = questId;
     }
 }

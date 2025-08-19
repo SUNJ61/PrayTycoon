@@ -27,13 +27,13 @@ public class GateUpdate : MonoBehaviour, IQuest
     private void OnTriggerEnter2D(Collider2D other)
     {
         UIManager.Instance.QuestUIEdit(Key);
-        QuestManager.Instance.QuestCheck(Key, CreditType, GateCredit, QuestTrigger);
+        QuestManager.Instance.QuestCheck(Key, CreditType, GateCredit, this, QuestTrigger);
 
         UIManager.Instance.QuestUIControl(true);
     }
 
-    public void SetQuestClear()
+    public void SetQuestClear() // 퀘스트가 성공하면 발생하는 이벤트.
     {
-        QuestClear = false;
+        QuestClear = true;
     }
 }
