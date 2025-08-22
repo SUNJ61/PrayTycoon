@@ -38,9 +38,16 @@ public class GraveUpdate : MonoBehaviour, IQuest
 
     public void SetQuestClear() // 퀘스트가 성공하면 발생하는 이벤트. (오브젝트 변경, 아이템 뽑기 같은 함수 넣으면 될 듯.)
     {
-        QuestClear = true;
+        if (QuestClear == false) // 퀘스트 완료 전 작동 함수.
+        {
+            QuestClear = true;
 
-        gameObject.transform.GetChild(0).gameObject.SetActive(false);
-        gameObject.transform.GetChild(1).gameObject.SetActive(true);
+            gameObject.transform.GetChild(0).gameObject.SetActive(false);
+            gameObject.transform.GetChild(1).gameObject.SetActive(true);
+        }
+        else // 퀘스트 완료 후 작동 함수.
+        {
+
+        }
     }
 }
