@@ -41,15 +41,6 @@ public class ObjectManager : Singleton<ObjectManager>
         return list;
     }
 
-    public void QuestObjectActive(string key, BoxCollider2D col = null) // 진행중인 퀘스트 오브젝트 관리 함수.
-    {
-        QuestOJ[key][0].SetActive(false);
-        QuestOJ[key][1].SetActive(true);
-
-        if (col != null)
-            col.enabled = false;
-    }
-
     public Dictionary<string, GameObject> GetDictionary(List<GameObject> list) //딕셔너리 자동 생성 함수, UI에 쓰려다 사용처를 잃음.
     {
         Dictionary<string, GameObject> dict = new Dictionary<string, GameObject>();

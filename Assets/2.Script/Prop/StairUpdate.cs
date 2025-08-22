@@ -25,14 +25,19 @@ public class StairUpdate : MonoBehaviour, IQuest
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        ButtonManager.Instance.SetCurrentQuest(QuestID);
         UIManager.Instance.QuestUIEdit(Key);
-        QuestManager.Instance.QuestCheck(Key, CreditType, StairCredit, this, QuestTrigger);
+        QuestManager.Instance.QuestCheck(Key, CreditType, StairCredit, this);
 
         UIManager.Instance.QuestUIControl(true);
     }
 
-    public void SetQuestClear() // 퀘스트 성공하면 발생하는 이벤트.
+    public void SetQuestClear() // 퀘스트가 성공하면 발생하는 이벤트. (오브젝트 변경, 아이템 뽑기 같은 함수 넣으면 될 듯.)
     {
         QuestClear = true;
+
+        gameObject.transform.GetChild(0).gameObject.SetActive(false);
+        gameObject.transform.GetChild(1).gameObject.SetActive(true);
+        QuestTrigger.enabled = false;
     }
 }

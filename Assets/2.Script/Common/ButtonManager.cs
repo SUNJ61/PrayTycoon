@@ -9,24 +9,16 @@ public class ButtonManager : Singleton<ButtonManager>
 {
     private GameObject UI;
 
-    [SerializeField] private Button QuestButton;
-    [SerializeField] private Button QuestCloseButton;
-    [SerializeField] private Button FailButton;
-    [SerializeField] private Button SummonButton;
-    [SerializeField] private Button SummonCloseButton;
+    public Button QuestButton;
+    public Button QuestCloseButton;
+    public Button FailButton;
+    public Button SummonButton;
+    public Button SummonCloseButton;
 
     private int CurrentQuestId;
 
     void Start()
     {
-        UI = GameObject.Find("UI"); //퍼블릭으로 잡기, 퍼블릭으로 연결하는게 메모리에 할당하는 방법이라, 순회 구조보다 더 가벼움.
-
-        QuestButton = UI.transform.GetChild(1).GetChild(2).GetComponent<Button>();
-        QuestCloseButton = UI.transform.GetChild(1).GetChild(3).GetComponent<Button>();
-        FailButton = UI.transform.GetChild(2).GetChild(2).GetComponent<Button>();
-        SummonButton = UI.transform.GetChild(3).GetChild(2).GetComponent<Button>();
-        SummonCloseButton = UI.transform.GetChild(3).GetChild(3).GetComponent<Button>();
-
         QuestButton.onClick.AddListener(QuestButtonClick);
         QuestCloseButton.onClick.AddListener(() => UIManager.Instance.QuestUIControl(false));
         FailButton.onClick.AddListener(() => UIManager.Instance.FailUIControl(false));
@@ -41,8 +33,6 @@ public class ButtonManager : Singleton<ButtonManager>
         {
             UIManager.Instance.QuestUIControl(false);
             QuestManager.Instance.CompleteQuest(CurrentQuestId);
-
-            ObjectManager.Instance.QuestObjectActive(QuestManager.Instance.currentKey, QuestManager.Instance.currentCol);
         }
         else // 현재 미션에 대해 크레딧 소모가 불가능 하면 실패 UI 출력.
         {
