@@ -25,18 +25,12 @@ public class UIManager : Singleton<UIManager>
     public TextMeshProUGUI PrayUI;
     public TextMeshProUGUI StoneUI;
 
-    private GameObject UI;
-    private GameObject QuestUI;
-    private GameObject FailUI;
-    private GameObject SummonUI;
+    public GameObject QuestUI;
+    public GameObject FailUI;
+    public GameObject SummonUI;
 
     void Start()
     {
-        UI = GameObject.Find("UI"); //퍼블릭으로 최적화 가능.
-        QuestUI = UI.transform.GetChild(1).gameObject;
-        FailUI = UI.transform.GetChild(2).gameObject;
-        SummonUI = UI.transform.GetChild(3).gameObject;
-
         QuestUI_List = ObjectManager.Instance.GetObject("UI", 1);
         FailUI_List = ObjectManager.Instance.GetObject("UI", 2);
         SummonUI_List = ObjectManager.Instance.GetObject("UI", 3);
