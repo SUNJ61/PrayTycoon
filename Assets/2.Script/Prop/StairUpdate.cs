@@ -5,7 +5,7 @@ using UnityEngine;
 public class StairUpdate : MonoBehaviour, IQuest
 {
     public int QuestID { get; private set; }
-    public bool IQuestClear => QuestClear; // 내부 변수 QuestClear를 읽기 위한 읽기 전용 프로퍼티 IQuestClear를 등록.
+    public bool IQuestClear => QuestClear; // 내부 변수 QuestClear를 읽기 위한 읽기 전용 프로퍼티, IQuestClear를 호출하면 QuestClear 값 반환.
 
     private BoxCollider2D QuestTrigger;
 
