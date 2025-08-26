@@ -49,7 +49,7 @@ public class Inventory : MonoBehaviour
 
     public bool RemoveItem(int itemId, int Amount) //인벤토리에 아이템 제거 함수. (개수가 모자라거나, 슬롯의 최대 개수 보다 더 많이 제거 될때 예외 처리가 없음.)
     {
-        if (Amount <= 0) //요구 개수가 0 이하면 성공.
+        if (Amount <= 0) //요구 개수가 0 이하면 반드시 성공.
             return true;
 
         if (!HasItem(itemId, Amount))
