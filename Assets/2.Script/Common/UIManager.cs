@@ -28,6 +28,7 @@ public class UIManager : Singleton<UIManager>
     public GameObject QuestUI;
     public GameObject FailUI;
     public GameObject SummonUI;
+    public GameObject InventoryUI;
 
     void Start()
     {
@@ -61,6 +62,11 @@ public class UIManager : Singleton<UIManager>
     public void SummonUIControl(bool active) //소환 UI 활성화, 비활성화 함수.
     {
         SummonUI.SetActive(active);
+    }
+
+    public void InventoryUIControl()
+    {
+        InventoryUI.SetActive(!InventoryUI.activeSelf); //인벤토리 UI 활성화, 비활성화 함수.
     }
 
     public void QuestUIEdit(string key) //키 값에 해당하는 미션의 문구로 변경하는 함수.

@@ -18,6 +18,12 @@ namespace Cainos.PixelArtTopDown_Basic
 
         private void Update()
         {
+            PlayerMove();
+            PlayerUI();
+        }
+
+        private void PlayerMove()
+        {
             Vector2 dir = Vector2.zero;
             if (Input.GetKey(KeyCode.A))
             {
@@ -45,6 +51,14 @@ namespace Cainos.PixelArtTopDown_Basic
             animator.SetBool("IsMoving", dir.magnitude > 0);
 
             GetComponent<Rigidbody2D>().velocity = speed * dir;
+        }
+
+        private void PlayerUI()
+        {
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                UIManager.Instance.InventoryUIControl();
+            }
         }
     }
 }

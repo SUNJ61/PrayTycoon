@@ -14,6 +14,7 @@ public class ButtonManager : Singleton<ButtonManager>
     public Button FailButton;
     public Button SummonButton;
     public Button SummonCloseButton;
+    public Button InventoryCloseButton;
 
     private int CurrentQuestId;
 
@@ -24,6 +25,7 @@ public class ButtonManager : Singleton<ButtonManager>
         FailButton.onClick.AddListener(() => UIManager.Instance.FailUIControl(false));
         SummonButton.onClick.AddListener(SummonButtonClick);
         SummonCloseButton.onClick.AddListener(() => UIManager.Instance.SummonUIControl(false));
+        InventoryCloseButton.onClick.AddListener(() => UIManager.Instance.InventoryUIControl());
     }
 
     private void QuestButtonClick() //퀘스트 버튼 클릭시 발동하는 함수.
