@@ -4,7 +4,6 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     [SerializeField] private int SlotCount = 20; // 인벤토리 슬롯 수, 임의로 20개로 가정.
-    [SerializeField] private List<ItemData> ItemDatabase; // 아이템 데이터를 저장할 리스트.
 
     public InventorySlot[] Slots;
 
@@ -82,10 +81,5 @@ public class Inventory : MonoBehaviour
                 total += slot.Amount;
 
         return total >= Amount;
-    }
-
-    public ItemData GetItemData(int itemId)
-    {
-        return ItemDatabase.Find(x => x.Id == itemId); // ItemDatabase에 등록된 아이템 데이터중 같은 Id를 가진 아이템을 찾아 반환.
     }
 }

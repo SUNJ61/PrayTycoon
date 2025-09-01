@@ -28,7 +28,7 @@ public class ItemDataPostprocessor : AssetPostprocessor
         // 기존 데이터와 다를 때만 업데이트
         bool changed = false;
 
-        if (db.items.Count != newList.Count) //db 길이 가 변경됬을 경우. (아이템 추가.)
+        if (db.items.Count != newList.Count) //db 길이 가 변경됬을 경우. (아이템 추가, 삭제)
         {
             changed = true;
         }
