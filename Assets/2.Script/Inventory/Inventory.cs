@@ -17,7 +17,7 @@ public class Inventory : MonoBehaviour
 
     public bool AddItem(int ItemId, int Amount)
     {
-        ItemData data = GetItemData(ItemId); // 저장할 아이템 찾기.
+        ItemData data = ObjectManager.Instance.itemDatabase.GetItem(ItemId); // 저장할 아이템 찾기.
         if (data == null) return false;
 
         for (int i = 0; i < Slots.Length; i++) //기존 슬롯에 아이템 합치기.
