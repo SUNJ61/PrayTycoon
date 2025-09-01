@@ -42097,7 +42097,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotCount: 20
-  ItemDatabase: []
 --- !u!1 &1890010790
 GameObject:
   m_ObjectHideFlags: 0

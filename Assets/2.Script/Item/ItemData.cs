@@ -6,6 +6,6 @@ public class ItemData : ScriptableObject
 {
     public int Id;
     public string ItemName;
-    public Sprite Icon;
+    public GameObject Icon;
     public int MaxStack = 999999;
 }

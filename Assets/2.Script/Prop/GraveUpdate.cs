@@ -9,7 +9,7 @@ public class GraveUpdate : MonoBehaviour, IQuest
 
 
     private int FixCredit = 5;
-    private int GraveCredit = 5;
+    //private int GraveCredit = 5;
 
     private string Key = "GraveStone";
     private string CreditType = "Stone";
