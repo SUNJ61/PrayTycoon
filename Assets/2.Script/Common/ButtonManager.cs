@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +13,7 @@ public class ButtonManager : Singleton<ButtonManager>
     public Button InventoryCloseButton;
 
     private int CurrentQuestId;
+    private int CurrentSummonId;
 
     void Start()
     {
@@ -63,5 +60,10 @@ public class ButtonManager : Singleton<ButtonManager>
     public void SetCurrentQuest(int questId)
     {
         CurrentQuestId = questId;
+    }
+
+    public void SetCurrentSummon(int summonId)
+    {
+        CurrentSummonId = summonId;
     }
 }

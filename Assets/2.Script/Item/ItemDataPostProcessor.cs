@@ -6,7 +6,7 @@ public class ItemDataPostprocessor : AssetPostprocessor
 {
     static void OnPostprocessAllAssets(
         string[] importedAssets, string[] deletedAssets,
-        string[] movedAssets, string[] movedFromAssetPaths)
+        string[] movedAssets, string[] movedFromAssetPaths) //유니티 에디터에 등록된 함수, 해당 매개변수를 사용하지 않더라도 이렇게 선언해야함. 어떤파일이 바뀌었는지 위치와 에셋명을 배열로 저장.
     {
         // ItemDatabase 에셋 찾기
         string[] dbGuids = AssetDatabase.FindAssets("t:ItemDatabase");

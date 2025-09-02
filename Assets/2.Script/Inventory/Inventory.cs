@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+public class Inventory : Singleton<Inventory>
 {
     [SerializeField] private int SlotCount = 20; // 인벤토리 슬롯 수, 임의로 20개로 가정.
 
     public InventorySlot[] Slots;
 
-    void Awake()
+    void Start()
     {
         Slots = new InventorySlot[SlotCount]; // 인벤토리 슬롯 리스트 생성, 길이는 SlotCount.
 

@@ -53,16 +53,39 @@ public class CreditManager : Singleton<CreditManager>
         return true;
     }
 
-    public void SummonCredit() // 3:7확률로 랜덤 뽑기 함수.
+    public void SummonCredit() // 5:95확률로 랜덤 뽑기 함수. (기도력을 석재, 골드로 바꾸는 뽑기.)
     {
-        float randomValue = Random.Range(0f, 100f);
+        float randomValue = Random.Range(1f, 101f);
 
-        if (randomValue > 70f)
+        if (randomValue > 95f)
             Credit["Gold"] += AddGold;
         else
             Credit["Stone"] += AddStone;
 
         UIManager.Instance.CreditUIEdit();
+    }
+
+    public int SpawnCredit() // 10 : 20 : 70 확률로 랜덤 뽑기 함수. (소환석 뽑기.)
+    {
+        int itemCode;
+        float Rarity = Random.Range(1f, 101f);
+        float randomValue = Random.Range(1f, 101f);
+
+        if (Rarity > 20f) // 21~100 노말
+            itemCode = 10;
+        else if (Rarity > 5f) // 6~19 레어
+            itemCode = 20;
+        else // 1~5 유니크
+            itemCode = 30;
+
+        if (randomValue > 30f) // 31~100 광부
+            itemCode += 4;
+        else if (randomValue > 10f) // 11~30 사냥꾼
+            itemCode = 5;
+        else // 1~10 마법사
+            itemCode = 6;
+
+        return itemCode;
     }
 
     private void AddCreditDic() //추후 데이터 저장 시스템 필요. 시작 할 때마다 초기화 됨.

@@ -114,15 +114,18 @@ public class UIManager : Singleton<UIManager>
         FailText.Add("Gate", "골드가 부족합니다.");
         FailText.Add("GraveStone", "석재가 부족합니다.");
         FailText.Add("Summon", "기도력이 부족합니다.");
+        FailText.Add("Spawn", "기도력이 부족합니다.");
     }
 
     private void AddSummonText()
     {
         SummonText.Add("Summon", "소환을 진행하시겠습니까?");
+        SummonText.Add("Spawn", "Q. 소환석을 만들겠습니까?");
     }
 
     private void AddSummonCondition()
     {
         SummonConditonText.Add("Summon", "소환을 하기 위해서는\n5의 기도력이 필요합니다.");
+        SummonConditonText.Add("Spawn", "소환석을 만들기 위해서는\n20의 기도력이 필요합니다.");
     }
 }
