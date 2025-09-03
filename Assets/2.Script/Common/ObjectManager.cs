@@ -30,7 +30,7 @@ public class ObjectManager : Singleton<ObjectManager>
         _itemDatabase = Resources.Load<ItemDatabase>("ItemDataBase");
     }
 
-    public List<GameObject> GetObject(string Ob_Name, int index = -1) // 해당 이름을 가진 오브젝트 자식 오브젝트를 리스트에 담는 함수, 자식 index 입력이 없으면 부모에서 리스트 생성, 있으면 자식을 찾아 리스트 생성.
+    public List<GameObject> GetObject(string Ob_Name, int index = -1) // 해당 이름을 가진 오브젝트의 자식 오브젝트의 자식을 리스트에 담는 함수, 자식 index 입력이 없으면 입력된 오브젝트 자식 리스트 생성.
     {
         Transform parent;
         List<GameObject> list = new List<GameObject>();
@@ -39,6 +39,25 @@ public class ObjectManager : Singleton<ObjectManager>
             parent = GameObject.Find(Ob_Name).transform;
         else
             parent = GameObject.Find(Ob_Name).transform.GetChild(index).transform;
+
+        if (parent != null)
+        {
+            foreach (Transform child in parent)
+                list.Add(child.gameObject);
+        }
+
+        return list;
+    }
+
+    public List<GameObject> GetObject(GameObject Obj, int index = -1) // 해당 오브젝트의 자식 오브젝트의 자식을 리스트에 담는 함수, 자식 index 입력이 없으면 입력된 오브젝트 자식 리스트 생성.
+    {
+        Transform parent;
+        List<GameObject> list = new List<GameObject>();
+        
+        if (index == -1)
+            parent = Obj.transform;
+        else
+            parent = Obj.transform.GetChild(index).transform;
 
         if (parent != null)
         {

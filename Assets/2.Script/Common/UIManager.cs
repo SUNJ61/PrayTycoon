@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -14,6 +13,7 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private List<GameObject> QuestUI_List;
     [SerializeField] private List<GameObject> FailUI_List;
     [SerializeField] private List<GameObject> SummonUI_List;
+    [SerializeField] private List<GameObject> InventorySlot_List;
 
     private TextMeshProUGUI quest;
     private TextMeshProUGUI questCondition;
@@ -35,6 +35,7 @@ public class UIManager : Singleton<UIManager>
         QuestUI_List = ObjectManager.Instance.GetObject("UI", 1);
         FailUI_List = ObjectManager.Instance.GetObject("UI", 2);
         SummonUI_List = ObjectManager.Instance.GetObject("UI", 3);
+        InventorySlot_List = ObjectManager.Instance.GetObject(InventoryUI, 0);
 
         quest = QuestUI_List[0].GetComponent<TextMeshProUGUI>();
         questCondition = QuestUI_List[1].GetComponent<TextMeshProUGUI>();
@@ -93,6 +94,20 @@ public class UIManager : Singleton<UIManager>
         StoneUI.text = CreditManager.Instance.credit["Stone"].ToString();
     }
 
+    public void InventoryCombineEdit(int Index, int Amount)
+    {
+        TextMeshProUGUI AmountText = InventorySlot_List[Index].transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        AmountText.text = Amount.ToString();
+    }
+
+    public void InventoryEmptyEdit(int Index, int Amount, int ItemID)
+    {
+        ItemData Item = ObjectManager.Instance.itemDatabase.GetItem(ItemID);
+
+        GameObject Icon = Instantiate(Item.Icon, InventorySlot_List[Index].transform);
+        TextMeshProUGUI AmountText = InventorySlot_List[Index].transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        AmountText.text = Amount.ToString();
+    }
 
     private void AddQuestText() //퀘스트 UI에 필요한 문구를 딕셔너리에 추가하는 함수. "GraveStone"
     {

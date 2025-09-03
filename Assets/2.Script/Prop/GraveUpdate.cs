@@ -8,9 +8,9 @@ public class GraveUpdate : MonoBehaviour, IQuest
     public bool IQuestClear => QuestClear; // 내부 변수 QuestClear를 읽기 위한 읽기 전용 프로퍼티, IQuestClear를 호출하면 QuestClear 값 반환.
 
 
-    private int SummonID = 0;
+    private int SummonID = 1;
     private int FixCredit = 5;
-    private int SpawnCredit = 5;
+    private int SpawnCredit = 20;
 
     private string FixKey = "GraveStone";
     private string SpawnKey = "Spawn";
@@ -35,6 +35,7 @@ public class GraveUpdate : MonoBehaviour, IQuest
         }
         else //수리가 된 후 사용함수.
         {
+            ButtonManager.Instance.SetCurrentSummon(SummonID);
             UIManager.Instance.SummonUIEdit(SpawnKey);
             QuestManager.Instance.QuestCheck(SpawnKey, SpawnCreditType, SpawnCredit, this);
             UIManager.Instance.SummonUIControl(true);

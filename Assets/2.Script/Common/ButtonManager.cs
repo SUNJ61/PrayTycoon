@@ -47,7 +47,17 @@ public class ButtonManager : Singleton<ButtonManager>
         (QuestManager.Instance.questCredit[QuestManager.Instance.currentKey], QuestManager.Instance.questCreditType[QuestManager.Instance.currentKey])) //현재 미션에 대해 크레딧이 소모 가능으로 판단하면 미션 업데이트. (소환 구분 법 필요.)
         {
             UIManager.Instance.SummonUIControl(false);
-            CreditManager.Instance.SummonCredit();
+            switch (CurrentSummonId)
+            {
+                case 0:
+                    CreditManager.Instance.SummonCredit(); // 0번 골드, 석재 소환
+                    break;
+
+                case 1:
+                    int ItemCode = CreditManager.Instance.SpawnCredit(); // 1번 소환석 소환
+                    Inventory.Instance.AddItem(ItemCode, 1);
+                    break;   
+            }
         }
         else
         {

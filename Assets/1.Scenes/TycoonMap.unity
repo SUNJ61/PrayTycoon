@@ -17009,6 +17009,8 @@ MonoBehaviour:
   QuestUI_List: []
   FailUI_List: []
   SummonUI_List: []
+  InventorySlot_List: []
+  UI: {fileID: 2123921112}
   GoldUI: {fileID: 2044068398}
   PrayUI: {fileID: 386341265}
   StoneUI: {fileID: 1669089368}

@@ -27,6 +27,9 @@ public class Inventory : Singleton<Inventory>
                 int canAdd = Mathf.Min(Amount, data.MaxStack - Slots[i].Amount); //입력 값과 저장 가능 값을 비교해 더 작은 값을 저장.
                 Slots[i].Amount += canAdd; //계산한 값을 토대로 해당 슬롯에 개수 추가.
                 Amount -= canAdd; //입력된 추가할 아이템의 개수에 저장된 값 차감.
+
+                UIManager.Instance.InventoryCombineEdit(i, Slots[i].Amount);
+
                 if (Amount <= 0) return true; //입력된 추가할 아이템의 개수가 0보다 작아지면 함수 종료.
             }
         }
@@ -38,6 +41,9 @@ public class Inventory : Singleton<Inventory>
                 Slots[i].ItemId = ItemId; //빈 칸의 ItemId를 저장할 아이템의 Id로 변경.
                 Slots[i].Amount = Mathf.Min(Amount, data.MaxStack); //입력된 아이템 개수가 해당 슬롯의 최대 한도와 비교, 더 적은 수 저장.
                 Amount -= Slots[i].Amount; //저장된 아이템만큼 입력된 추가할 아이템의 개수에서 값 차감.
+
+                UIManager.Instance.InventoryEmptyEdit(i, Slots[i].Amount, ItemId);
+
                 if (Amount <= 0) return true; //입력된 추가할 아이템의 개수가 0보다 작아지면 함수 종료.
             }
         }

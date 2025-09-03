@@ -33,6 +33,7 @@ public class SummonAltar : MonoBehaviour, IQuest
         targetColor.a = 1.0f;
         StartCoroutine(RuneUpdate());
 
+        ButtonManager.Instance.SetCurrentSummon(SummonID);
         UIManager.Instance.SummonUIEdit(Key);
         QuestManager.Instance.QuestCheck(Key, CreditType, Credit, this);
         UIManager.Instance.SummonUIControl(true);
