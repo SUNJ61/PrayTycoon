@@ -10,7 +10,7 @@ public class GraveUpdate : MonoBehaviour, IQuest
 
     private int SummonID = 1;
     private int FixCredit = 5;
-    private int SpawnCredit = 20;
+    private int SpawnCredit = 1;
 
     private string FixKey = "GraveStone";
     private string SpawnKey = "Spawn";

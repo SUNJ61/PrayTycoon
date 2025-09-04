@@ -81,9 +81,9 @@ public class CreditManager : Singleton<CreditManager>
         if (randomValue > 30f) // 31~100 광부
             itemCode += 4;
         else if (randomValue > 10f) // 11~30 사냥꾼
-            itemCode = 5;
+            itemCode += 5;
         else // 1~10 마법사
-            itemCode = 6;
+            itemCode += 6;
 
         return itemCode;
     }
