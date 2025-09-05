@@ -94,7 +94,7 @@ public class UIManager : Singleton<UIManager>
         StoneUI.text = CreditManager.Instance.credit["Stone"].ToString();
     }
 
-    public void InventoryCombineEdit(int Index, int Amount)
+    public void InventoryAmountEdit(int Index, int Amount)
     {
         TextMeshProUGUI AmountText = InventorySlot_List[Index].transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         AmountText.text = Amount.ToString();
@@ -104,9 +104,17 @@ public class UIManager : Singleton<UIManager>
     {
         ItemData Item = ObjectManager.Instance.itemDatabase.GetItem(ItemID);
 
-        GameObject Icon = Instantiate(Item.Icon, InventorySlot_List[Index].transform);
+        Instantiate(Item.Icon, InventorySlot_List[Index].transform);
         TextMeshProUGUI AmountText = InventorySlot_List[Index].transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         AmountText.text = Amount.ToString();
+    }
+
+    public void InventoryDeleteEdit(int Index)
+    {
+        GameObject CloneItem = InventorySlot_List[Index].transform.GetChild(1).gameObject;
+
+        if (CloneItem != null)
+            Destroy(CloneItem);
     }
 
     private void AddQuestText() //퀘스트 UI에 필요한 문구를 딕셔너리에 추가하는 함수. "GraveStone"

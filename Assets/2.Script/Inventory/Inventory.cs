@@ -28,7 +28,7 @@ public class Inventory : Singleton<Inventory>
                 Slots[i].Amount += canAdd; //계산한 값을 토대로 해당 슬롯에 개수 추가.
                 Amount -= canAdd; //입력된 추가할 아이템의 개수에 저장된 값 차감.
 
-                UIManager.Instance.InventoryCombineEdit(i, Slots[i].Amount);
+                UIManager.Instance.InventoryAmountEdit(i, Slots[i].Amount);
 
                 if (Amount <= 0) return true; //입력된 추가할 아이템의 개수가 0보다 작아지면 함수 종료.
             }
@@ -74,6 +74,9 @@ public class Inventory : Singleton<Inventory>
                 Slots[i].ItemId = -1;
                 Slots[i].Amount = 0;
             }
+
+            UIManager.Instance.InventoryAmountEdit(i, Slots[i].Amount); //UI수령 조정
+            UIManager.Instance.InventoryDeleteEdit(i); //UI 삭제
         }
 
         return true;
