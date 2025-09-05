@@ -15,4 +15,4 @@ MonoBehaviour:
   Id: 25
   ItemName: RareKnightSpawn
   Icon: {fileID: 7417429054100027450, guid: e0a52a0560527d6459b20c0efe281bc9, type: 3}
-  MaxStack: 999999
+  MaxStack: 99

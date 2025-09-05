@@ -15,4 +15,4 @@ MonoBehaviour:
   Id: 15
   ItemName: NormalKnightSpawn
   Icon: {fileID: 9095438816371858657, guid: db492dcd70926154eb209cf0e2d613c0, type: 3}
-  MaxStack: 999999
+  MaxStack: 99

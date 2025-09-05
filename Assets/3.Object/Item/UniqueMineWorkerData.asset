@@ -15,4 +15,4 @@ MonoBehaviour:
   Id: 34
   ItemName: UniqueMineWorkerSpawn
   Icon: {fileID: 5745123663406638926, guid: 525437a3b8a47ea449eb9a34a3974f88, type: 3}
-  MaxStack: 999999
+  MaxStack: 99

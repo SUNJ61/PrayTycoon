@@ -15,4 +15,4 @@ MonoBehaviour:
   Id: 26
   ItemName: RareWizardSpawn
   Icon: {fileID: 3807073831324283676, guid: 2b218a645f54ec44297ace48b58d0d35, type: 3}
-  MaxStack: 999999
+  MaxStack: 99

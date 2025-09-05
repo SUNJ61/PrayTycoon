@@ -15,4 +15,4 @@ MonoBehaviour:
   Id: 36
   ItemName: UniqueWizardSpawn
   Icon: {fileID: 8336719307444667463, guid: 10e82520cd737674d80e7fda486cd2e2, type: 3}
-  MaxStack: 999999
+  MaxStack: 99

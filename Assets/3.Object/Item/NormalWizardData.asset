@@ -15,4 +15,4 @@ MonoBehaviour:
   Id: 16
   ItemName: NormalWizardSpawn
   Icon: {fileID: 2062889822667121458, guid: 3583e8b3e5ba9f445928338b5e75ec61, type: 3}
-  MaxStack: 999999
+  MaxStack: 99
