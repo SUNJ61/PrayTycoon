@@ -73,10 +73,10 @@ public class Inventory : Singleton<Inventory>
             {
                 Slots[i].ItemId = -1;
                 Slots[i].Amount = 0;
+                UIManager.Instance.InventoryDeleteEdit(i); //UI 삭제
             }
-
+            
             UIManager.Instance.InventoryAmountEdit(i, Slots[i].Amount); //UI수령 조정
-            UIManager.Instance.InventoryDeleteEdit(i); //UI 삭제
         }
 
         return true;

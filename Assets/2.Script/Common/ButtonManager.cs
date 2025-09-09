@@ -54,7 +54,7 @@ public class ButtonManager : Singleton<ButtonManager>
                     break;
 
                 case 1:
-                    int ItemCode = CreditManager.Instance.SpawnCredit(); // 1번 소환석 소환
+                    int ItemCode = CreditManager.Instance.SpawnRandomCode(); // 1번 소환석 소환
                     Inventory.Instance.AddItem(ItemCode, 1);
                     break;   
             }

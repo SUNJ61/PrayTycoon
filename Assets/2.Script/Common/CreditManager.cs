@@ -6,7 +6,18 @@ public class CreditManager : Singleton<CreditManager>
 {
     private Coroutine PrayCoroutine;
 
-    [SerializeField] private Dictionary<string, int> Credit = new Dictionary<string, int>();
+    private Dictionary<string, int> CreditItemCode = new Dictionary<string, int>()
+    {
+        {"Pray", 1},
+        {"Stone", 2},
+        {"Gold", 3}
+    };
+    private Dictionary<string, int> Credit = new Dictionary<string, int>()
+    {
+        {"Pray", 0},
+        {"Stone", 0},
+        {"Gold", 0}
+    }; //사용자 크레딧 정보를 저장하는 딕셔너리.
     public Dictionary<string, int> credit
     {
         get { return Credit; }
@@ -17,9 +28,9 @@ public class CreditManager : Singleton<CreditManager>
     private int AddGold = 10;
     private int AddStone = 10;
 
-    void Start()
+    private void Start()
     {
-        AddCreditDic();
+        //추후 데이터를 받아서 크레딧 불러오기 함수를 만들면 추가 필요.
     }
 
     public void PrayCountCheck() //Pray(기도력) 증가하는지 확인, 증가 실행과 정지를를 하는 함수.
@@ -39,6 +50,7 @@ public class CreditManager : Singleton<CreditManager>
         {
             Credit["Pray"] += PrayAdd;
             UIManager.Instance.CreditUIEdit();
+            Inventory.Instance.AddItem(CreditItemCode["Pray"], PrayAdd);
             yield return new WaitForSeconds(PrayDelay);
         }
     }
@@ -50,6 +62,7 @@ public class CreditManager : Singleton<CreditManager>
 
         Credit[key] -= consumeCredit; //조건문에서 걸러지지 않으면 재화 소비 가능.
         UIManager.Instance.CreditUIEdit();
+        Inventory.Instance.RemoveItem(CreditItemCode[key], consumeCredit);
         return true;
     }
 
@@ -58,14 +71,20 @@ public class CreditManager : Singleton<CreditManager>
         float randomValue = Random.Range(1f, 101f);
 
         if (randomValue > 95f)
+        {
             Credit["Gold"] += AddGold;
+            Inventory.Instance.AddItem(CreditItemCode["Gold"], AddGold);
+        }
         else
+        {
             Credit["Stone"] += AddStone;
+            Inventory.Instance.AddItem(CreditItemCode["Stone"], AddStone);
+        }
 
         UIManager.Instance.CreditUIEdit();
     }
 
-    public int SpawnCredit() // 10 : 20 : 70 확률로 랜덤 뽑기 함수. (소환석 뽑기.)
+    public int SpawnRandomCode() // 10 : 20 : 70 확률로 랜덤 뽑기 함수. (소환석 뽑기.)
     {
         int itemCode;
         float Rarity = Random.Range(1f, 101f);
@@ -86,12 +105,5 @@ public class CreditManager : Singleton<CreditManager>
             itemCode += 6;
 
         return itemCode;
-    }
-
-    private void AddCreditDic() //추후 데이터 저장 시스템 필요. 시작 할 때마다 초기화 됨.
-    {
-        Credit.Add("Pray", 0);
-        Credit.Add("Stone", 0);
-        Credit.Add("Gold", 0);
     }
 }
