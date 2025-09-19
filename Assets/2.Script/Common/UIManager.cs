@@ -10,38 +10,32 @@ public class UIManager : Singleton<UIManager>
     private Dictionary<string, string> SummonText = new Dictionary<string, string>();
     private Dictionary<string, string> SummonConditonText = new Dictionary<string, string>();
 
-    [SerializeField] private List<GameObject> QuestUI_List;
+    [SerializeField] private List<GameObject> GuideUI_List;
     [SerializeField] private List<GameObject> FailUI_List;
-    [SerializeField] private List<GameObject> SummonUI_List;
     [SerializeField] private List<GameObject> InventorySlot_List;
 
-    private TextMeshProUGUI quest;
-    private TextMeshProUGUI questCondition;
+    private TextMeshProUGUI GuideUIText;
+    private TextMeshProUGUI GuideCondition;
     private TextMeshProUGUI failCondition;
-    private TextMeshProUGUI summon;
-    private TextMeshProUGUI summonCondition;
 
     public TextMeshProUGUI GoldUI;
     public TextMeshProUGUI PrayUI;
     public TextMeshProUGUI StoneUI;
 
-    public GameObject QuestUI;
+    public GameObject GuideUI;
     public GameObject FailUI;
     public GameObject SummonUI;
     public GameObject InventoryUI;
 
     void Start()
     {
-        QuestUI_List = ObjectManager.Instance.GetObject("UI", 1);
+        GuideUI_List = ObjectManager.Instance.GetObject("UI", 1);
         FailUI_List = ObjectManager.Instance.GetObject("UI", 2);
-        SummonUI_List = ObjectManager.Instance.GetObject("UI", 3);
         InventorySlot_List = ObjectManager.Instance.GetObject(InventoryUI, 0);
 
-        quest = QuestUI_List[0].GetComponent<TextMeshProUGUI>();
-        questCondition = QuestUI_List[1].GetComponent<TextMeshProUGUI>();
+        GuideUIText = GuideUI_List[0].GetComponent<TextMeshProUGUI>();
+        GuideCondition = GuideUI_List[1].GetComponent<TextMeshProUGUI>();
         failCondition = FailUI_List[1].GetComponent<TextMeshProUGUI>();
-        summon = SummonUI_List[0].GetComponent<TextMeshProUGUI>();
-        summonCondition = SummonUI_List[1].GetComponent<TextMeshProUGUI>();
 
         AddQuestText();
         AddSummonText();
@@ -50,19 +44,14 @@ public class UIManager : Singleton<UIManager>
         AddFailText();
     }
 
-    public void QuestUIControl(bool active) //퀘스트 UI 활성화, 비활성화 함수.
+    public void GuideUIControl(bool active) //퀘스트 UI 활성화, 비활성화 함수.
     {
-        QuestUI.SetActive(active);
+        GuideUI.SetActive(active);
     }
 
     public void FailUIControl(bool active) //실패 UI 활성화, 비활성화 함수.
     {
         FailUI.SetActive(active);
-    }
-
-    public void SummonUIControl(bool active) //소환 UI 활성화, 비활성화 함수.
-    {
-        SummonUI.SetActive(active);
     }
 
     public void InventoryUIControl()
@@ -72,8 +61,8 @@ public class UIManager : Singleton<UIManager>
 
     public void QuestUIEdit(string key) //키 값에 해당하는 미션의 문구로 변경하는 함수.
     {
-        quest.text = QuestText[key];
-        questCondition.text = QuestConditionText[key];
+        GuideUIText.text = QuestText[key];
+        GuideCondition.text = QuestConditionText[key];
     }
 
     public void FailUIEdit(string key) //키 값에 해당하는 미션의 실패 메세지로 변경하는 함수.
@@ -83,8 +72,8 @@ public class UIManager : Singleton<UIManager>
 
     public void SummonUIEdit(string key) //키 값에 해당하는 미션의 문구로 변경하는 함수.
     {
-        summon.text = SummonText[key];
-        summonCondition.text = SummonConditonText[key];
+        GuideUIText.text = SummonText[key];
+        GuideCondition.text = SummonConditonText[key];
     }
 
     public void CreditUIEdit()

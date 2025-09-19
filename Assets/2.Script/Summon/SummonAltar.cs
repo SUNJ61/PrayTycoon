@@ -34,13 +34,19 @@ public class SummonAltar : MonoBehaviour, IQuest
         StartCoroutine(RuneUpdate());
 
         ButtonManager.Instance.SetCurrentSummon(SummonID);
+        ButtonManager.Instance.ButtonUpdate(1);
+
         UIManager.Instance.SummonUIEdit(Key);
         QuestManager.Instance.QuestCheck(Key, CreditType, Credit, this);
-        UIManager.Instance.SummonUIControl(true);
+
+        UIManager.Instance.GuideUIControl(true);
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
+        ButtonManager.Instance.ButtonClear();
+        UIManager.Instance.GuideUIControl(false);
+
         targetColor.a = 0.0f;
         StartCoroutine(RuneUpdate());
     }

@@ -27,10 +27,18 @@ public class GateUpdate : MonoBehaviour, IQuest
     private void OnTriggerEnter2D(Collider2D other)
     {
         ButtonManager.Instance.SetCurrentQuest(QuestID);
+        ButtonManager.Instance.ButtonUpdate(0);
+
         UIManager.Instance.QuestUIEdit(Key);
         QuestManager.Instance.QuestCheck(Key, CreditType, GateCredit, this);
 
-        UIManager.Instance.QuestUIControl(true);
+        UIManager.Instance.GuideUIControl(true);
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        ButtonManager.Instance.ButtonClear();
+        UIManager.Instance.GuideUIControl(false);
     }
 
     public void SetQuestClear() // 퀘스트가 성공하면 발생하는 이벤트. (오브젝트 변경, 아이템 뽑기 같은 함수 넣으면 될 듯.)

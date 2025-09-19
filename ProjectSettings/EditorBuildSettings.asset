@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/1.Scenes/TycoonCemetery.unity
+    path: Assets/1.Scenes/TycoonGrave.unity
     guid: a0015d8e4e6cbbe49a7ce5f4209e2071
   - enabled: 1
     path: Assets/1.Scenes/TycoonPrayRoom.unity
@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/1.Scenes/TycoonMetamorphoRoom.unity
     guid: 42052c43274e1fe4a987d0ab341331cf
+  - enabled: 1
+    path: Assets/1.Scenes/TycoonGuild.unity
+    guid: 73e0fed00f07fd546b19be2116cfe697
   m_configObjects: {}

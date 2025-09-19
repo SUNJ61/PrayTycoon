@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PortalData", menuName = "Game/PortalData")]
@@ -19,7 +20,7 @@ public class PortalType : ScriptableObject
             if (info.type == type)
                 return info.sceneName;
         }
-        
+
         return null;
     }
 }

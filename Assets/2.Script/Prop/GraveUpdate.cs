@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GraveUpdate : MonoBehaviour, IQuest
@@ -28,18 +26,29 @@ public class GraveUpdate : MonoBehaviour, IQuest
         if (QuestClear == false) //수리가 되기 전 사용함수.
         {
             ButtonManager.Instance.SetCurrentQuest(QuestID);
+            ButtonManager.Instance.ButtonUpdate(0);
+
             UIManager.Instance.QuestUIEdit(FixKey);
             QuestManager.Instance.QuestCheck(FixKey, FixCreditType, FixCredit, this);
 
-            UIManager.Instance.QuestUIControl(true);
+            UIManager.Instance.GuideUIControl(true);
         }
         else //수리가 된 후 사용함수.
         {
             ButtonManager.Instance.SetCurrentSummon(SummonID);
+            ButtonManager.Instance.ButtonUpdate(1);
+
             UIManager.Instance.SummonUIEdit(SpawnKey);
             QuestManager.Instance.QuestCheck(SpawnKey, SpawnCreditType, SpawnCredit, this);
-            UIManager.Instance.SummonUIControl(true);
+
+            UIManager.Instance.GuideUIControl(true);
         }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        ButtonManager.Instance.ButtonClear();
+        UIManager.Instance.GuideUIControl(false);
     }
 
     public void SetQuestClear() // 퀘스트가 성공하면 발생하는 이벤트. (오브젝트 변경, 아이템 뽑기 같은 함수 넣으면 될 듯.)
@@ -50,10 +59,6 @@ public class GraveUpdate : MonoBehaviour, IQuest
 
             gameObject.transform.GetChild(0).gameObject.SetActive(false);
             gameObject.transform.GetChild(1).gameObject.SetActive(true);
-        }
-        else // 퀘스트 완료 후 작동 함수.
-        {
-
         }
     }
 }

@@ -5,8 +5,8 @@ public class ButtonManager : Singleton<ButtonManager>
 {
     private GameObject UI;
 
-    public Button QuestButton;
-    public Button QuestCloseButton;
+    public Button GuideButton;
+    public Button GuideCloseButton;
     public Button FailButton;
     public Button SummonButton;
     public Button SummonCloseButton;
@@ -17,12 +17,32 @@ public class ButtonManager : Singleton<ButtonManager>
 
     void Start()
     {
-        QuestButton.onClick.AddListener(QuestButtonClick);
-        QuestCloseButton.onClick.AddListener(() => UIManager.Instance.QuestUIControl(false));
+        GuideCloseButton.onClick.AddListener(GuideCloseButtonClick);
         FailButton.onClick.AddListener(() => UIManager.Instance.FailUIControl(false));
-        SummonButton.onClick.AddListener(SummonButtonClick);
-        SummonCloseButton.onClick.AddListener(() => UIManager.Instance.SummonUIControl(false));
         InventoryCloseButton.onClick.AddListener(() => UIManager.Instance.InventoryUIControl());
+    }
+
+    public void ButtonUpdate(int caseId) //버튼 설정 함수.
+    {
+        switch (caseId)
+        {
+            case 0: //퀘스트 일때 ID 0번.
+                GuideButton.onClick.AddListener(QuestButtonClick);
+                break;
+
+            case 1: //소환 일때 ID 1번.
+                GuideButton.onClick.AddListener(SummonButtonClick);
+                break;
+                
+            case 2: //포탈 일때 ID 2번.
+                GuideButton.onClick.AddListener(QuestButtonClick);
+                break;
+        }
+    }
+
+    public void ButtonClear()
+    {
+        GuideButton.onClick.RemoveAllListeners();
     }
 
     private void QuestButtonClick() //퀘스트 버튼 클릭시 발동하는 함수.
@@ -30,15 +50,17 @@ public class ButtonManager : Singleton<ButtonManager>
         if (CreditManager.Instance.UseCredit
         (QuestManager.Instance.questCredit[QuestManager.Instance.currentKey], QuestManager.Instance.questCreditType[QuestManager.Instance.currentKey])) //현재 미션에 대해 크레딧이 소모 가능으로 판단하면 미션 업데이트.
         {
-            UIManager.Instance.QuestUIControl(false);
+            UIManager.Instance.GuideUIControl(false);
             QuestManager.Instance.CompleteQuest(CurrentQuestId);
         }
         else // 현재 미션에 대해 크레딧 소모가 불가능 하면 실패 UI 출력.
         {
-            UIManager.Instance.QuestUIControl(false);
+            UIManager.Instance.GuideUIControl(false);
             UIManager.Instance.FailUIEdit(QuestManager.Instance.currentKey);
             UIManager.Instance.FailUIControl(true);
         }
+
+        GuideButton.onClick.RemoveListener(QuestButtonClick); //버튼 초기화.
     }
 
     private void SummonButtonClick() //소환 버튼 클릭시 발동하는 함수.
@@ -46,7 +68,7 @@ public class ButtonManager : Singleton<ButtonManager>
         if (CreditManager.Instance.UseCredit
         (QuestManager.Instance.questCredit[QuestManager.Instance.currentKey], QuestManager.Instance.questCreditType[QuestManager.Instance.currentKey])) //현재 미션에 대해 크레딧이 소모 가능으로 판단하면 미션 업데이트. (소환 구분 법 필요.)
         {
-            UIManager.Instance.SummonUIControl(false);
+            UIManager.Instance.GuideUIControl(false);
             switch (CurrentSummonId)
             {
                 case 0:
@@ -56,15 +78,23 @@ public class ButtonManager : Singleton<ButtonManager>
                 case 1:
                     int ItemCode = CreditManager.Instance.SpawnRandomCode(); // 1번 소환석 소환
                     Inventory.Instance.AddItem(ItemCode, 1);
-                    break;   
+                    break;
             }
         }
         else
         {
-            UIManager.Instance.SummonUIControl(false);
+            UIManager.Instance.GuideUIControl(false);
             UIManager.Instance.FailUIEdit(QuestManager.Instance.currentKey);
             UIManager.Instance.FailUIControl(true);
         }
+
+        GuideButton.onClick.RemoveListener(SummonButtonClick);
+    }
+
+    private void GuideCloseButtonClick()
+    {
+        GuideButton.onClick.RemoveAllListeners();
+        UIManager.Instance.GuideUIControl(false);
     }
 
     public void SetCurrentQuest(int questId)
