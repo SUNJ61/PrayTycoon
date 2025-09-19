@@ -7,14 +7,11 @@ public class Portal : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
-        {
             //이동 UI 띄우기.
-        }
     }
 
-    private void OriggerExit(Collider other)
+    private void OnTriggerExit2D (Collider2D other)
     {
-        //이동 UI 내리기.        
+        //이동 UI 내리기.
     }
 }
