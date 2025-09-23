@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d46febde910c39044a151f3bec935c82, type: 3}
   m_Name: MainMapData
   m_EditorClassIdentifier: 
+  spawnPoint: {x: -4, y: -10, z: 0}
   Portaltype: MainMap
   SceneName: TycoonMainMap

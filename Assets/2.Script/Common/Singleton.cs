@@ -22,7 +22,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         }
     }
 
-    protected virtual void Awake()
+    public virtual void Awake()
     {
         if (instance != null && instance != this) //이미 씬에 기존 instance가 존재하면 새로 생성된 instance를 제거.
         {

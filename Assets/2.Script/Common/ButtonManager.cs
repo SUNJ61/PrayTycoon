@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class ButtonManager : Singleton<ButtonManager>
 {
@@ -12,6 +12,8 @@ public class ButtonManager : Singleton<ButtonManager>
     public Button SummonButton;
     public Button SummonCloseButton;
     public Button InventoryCloseButton;
+
+    private Vector3 CurrentspawnPoint;
 
     private int CurrentQuestId;
     private int CurrentSummonId;
@@ -99,7 +101,7 @@ public class ButtonManager : Singleton<ButtonManager>
         UIManager.Instance.GuideUIControl(false);
         GuideButton.onClick.RemoveListener(PortalButtonClick);
 
-        SceneManager.LoadScene(NextScene);
+        SceneLoadManager.Instance.NextSceneLoad(NextScene, CurrentspawnPoint);
     }
 
     private void GuideCloseButtonClick()
@@ -118,8 +120,9 @@ public class ButtonManager : Singleton<ButtonManager>
         CurrentSummonId = summonId;
     }
 
-    public void SetCurrentPortal(string sceneName)
+    public void SetCurrentPortal(string sceneName, Vector3 spawnPoint)
     {
         NextScene = sceneName;
+        CurrentspawnPoint = spawnPoint;
     }
 }

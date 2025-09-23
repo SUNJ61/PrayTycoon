@@ -8,7 +8,7 @@ public class Portal : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        ButtonManager.Instance.SetCurrentPortal(portalType.SceneName);
+        ButtonManager.Instance.SetCurrentPortal(portalType.SceneName, portalType.spawnPoint);
         ButtonManager.Instance.ButtonUpdate(caseId);
 
         UIManager.Instance.PortalUIEdit(portalType.Portaltype);

@@ -154,10 +154,12 @@ public class UIManager : Singleton<UIManager>
     private void AddPortalText()
     {
         PortalText.Add("PrayRoom", "기도실 포탈");
+        PortalText.Add("MainMap", "광장 포탈");
     }
 
     private void AddPortalConditonText()
     {
         PortalConditionText.Add("PrayRoom", "기도실로 이동하시겠습니까?");
+        PortalConditionText.Add("MainMap", "광장으로 이동하시겠습니까?");
     }
 }
