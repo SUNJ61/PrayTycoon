@@ -6076,7 +6076,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Stair: []
   Gate: []
-  Grave: []
 --- !u!1001 &620718890
 PrefabInstance:
   m_ObjectHideFlags: 0

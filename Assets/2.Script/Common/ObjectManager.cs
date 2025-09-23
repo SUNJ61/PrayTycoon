@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class ObjectManager : Singleton<ObjectManager>
 {
-    private Dictionary<string, List<GameObject>> QuestOJ = new Dictionary<string,List<GameObject>>();
+    private Dictionary<string, List<GameObject>> QuestOJ = new Dictionary<string, List<GameObject>>();
 
     [SerializeField] private List<GameObject> Stair;
     [SerializeField] private List<GameObject> Gate;
-    [SerializeField] private List<GameObject> Grave;
+    //[SerializeField] private List<GameObject> Grave;
 
     private ItemDatabase _itemDatabase;
     public ItemDatabase itemDatabase
@@ -21,11 +21,11 @@ public class ObjectManager : Singleton<ObjectManager>
     {
         Stair = GetObject("Stair-Main");
         Gate = GetObject("Gate");
-        Grave = GetObject("GraveStone");
+        //Grave = GetObject("GraveStone");
 
         QuestOJ.Add("Stair-Main", Stair);
         QuestOJ.Add("Gate", Gate);
-        QuestOJ.Add("GraveStone", Grave);
+        //QuestOJ.Add("GraveStone", Grave);
 
         _itemDatabase = Resources.Load<ItemDatabase>("ItemDataBase");
     }
@@ -34,7 +34,7 @@ public class ObjectManager : Singleton<ObjectManager>
     {
         Transform parent;
         List<GameObject> list = new List<GameObject>();
-        
+
         if (index == -1)
             parent = GameObject.Find(Ob_Name).transform;
         else
@@ -53,7 +53,7 @@ public class ObjectManager : Singleton<ObjectManager>
     {
         Transform parent;
         List<GameObject> list = new List<GameObject>();
-        
+
         if (index == -1)
             parent = Obj.transform;
         else
@@ -79,5 +79,15 @@ public class ObjectManager : Singleton<ObjectManager>
         }
 
         return dict;
+    }
+
+    public void PlayerSpawn()
+    {
+        //플레이어 스폰관리.
+    }
+
+    public void CameraCtrl()
+    {
+        //카메라 플레이어 한테 붙이기.
     }
 }

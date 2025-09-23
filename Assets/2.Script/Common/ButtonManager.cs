@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ButtonManager : Singleton<ButtonManager>
 {
@@ -14,6 +15,8 @@ public class ButtonManager : Singleton<ButtonManager>
 
     private int CurrentQuestId;
     private int CurrentSummonId;
+
+    private string NextScene;
 
     void Start()
     {
@@ -33,9 +36,9 @@ public class ButtonManager : Singleton<ButtonManager>
             case 1: //소환 일때 ID 1번.
                 GuideButton.onClick.AddListener(SummonButtonClick);
                 break;
-                
+
             case 2: //포탈 일때 ID 2번.
-                GuideButton.onClick.AddListener(QuestButtonClick);
+                GuideButton.onClick.AddListener(PortalButtonClick);
                 break;
         }
     }
@@ -91,6 +94,14 @@ public class ButtonManager : Singleton<ButtonManager>
         GuideButton.onClick.RemoveListener(SummonButtonClick);
     }
 
+    private void PortalButtonClick() //포탈 버튼 클릭시 발동하는 함수.
+    {
+        UIManager.Instance.GuideUIControl(false);
+        GuideButton.onClick.RemoveListener(PortalButtonClick);
+
+        SceneManager.LoadScene(NextScene);
+    }
+
     private void GuideCloseButtonClick()
     {
         GuideButton.onClick.RemoveAllListeners();
@@ -105,5 +116,10 @@ public class ButtonManager : Singleton<ButtonManager>
     public void SetCurrentSummon(int summonId)
     {
         CurrentSummonId = summonId;
+    }
+
+    public void SetCurrentPortal(string sceneName)
+    {
+        NextScene = sceneName;
     }
 }

@@ -1,17 +1,23 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Portal : MonoBehaviour
 {
     public PortalType portalType;
 
+    private int caseId = 2;
+
     private void OnTriggerEnter2D(Collider2D other)
     {
-            //이동 UI 띄우기.
+        ButtonManager.Instance.SetCurrentPortal(portalType.SceneName);
+        ButtonManager.Instance.ButtonUpdate(caseId);
+
+        UIManager.Instance.PortalUIEdit(portalType.Portaltype);
+        UIManager.Instance.GuideUIControl(true);
     }
 
-    private void OnTriggerExit2D (Collider2D other)
+    private void OnTriggerExit2D(Collider2D other)
     {
-        //이동 UI 내리기.
+        ButtonManager.Instance.ButtonClear();
+        UIManager.Instance.GuideUIControl(false);
     }
 }

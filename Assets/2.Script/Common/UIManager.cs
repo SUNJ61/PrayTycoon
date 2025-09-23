@@ -8,7 +8,9 @@ public class UIManager : Singleton<UIManager>
     private Dictionary<string, string> QuestConditionText = new Dictionary<string, string>();
     private Dictionary<string, string> FailText = new Dictionary<string, string>();
     private Dictionary<string, string> SummonText = new Dictionary<string, string>();
-    private Dictionary<string, string> SummonConditonText = new Dictionary<string, string>();
+    private Dictionary<string, string> SummonConditionText = new Dictionary<string, string>();
+    private Dictionary<string, string> PortalText = new Dictionary<string, string>();
+    private Dictionary<string, string> PortalConditionText = new Dictionary<string, string>();
 
     [SerializeField] private List<GameObject> GuideUI_List;
     [SerializeField] private List<GameObject> FailUI_List;
@@ -38,10 +40,12 @@ public class UIManager : Singleton<UIManager>
         failCondition = FailUI_List[1].GetComponent<TextMeshProUGUI>();
 
         AddQuestText();
-        AddSummonText();
         AddQuestConditionText();
-        AddSummonCondition();
+        AddSummonText();
+        AddSummonConditionText();
         AddFailText();
+        AddPortalText();
+        AddPortalConditonText();
     }
 
     public void GuideUIControl(bool active) //퀘스트 UI 활성화, 비활성화 함수.
@@ -70,10 +74,16 @@ public class UIManager : Singleton<UIManager>
         failCondition.text = FailText[key];
     }
 
-    public void SummonUIEdit(string key) //키 값에 해당하는 미션의 문구로 변경하는 함수.
+    public void SummonUIEdit(string key) //키 값에 해당하는 소환의 문구로 변경하는 함수.
     {
         GuideUIText.text = SummonText[key];
-        GuideCondition.text = SummonConditonText[key];
+        GuideCondition.text = SummonConditionText[key];
+    }
+
+    public void PortalUIEdit(string key) //키 값에 해당하는 포탈의 문구로 변경하는 함수.
+    {
+        GuideUIText.text = PortalText[key];
+        GuideCondition.text = PortalConditionText[key];
     }
 
     public void CreditUIEdit()
@@ -135,9 +145,19 @@ public class UIManager : Singleton<UIManager>
         SummonText.Add("Spawn", "Q. 소환석을 만들겠습니까?");
     }
 
-    private void AddSummonCondition()
+    private void AddSummonConditionText()
     {
-        SummonConditonText.Add("Summon", "소환을 하기 위해서는\n5의 기도력이 필요합니다.");
-        SummonConditonText.Add("Spawn", "소환석을 만들기 위해서는\n20의 기도력이 필요합니다.");
+        SummonConditionText.Add("Summon", "소환을 하기 위해서는\n5의 기도력이 필요합니다.");
+        SummonConditionText.Add("Spawn", "소환석을 만들기 위해서는\n20의 기도력이 필요합니다.");
+    }
+
+    private void AddPortalText()
+    {
+        PortalText.Add("PrayRoom", "기도실 포탈");
+    }
+
+    private void AddPortalConditonText()
+    {
+        PortalConditionText.Add("PrayRoom", "기도실로 이동하시겠습니까?");
     }
 }
