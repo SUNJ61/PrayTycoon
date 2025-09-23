@@ -347,7 +347,7 @@ GameObject:
   m_Component:
   - component: {fileID: 46059224}
   m_Layer: 0
-  m_Name: 'Coggin '
+  m_Name: Coggin_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -597,7 +597,7 @@ GameObject:
   m_Component:
   - component: {fileID: 79169211}
   m_Layer: 0
-  m_Name: Coggin  (1)
+  m_Name: Coggin_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

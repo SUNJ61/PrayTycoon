@@ -1,26 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PortalData", menuName = "Game/PortalData")]
+[CreateAssetMenu(fileName = "PortalData", menuName = "Portal/PortalData")]
 public class PortalType : ScriptableObject
 {
-    [System.Serializable]
-    public class PortalInfo
-    {
-        public PortalType type;
-        public string sceneName;
-    }
-
-    public PortalInfo[] portalInfos;
-
-    public string GetSceneName(PortalType type)
-    {
-        foreach (var info in portalInfos)
-        {
-            if (info.type == type)
-                return info.sceneName;
-        }
-
-        return null;
-    }
+    public string Portaltype;
+    public string SceneName;
 }
