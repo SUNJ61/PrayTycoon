@@ -141,25 +141,31 @@ public class UIManager : Singleton<UIManager>
 
     private void AddSummonText()
     {
-        SummonText.Add("Summon", "소환을 진행하시겠습니까?");
-        SummonText.Add("Spawn", "Q. 소환석을 만들겠습니까?");
+        SummonText.Add("Summon", "연성을 진행하시겠습니까?");
+        SummonText.Add("Spawn", "Q. 소환을 진행하시겠습니까?");
     }
 
     private void AddSummonConditionText()
     {
-        SummonConditionText.Add("Summon", "소환을 하기 위해서는\n5의 기도력이 필요합니다.");
-        SummonConditionText.Add("Spawn", "소환석을 만들기 위해서는\n20의 기도력이 필요합니다.");
+        SummonConditionText.Add("Summon", "연성을 하기 위해서는\n5의 기도력이 필요합니다.");
+        SummonConditionText.Add("Spawn", "소환을 하기 위해서는\n20의 기도력이 필요합니다.");
     }
 
     private void AddPortalText()
     {
         PortalText.Add("PrayRoom", "기도실 포탈");
         PortalText.Add("MainMap", "광장 포탈");
+        PortalText.Add("MetamorphoRoom", "연성실 포탈");
+        PortalText.Add("Grave", "묘지 포탈");
+        PortalText.Add("Guild", "길드 포탈");
     }
 
     private void AddPortalConditonText()
     {
-        PortalConditionText.Add("PrayRoom", "기도실로 이동하시겠습니까?");
-        PortalConditionText.Add("MainMap", "광장으로 이동하시겠습니까?");
+        PortalConditionText.Add("PrayRoom", "기도실로\n이동하시겠습니까 ?");
+        PortalConditionText.Add("MainMap", "광장으로\n이동하시겠습니까?");
+        PortalConditionText.Add("MetamorphoRoom", "연성실로\n이동하시겠습니까?");
+        PortalConditionText.Add("Grave", "묘지로\n이동하시겠습니까?");
+        PortalConditionText.Add("Guild", "길드로\n이동하시겠습니까?");
     }
 }

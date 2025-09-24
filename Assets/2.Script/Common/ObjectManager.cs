@@ -9,7 +9,7 @@ public class ObjectManager : Singleton<ObjectManager>
 
     [SerializeField] private List<GameObject> Stair;
     [SerializeField] private List<GameObject> Gate;
-    //[SerializeField] private List<GameObject> Grave;
+    [SerializeField] private List<GameObject> Grave;
 
     private ItemDatabase _itemDatabase;
     public ItemDatabase itemDatabase
@@ -31,37 +31,44 @@ public class ObjectManager : Singleton<ObjectManager>
 
         _itemDatabase = Resources.Load<ItemDatabase>("ItemDataBase");
         PlayerObj = Resources.Load<GameObject>("Player");
-    }
-    void Start()
-    {
+
         Stair = GetObject("Stair-Main");
         Gate = GetObject("Gate");
-        //Grave = GetObject("GraveStone");
+        Grave = GetObject("GraveStone");
 
         QuestOJ.Add("Stair-Main", Stair);
         QuestOJ.Add("Gate", Gate);
-        //QuestOJ.Add("GraveStone", Grave);
-
+        QuestOJ.Add("GraveStone", Grave);
+    }
+    void Start()
+    {
         PlayerSpawn(spawnPoint);
     }
 
     public List<GameObject> GetObject(string Ob_Name, int index = -1) // 해당 이름을 가진 오브젝트의 자식 오브젝트의 자식을 리스트에 담는 함수, 자식 index 입력이 없으면 입력된 오브젝트 자식 리스트 생성.
     {
-        Transform parent;
-        List<GameObject> list = new List<GameObject>();
+        GameObject obj = GameObject.Find(Ob_Name);
 
-        if (index == -1)
-            parent = GameObject.Find(Ob_Name).transform;
-        else
-            parent = GameObject.Find(Ob_Name).transform.GetChild(index).transform;
-
-        if (parent != null)
+        if (obj != null)
         {
-            foreach (Transform child in parent)
-                list.Add(child.gameObject);
-        }
+            Transform parent;
+            List<GameObject> list = new List<GameObject>();
 
-        return list;
+            if (index == -1)
+                parent = GameObject.Find(Ob_Name).transform;
+            else
+                parent = GameObject.Find(Ob_Name).transform.GetChild(index).transform;
+
+            if (parent != null)
+            {
+                foreach (Transform child in parent)
+                    list.Add(child.gameObject);
+            }
+
+            return list;
+        }
+        else
+            return null;
     }
 
     public List<GameObject> GetObject(GameObject Obj, int index = -1) // 해당 오브젝트의 자식 오브젝트의 자식을 리스트에 담는 함수, 자식 index 입력이 없으면 입력된 오브젝트 자식 리스트 생성.
