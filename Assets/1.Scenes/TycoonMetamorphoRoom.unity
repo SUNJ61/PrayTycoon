@@ -17357,6 +17357,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1849105592}
   - component: {fileID: 1849105593}
+  - component: {fileID: 1849105594}
   m_Layer: 20
   m_Name: MiracleStatue
   m_TagString: Untagged
@@ -17425,6 +17426,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4, y: 2}
   m_EdgeRadius: 0
+--- !u!114 &1849105594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1849105591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5013e0f90def59458a18e265f8172cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2106228702
 GameObject:
   m_ObjectHideFlags: 0
@@ -18092,6 +18105,7 @@ GameObject:
   - component: {fileID: 7947911506762687482}
   - component: {fileID: 7947911506762687480}
   - component: {fileID: 5997224649928175417}
+  - component: {fileID: 7947911506762687486}
   m_Layer: 20
   m_Name: Potal-Main
   m_TagString: Untagged
@@ -18099,6 +18113,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &7947911506762687486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7947911506762687485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57a2d9e1c006dc0479386e49085fb6d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  portalType: {fileID: 11400000, guid: 244b52c522dbb4943b9163f81c548745, type: 2}
+  runes:
+  - {fileID: 6250821297135722848}
+  - {fileID: 9183256226761926738}
+  - {fileID: 6868958709696249910}
+  - {fileID: 2128395780263670101}
 --- !u!212 &7947911506907567620
 SpriteRenderer:
   m_ObjectHideFlags: 0

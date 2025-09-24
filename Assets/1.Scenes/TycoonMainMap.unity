@@ -792,6 +792,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   portalType: {fileID: 11400000, guid: 431e3fa90549a6f48a145a171ef48cce, type: 2}
+  runes:
+  - {fileID: 828061283}
+  - {fileID: 688942333}
+  - {fileID: 1584353203}
+  - {fileID: 1503444724}
 --- !u!61 &65500988
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6425,6 +6430,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Stair: []
   Gate: []
+  Grave: []
   PlayerObj: {fileID: 0}
   CurrentPlayer: {fileID: 0}
 --- !u!1 &605677563
@@ -16370,6 +16376,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   portalType: {fileID: 11400000, guid: 252274523c9c6854f8501895ff6eec61, type: 2}
+  runes:
+  - {fileID: 980723347}
+  - {fileID: 2006281501}
+  - {fileID: 1570406445}
+  - {fileID: 503903616}
 --- !u!61 &918359502
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -22178,6 +22189,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   portalType: {fileID: 11400000, guid: 9191811810b7c8842aba0f306054717a, type: 2}
+  runes:
+  - {fileID: 259264328}
+  - {fileID: 183592842}
+  - {fileID: 1790285665}
+  - {fileID: 743508935}
 --- !u!61 &1826271259
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -44217,6 +44233,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   portalType: {fileID: 11400000, guid: b25f0deb8cd9d0943a1ced65a174189d, type: 2}
+  runes:
+  - {fileID: 1991634229861006390}
+  - {fileID: 3633752873037133060}
+  - {fileID: 1319455270096756064}
+  - {fileID: 5806618424245840899}
 --- !u!1 &2544660755275320144
 GameObject:
   m_ObjectHideFlags: 0

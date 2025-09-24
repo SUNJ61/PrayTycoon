@@ -267,6 +267,7 @@ GameObject:
   - component: {fileID: 781687038}
   - component: {fileID: 781687040}
   - component: {fileID: 781687039}
+  - component: {fileID: 781687041}
   m_Layer: 20
   m_Name: Potal-Main
   m_TagString: Untagged
@@ -388,6 +389,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!114 &781687041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 781687037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57a2d9e1c006dc0479386e49085fb6d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  portalType: {fileID: 11400000, guid: 244b52c522dbb4943b9163f81c548745, type: 2}
+  runes:
+  - {fileID: 1297180200}
+  - {fileID: 1840238180}
+  - {fileID: 2086660827}
+  - {fileID: 1824777851}
 --- !u!1 &973660452
 GameObject:
   m_ObjectHideFlags: 0

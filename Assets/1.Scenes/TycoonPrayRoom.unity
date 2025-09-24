@@ -352,6 +352,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   portalType: {fileID: 11400000, guid: 244b52c522dbb4943b9163f81c548745, type: 2}
+  runes:
+  - {fileID: 366375979}
+  - {fileID: 1660172310}
+  - {fileID: 1093627306}
+  - {fileID: 481174389}
 --- !u!1 &60569277
 GameObject:
   m_ObjectHideFlags: 0

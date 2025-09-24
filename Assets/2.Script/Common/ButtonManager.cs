@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
+using System;
 
 public class ButtonManager : Singleton<ButtonManager>
 {
+    public static event Action OnTeleport;
     private GameObject UI;
 
     public Button GuideButton;
@@ -19,6 +20,7 @@ public class ButtonManager : Singleton<ButtonManager>
     private int CurrentSummonId;
 
     private string NextScene;
+
 
     void Start()
     {
@@ -98,6 +100,8 @@ public class ButtonManager : Singleton<ButtonManager>
 
     private void PortalButtonClick() //포탈 버튼 클릭시 발동하는 함수.
     {
+        OnTeleport?.Invoke();
+        
         UIManager.Instance.GuideUIControl(false);
         GuideButton.onClick.RemoveListener(PortalButtonClick);
 
