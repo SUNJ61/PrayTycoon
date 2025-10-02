@@ -5,7 +5,6 @@ public class MapObjectData
 {
     public string objectId;   // 고유 ID
     public bool isRepaired;   // 수리 여부
-    public float posX, posY, posZ; // 위치
 }
 
 [System.Serializable]
