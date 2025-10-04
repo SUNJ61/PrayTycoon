@@ -103,17 +103,15 @@ public class ObjectManager : Singleton<ObjectManager>
         return dict;
     }
 
-    public void PlayerSpawn(Vector3 spawnPoint)
+    public void PlayerSpawn(Vector3 spawnPoint) //플레이어 스폰관리.
     {
-        //플레이어 스폰관리.
         CurrentPlayer = Instantiate(PlayerObj, spawnPoint, Quaternion.identity);
 
         CameraCtrl();
     }
 
-    public void CameraCtrl()
-    {
-        //카메라 붙이기.
+    public void CameraCtrl() //카메라 붙이기.
+    {     
         MainCamera = GameObject.Find("Main Camera");
         cameraFollow = MainCamera.GetComponent<CameraFollow>();
 

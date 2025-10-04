@@ -20,6 +20,8 @@ public class GateUpdate : MonoBehaviour, IQuest
         QuestTrigger = GetComponent<BoxCollider2D>();
 
         QuestID = 3;
+
+        LoadGate();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -39,12 +41,33 @@ public class GateUpdate : MonoBehaviour, IQuest
         UIManager.Instance.GuideUIControl(false);
     }
 
+    private void LoadGate()
+    {
+        GameObject Gate_C = gameObject.transform.GetChild(0).gameObject;
+        SaveObject Gate_C_Data = Gate_C.transform.GetComponent<SaveObject>();
+        Gate_C.SetActive(Gate_C_Data.isRepaired);
+        QuestTrigger.enabled = Gate_C_Data.isRepaired;
+
+        GameObject Gate_O = gameObject.transform.GetChild(1).gameObject;
+        SaveObject Gate_O_Data = Gate_O.transform.GetComponent<SaveObject>();
+        Gate_O.SetActive(Gate_O_Data.isRepaired);
+        QuestClear = Gate_O_Data.isRepaired;
+    }
+
     public void SetQuestClear() // 퀘스트가 성공하면 발생하는 이벤트. (오브젝트 변경, 아이템 뽑기 같은 함수 넣으면 될 듯.)
     {
         QuestClear = true;
 
-        gameObject.transform.GetChild(0).gameObject.SetActive(false);
-        gameObject.transform.GetChild(1).gameObject.SetActive(true);
+        GameObject Gate_C = gameObject.transform.GetChild(0).gameObject;
+        SaveObject Gate_C_Data = Gate_C.transform.GetComponent<SaveObject>();
+        Gate_C.SetActive(false);
+        Gate_C_Data.isRepaired = false;
+
+        GameObject Gate_O = gameObject.transform.GetChild(1).gameObject;
+        SaveObject Gate_O_Data = Gate_O.transform.GetComponent<SaveObject>();
+        Gate_O.SetActive(true);
+        Gate_O_Data.isRepaired = true;
+
         QuestTrigger.enabled = false;
     }
 }

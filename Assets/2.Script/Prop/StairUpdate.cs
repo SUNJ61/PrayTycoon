@@ -19,6 +19,8 @@ public class StairUpdate : MonoBehaviour, IQuest
         QuestTrigger = GetComponent<BoxCollider2D>();
 
         QuestID = 0;
+
+        LoadStair();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -38,12 +40,33 @@ public class StairUpdate : MonoBehaviour, IQuest
         UIManager.Instance.GuideUIControl(false);
     }
 
+    private void LoadStair()
+    {
+        GameObject Stair_B = gameObject.transform.GetChild(0).gameObject;
+        SaveObject Stair_B_Data = Stair_B.transform.GetComponent<SaveObject>();
+        Stair_B.SetActive(Stair_B_Data.isRepaired);
+        QuestTrigger.enabled = Stair_B_Data.isRepaired;
+
+        GameObject Stair = gameObject.transform.GetChild(1).gameObject;
+        SaveObject Stair_Data = Stair.transform.GetComponent<SaveObject>();
+        Stair.SetActive(Stair_Data.isRepaired);
+        QuestClear = Stair_Data.isRepaired;
+    }
+
     public void SetQuestClear() // 퀘스트가 성공하면 발생하는 이벤트. (오브젝트 변경, 아이템 뽑기 같은 함수 넣으면 될 듯.)
     {
         QuestClear = true;
 
-        gameObject.transform.GetChild(0).gameObject.SetActive(false);
-        gameObject.transform.GetChild(1).gameObject.SetActive(true);
+        GameObject Stair_B = gameObject.transform.GetChild(0).gameObject;
+        SaveObject Stair_B_Data = Stair_B.transform.GetComponent<SaveObject>();
+        Stair_B.SetActive(false);
+        Stair_B_Data.isRepaired = false;
+
+        GameObject Stair = gameObject.transform.GetChild(1).gameObject;
+        SaveObject Stair_Data = Stair.transform.GetComponent<SaveObject>();
+        Stair.SetActive(true);
+        Stair_Data.isRepaired = true;
+
         QuestTrigger.enabled = false;
     }
 }

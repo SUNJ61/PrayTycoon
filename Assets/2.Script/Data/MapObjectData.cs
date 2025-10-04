@@ -10,5 +10,5 @@ public class MapObjectData
 [System.Serializable]
 public class MapSaveData
 {
-    public List<MapObjectData> objects = new();
+    public Dictionary<string, List<MapObjectData>> sceneObjects = new();
 }

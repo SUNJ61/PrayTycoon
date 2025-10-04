@@ -105,6 +105,8 @@ public class ButtonManager : Singleton<ButtonManager>
         UIManager.Instance.GuideUIControl(false);
         GuideButton.onClick.RemoveListener(PortalButtonClick);
 
+        SaveManager.Instance.SaveMap();
+
         SceneLoadManager.Instance.NextSceneLoad(NextScene, CurrentspawnPoint);
     }
 

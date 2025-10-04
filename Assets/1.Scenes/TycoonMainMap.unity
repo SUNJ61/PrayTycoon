@@ -1220,6 +1220,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 189718264}
+  - component: {fileID: 189718265}
   m_Layer: 0
   m_Name: Stair M - End
   m_TagString: Untagged
@@ -1247,6 +1248,20 @@ Transform:
   - {fileID: 1601602850}
   m_Father: {fileID: 89815125}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &189718265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189718263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99d6a4f6e6c03104d81c3615b7e79b1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectId: 
+  isRepaired: 0
 --- !u!1 &226066582
 GameObject:
   m_ObjectHideFlags: 0
@@ -17009,6 +17024,50 @@ Transform:
   m_Children:
   - {fileID: 291620141}
   m_Father: {fileID: 226066583}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1075163941
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1075163943}
+  - component: {fileID: 1075163942}
+  m_Layer: 0
+  m_Name: SaveManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1075163942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075163941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c3ae1e2cb1149c41a8ee9f876aed735, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1075163943
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075163941}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.9275005, y: 8.568557, z: -0.0014941236}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1091973637
 GameObject:
@@ -44879,8 +44938,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5241493059708525865}
   - component: {fileID: 5241493059708525867}
+  - component: {fileID: 5241493059708525868}
   m_Layer: 0
-  m_Name: Stair Broken M - Main
+  m_Name: Stair Broken - Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44931,6 +44991,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 0.1}
   m_EdgeRadius: 0
+--- !u!114 &5241493059708525868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5241493059708525866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99d6a4f6e6c03104d81c3615b7e79b1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectId: Stair Broken - Main
+  isRepaired: 1
 --- !u!61 &5241493060129506417
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -45519,13 +45593,28 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6075975976487355389}
+  - component: {fileID: 6075975976487355391}
   m_Layer: 0
-  m_Name: Stair M - Main
+  m_Name: Stair - Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!114 &6075975976487355391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6075975976487355390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99d6a4f6e6c03104d81c3615b7e79b1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectId: Stair - Main
+  isRepaired: 0
 --- !u!114 &6223746542922529200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45660,8 +45749,9 @@ GameObject:
   - component: {fileID: 6693561364988906893}
   - component: {fileID: 6693561364988906890}
   - component: {fileID: 3130106373198922068}
+  - component: {fileID: 6693561364988906894}
   m_Layer: 20
-  m_Name: Wooden Gate Opened
+  m_Name: Gate Open
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45683,6 +45773,20 @@ Transform:
   - {fileID: 6693561365178398019}
   m_Father: {fileID: 1254701746}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6693561364988906894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6693561364988906891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99d6a4f6e6c03104d81c3615b7e79b1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectId: Gate Open
+  isRepaired: 0
 --- !u!1 &6693561365178398016
 GameObject:
   m_ObjectHideFlags: 0
@@ -45992,13 +46096,28 @@ GameObject:
   - component: {fileID: 8154360242270798819}
   - component: {fileID: 8154360242270798820}
   - component: {fileID: 8154360242270798818}
+  - component: {fileID: 8154360242270798822}
   m_Layer: 20
-  m_Name: Wooden Gate
+  m_Name: Gate Close
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8154360242270798822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8154360242270798821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99d6a4f6e6c03104d81c3615b7e79b1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectId: Gate Close
+  isRepaired: 1
 --- !u!4 &9150657734228204140
 Transform:
   m_ObjectHideFlags: 0
@@ -46046,3 +46165,4 @@ SceneRoots:
   - {fileID: 897148801}
   - {fileID: 1800566242}
   - {fileID: 605677565}
+  - {fileID: 1075163943}

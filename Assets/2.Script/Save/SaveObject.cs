@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SaveObject : MonoBehaviour
@@ -8,7 +6,7 @@ public class SaveObject : MonoBehaviour
     public bool isRepaired = false;
     public string ObjectId => objectId;
 
-    public MapObjectData SetData()
+    public MapObjectData GetData()
     {
         return new MapObjectData
         {
