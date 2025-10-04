@@ -19,6 +19,8 @@ public class GraveUpdate : MonoBehaviour, IQuest
     void Start()
     {
         QuestID = 2;
+
+        LoadGrave();
     }
 
     private void OnTriggerEnter2D(Collider2D other) //수리 후와 수리 전을 구분해야함.
@@ -51,14 +53,33 @@ public class GraveUpdate : MonoBehaviour, IQuest
         UIManager.Instance.GuideUIControl(false);
     }
 
+    private void LoadGrave()
+    {
+        GameObject Grave_B = gameObject.transform.GetChild(0).gameObject;
+        SaveObject Grave_B_Data = Grave_B.transform.GetComponent<SaveObject>();
+        Grave_B.SetActive(Grave_B_Data.isRepaired);
+
+        GameObject Grave = gameObject.transform.GetChild(1).gameObject;
+        SaveObject Grave_Data = Grave.transform.GetComponent<SaveObject>();
+        Grave.SetActive(Grave_Data.isRepaired);
+        QuestClear = Grave_Data.isRepaired;
+    }
+
     public void SetQuestClear() // 퀘스트가 성공하면 발생하는 이벤트. (오브젝트 변경, 아이템 뽑기 같은 함수 넣으면 될 듯.)
     {
         if (QuestClear == false) // 퀘스트 완료 전 작동 함수.
         {
             QuestClear = true;
 
-            gameObject.transform.GetChild(0).gameObject.SetActive(false);
-            gameObject.transform.GetChild(1).gameObject.SetActive(true);
+            GameObject Grave_B = gameObject.transform.GetChild(0).gameObject;
+            SaveObject Grave_B_Data = Grave_B.transform.GetComponent<SaveObject>();
+            Grave_B.SetActive(false);
+            Grave_B_Data.isRepaired = false;
+
+            GameObject Grave = gameObject.transform.GetChild(1).gameObject;
+            SaveObject Grave_Data = Grave.transform.GetComponent<SaveObject>();
+            Grave.SetActive(true);
+            Grave_Data.isRepaired = true;
         }
     }
 }

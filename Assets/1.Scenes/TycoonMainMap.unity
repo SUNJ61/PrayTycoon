@@ -1222,7 +1222,7 @@ GameObject:
   - component: {fileID: 189718264}
   - component: {fileID: 189718265}
   m_Layer: 0
-  m_Name: Stair M - End
+  m_Name: Stair - End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1260,8 +1260,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99d6a4f6e6c03104d81c3615b7e79b1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectId: 
-  isRepaired: 0
+  objectId: Stair - End
+  isRepaired: 1
 --- !u!1 &226066582
 GameObject:
   m_ObjectHideFlags: 0
