@@ -6,8 +6,6 @@ public class SummonAltar : MonoBehaviour, IQuest
 {
     public int QuestID { get; private set; }
     public bool IQuestClear => QuestClear; // 내부 변수 QuestClear를 읽기 위한 읽기 전용 프로퍼티, IQuestClear를 호출하면 QuestClear 값 반환.
-
-    private int SummonID = 0;
     private int Credit = 5;
 
     private string Key = "Summon";
@@ -16,12 +14,12 @@ public class SummonAltar : MonoBehaviour, IQuest
     private bool QuestClear = false;
     private void Awake()
     {
-        QuestID = 1;
+        QuestID = 0;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        ButtonManager.Instance.SetCurrentSummon(SummonID);
+        ButtonManager.Instance.SetCurrentSummon(QuestID);
         ButtonManager.Instance.ButtonUpdate(1);
 
         UIManager.Instance.SummonUIEdit(Key);

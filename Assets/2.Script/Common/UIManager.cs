@@ -141,7 +141,7 @@ public class UIManager : Singleton<UIManager>
 
     private void AddSummonText()
     {
-        SummonText.Add("Summon", "연성을 진행하시겠습니까?");
+        SummonText.Add("Summon", "Q. 연성을 진행하시겠습니까?");
         SummonText.Add("Spawn", "Q. 소환을 진행하시겠습니까?");
     }
 
@@ -162,7 +162,7 @@ public class UIManager : Singleton<UIManager>
 
     private void AddPortalConditonText()
     {
-        PortalConditionText.Add("PrayRoom", "기도실로\n이동하시겠습니까 ?");
+        PortalConditionText.Add("PrayRoom", "기도실로\n이동하시겠습니까?");
         PortalConditionText.Add("MainMap", "광장으로\n이동하시겠습니까?");
         PortalConditionText.Add("MetamorphoRoom", "연성실로\n이동하시겠습니까?");
         PortalConditionText.Add("Grave", "묘지로\n이동하시겠습니까?");
