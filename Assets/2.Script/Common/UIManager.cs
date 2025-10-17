@@ -1,9 +1,11 @@
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using UnityEngine;
 
 public class UIManager : Singleton<UIManager>
 {
+    private Dictionary<string, UITextData> textDictionary = new Dictionary<string, UITextData>();
     private Dictionary<string, string> QuestText = new Dictionary<string, string>();
     private Dictionary<string, string> QuestConditionText = new Dictionary<string, string>();
     private Dictionary<string, string> FailText = new Dictionary<string, string>();
@@ -11,6 +13,8 @@ public class UIManager : Singleton<UIManager>
     private Dictionary<string, string> SummonConditionText = new Dictionary<string, string>();
     private Dictionary<string, string> PortalText = new Dictionary<string, string>();
     private Dictionary<string, string> PortalConditionText = new Dictionary<string, string>();
+
+    private UITextDatabase database;
 
     [SerializeField] private List<GameObject> GuideUI_List;
     [SerializeField] private List<GameObject> FailUI_List;
@@ -39,13 +43,43 @@ public class UIManager : Singleton<UIManager>
         GuideCondition = GuideUI_List[1].GetComponent<TextMeshProUGUI>();
         failCondition = FailUI_List[1].GetComponent<TextMeshProUGUI>();
 
-        AddQuestText();
-        AddQuestConditionText();
-        AddSummonText();
-        AddSummonConditionText();
-        AddFailText();
-        AddPortalText();
-        AddPortalConditonText();
+        //AddQuestText();
+        //AddQuestConditionText();
+        //AddSummonText();
+        //AddSummonConditionText();
+        //AddFailText();
+        //AddPortalText();
+        //AddPortalConditonText();
+        LoadTextData();
+    }
+
+    private void LoadTextData()
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, "UITextData.json");
+
+        if (!File.Exists(path)) //데이터 파일이 없을 경우.
+        {
+            Debug.LogError("UITextData.json 파일을 찾을 수 없습니다.");
+            return;
+        }
+
+        string json = File.ReadAllText(path);
+        database = JsonUtility.FromJson<UITextDatabase>(json); //해당 json파일을 배열로 변경.
+
+        textDictionary.Clear();
+
+        foreach (var data in database.Texts) //배열에 저장된 값을 딕셔너리에 저장.
+        {
+            Debug.Log("진행중");
+            if (!textDictionary.ContainsKey(data.Key))
+            {
+                textDictionary.Add(data.Key, data);
+                Debug.Log($"key저장: {data.Key}");
+            }
+            else
+                Debug.Log($"중복된 key발견: {data.Key}");
+        }
+        Debug.Log("함수 끝");
     }
 
     public void GuideUIControl(bool active) //퀘스트 UI 활성화, 비활성화 함수.
@@ -65,25 +99,36 @@ public class UIManager : Singleton<UIManager>
 
     public void QuestUIEdit(string key) //키 값에 해당하는 미션의 문구로 변경하는 함수.
     {
-        GuideUIText.text = QuestText[key];
-        GuideCondition.text = QuestConditionText[key];
+        //GuideUIText.text = QuestText[key];
+        //GuideCondition.text = QuestConditionText[key];
+
+        GuideUIText.text = textDictionary[key].Title;
+        GuideCondition.text = textDictionary[key].Text;
     }
 
     public void FailUIEdit(string key) //키 값에 해당하는 미션의 실패 메세지로 변경하는 함수.
     {
-        failCondition.text = FailText[key];
+        //failCondition.text = FailText[key];
+
+        failCondition.text = textDictionary[key].FailText;
     }
 
     public void SummonUIEdit(string key) //키 값에 해당하는 소환의 문구로 변경하는 함수.
     {
-        GuideUIText.text = SummonText[key];
-        GuideCondition.text = SummonConditionText[key];
+        //GuideUIText.text = SummonText[key];
+        //GuideCondition.text = SummonConditionText[key];
+
+        GuideUIText.text = textDictionary[key].Title;
+        GuideCondition.text = textDictionary[key].Text;
     }
 
     public void PortalUIEdit(string key) //키 값에 해당하는 포탈의 문구로 변경하는 함수.
     {
-        GuideUIText.text = PortalText[key];
-        GuideCondition.text = PortalConditionText[key];
+        //GuideUIText.text = PortalText[key];
+        //GuideCondition.text = PortalConditionText[key];
+
+        GuideUIText.text = textDictionary[key].Title;
+        GuideCondition.text = textDictionary[key].Text;
     }
 
     public void CreditUIEdit()

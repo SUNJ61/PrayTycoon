@@ -3,14 +3,14 @@ using System.Collections.Generic;
 [System.Serializable]
 public class UITextData
 {
-    public int Id;
-    public string key;
+    public string Key;
     public string Title;
+    public string Text;
     public string FailText;
 }
 
 [System.Serializable]
 public class UITextDatabase
 {
-    public List<UITextData> texts = new List<UITextData>();
+    public List<UITextData> Texts = new List<UITextData>();
 }

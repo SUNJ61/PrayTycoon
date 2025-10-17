@@ -14,7 +14,7 @@ public class SummonAltar : MonoBehaviour, IQuest
     private bool QuestClear = false;
     private void Awake()
     {
-        QuestID = 0;
+        QuestID = 1;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
