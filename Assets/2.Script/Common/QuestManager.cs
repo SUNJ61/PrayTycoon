@@ -55,4 +55,9 @@ public class QuestManager : Singleton<QuestManager>
     {
         return QuestObj.TryGetValue(questID, out IQuest quest) && quest.IQuestClear;
     }
+
+    public void ResetData() //퀘스트 정보 담는 오브젝트 클리어.
+    {
+        QuestObj.Clear();
+    }
 }

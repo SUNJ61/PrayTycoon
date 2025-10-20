@@ -6,13 +6,6 @@ using UnityEngine;
 public class UIManager : Singleton<UIManager>
 {
     private Dictionary<string, UITextData> textDictionary = new Dictionary<string, UITextData>();
-    private Dictionary<string, string> QuestText = new Dictionary<string, string>();
-    private Dictionary<string, string> QuestConditionText = new Dictionary<string, string>();
-    private Dictionary<string, string> FailText = new Dictionary<string, string>();
-    private Dictionary<string, string> SummonText = new Dictionary<string, string>();
-    private Dictionary<string, string> SummonConditionText = new Dictionary<string, string>();
-    private Dictionary<string, string> PortalText = new Dictionary<string, string>();
-    private Dictionary<string, string> PortalConditionText = new Dictionary<string, string>();
 
     private UITextDatabase database;
 
@@ -43,13 +36,6 @@ public class UIManager : Singleton<UIManager>
         GuideCondition = GuideUI_List[1].GetComponent<TextMeshProUGUI>();
         failCondition = FailUI_List[1].GetComponent<TextMeshProUGUI>();
 
-        //AddQuestText();
-        //AddQuestConditionText();
-        //AddSummonText();
-        //AddSummonConditionText();
-        //AddFailText();
-        //AddPortalText();
-        //AddPortalConditonText();
         LoadTextData();
     }
 
@@ -70,16 +56,9 @@ public class UIManager : Singleton<UIManager>
 
         foreach (var data in database.Texts) //배열에 저장된 값을 딕셔너리에 저장.
         {
-            Debug.Log("진행중");
             if (!textDictionary.ContainsKey(data.Key))
-            {
                 textDictionary.Add(data.Key, data);
-                Debug.Log($"key저장: {data.Key}");
-            }
-            else
-                Debug.Log($"중복된 key발견: {data.Key}");
         }
-        Debug.Log("함수 끝");
     }
 
     public void GuideUIControl(bool active) //퀘스트 UI 활성화, 비활성화 함수.
@@ -99,34 +78,23 @@ public class UIManager : Singleton<UIManager>
 
     public void QuestUIEdit(string key) //키 값에 해당하는 미션의 문구로 변경하는 함수.
     {
-        //GuideUIText.text = QuestText[key];
-        //GuideCondition.text = QuestConditionText[key];
-
         GuideUIText.text = textDictionary[key].Title;
         GuideCondition.text = textDictionary[key].Text;
     }
 
     public void FailUIEdit(string key) //키 값에 해당하는 미션의 실패 메세지로 변경하는 함수.
     {
-        //failCondition.text = FailText[key];
-
         failCondition.text = textDictionary[key].FailText;
     }
 
     public void SummonUIEdit(string key) //키 값에 해당하는 소환의 문구로 변경하는 함수.
     {
-        //GuideUIText.text = SummonText[key];
-        //GuideCondition.text = SummonConditionText[key];
-
         GuideUIText.text = textDictionary[key].Title;
         GuideCondition.text = textDictionary[key].Text;
     }
 
     public void PortalUIEdit(string key) //키 값에 해당하는 포탈의 문구로 변경하는 함수.
     {
-        //GuideUIText.text = PortalText[key];
-        //GuideCondition.text = PortalConditionText[key];
-
         GuideUIText.text = textDictionary[key].Title;
         GuideCondition.text = textDictionary[key].Text;
     }
@@ -159,58 +127,5 @@ public class UIManager : Singleton<UIManager>
 
         if (CloneItem != null)
             Destroy(CloneItem);
-    }
-
-    private void AddQuestText() //퀘스트 UI에 필요한 문구를 딕셔너리에 추가하는 함수. "GraveStone"
-    {
-        QuestText.Add("Stair-Main", "Q. 계단을 수리하시겠습니까?");
-        QuestText.Add("Gate", "Q. 잠긴 문을 열겠습니까?");
-        QuestText.Add("GraveStone", "Q. 무덤을 수리하시겠습니까?");
-    }
-
-    private void AddQuestConditionText() //퀘스트 UI에 필요한 문구를 딕셔너리에 추가하는 함수.
-    {
-        QuestConditionText.Add("Stair-Main", "계단을 수리하기 위해서는\n5의 기도력이 필요합니다.");
-        QuestConditionText.Add("Gate", "문을 열기 위해서는\n5G의 골드가 필요합니다.");
-        QuestConditionText.Add("GraveStone", "무덤을 수리하기 위해서는\n5의 석재가 필요합니다.");
-    }
-
-    private void AddFailText() //퀘스트에 실패한 문구를 딕셔너리에 추가하는 함수.
-    {
-        FailText.Add("Stair-Main", "기도력이 부족합니다.");
-        FailText.Add("Gate", "골드가 부족합니다.");
-        FailText.Add("GraveStone", "석재가 부족합니다.");
-        FailText.Add("Summon", "기도력이 부족합니다.");
-        FailText.Add("Spawn", "기도력이 부족합니다.");
-    }
-
-    private void AddSummonText()
-    {
-        SummonText.Add("Summon", "Q. 연성을 진행하시겠습니까?");
-        SummonText.Add("Spawn", "Q. 소환을 진행하시겠습니까?");
-    }
-
-    private void AddSummonConditionText()
-    {
-        SummonConditionText.Add("Summon", "연성을 하기 위해서는\n5의 기도력이 필요합니다.");
-        SummonConditionText.Add("Spawn", "소환을 하기 위해서는\n20의 기도력이 필요합니다.");
-    }
-
-    private void AddPortalText()
-    {
-        PortalText.Add("PrayRoom", "기도실 포탈");
-        PortalText.Add("MainMap", "광장 포탈");
-        PortalText.Add("MetamorphoRoom", "연성실 포탈");
-        PortalText.Add("Grave", "묘지 포탈");
-        PortalText.Add("Guild", "길드 포탈");
-    }
-
-    private void AddPortalConditonText()
-    {
-        PortalConditionText.Add("PrayRoom", "기도실로\n이동하시겠습니까?");
-        PortalConditionText.Add("MainMap", "광장으로\n이동하시겠습니까?");
-        PortalConditionText.Add("MetamorphoRoom", "연성실로\n이동하시겠습니까?");
-        PortalConditionText.Add("Grave", "묘지로\n이동하시겠습니까?");
-        PortalConditionText.Add("Guild", "길드로\n이동하시겠습니까?");
     }
 }

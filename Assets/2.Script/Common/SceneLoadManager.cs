@@ -11,6 +11,8 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
 
         SceneManager.sceneLoaded += PlayerLoad;
         SceneManager.sceneLoaded += MapLoad;
+        SceneManager.sceneLoaded += DataClear;
+
         SceneManager.LoadScene(sceneName);
     }
 
@@ -24,5 +26,11 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
     {
         SceneManager.sceneLoaded -= MapLoad;
         SaveManager.Instance.LoadMap(scene.name);
+    }
+
+    private void DataClear(Scene scene, LoadSceneMode mode) //씬 로드 후 필요 없는 데이터 삭제.
+    {
+        SceneManager.sceneLoaded -= DataClear;
+        QuestManager.Instance.ResetData();
     }
 }
