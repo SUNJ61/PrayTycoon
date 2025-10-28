@@ -18466,8 +18466,8 @@ GameObject:
   - component: {fileID: 1756694021853013366}
   - component: {fileID: 1756694021853013364}
   - component: {fileID: 4394658920137314809}
-  - component: {fileID: 4394658920137314810}
   - component: {fileID: 4394658920137314811}
+  - component: {fileID: 4394658920137314810}
   m_Layer: 20
   m_Name: GuildStatue
   m_TagString: Untagged

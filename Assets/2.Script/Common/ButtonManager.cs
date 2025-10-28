@@ -13,7 +13,6 @@ public class ButtonManager : Singleton<ButtonManager>
     public Button SummonButton;
     public Button SummonCloseButton;
     public Button InventoryCloseButton;
-    public Button GuildCloseButton;
 
     private Vector3 CurrentspawnPoint;
 
@@ -28,7 +27,6 @@ public class ButtonManager : Singleton<ButtonManager>
         GuideCloseButton.onClick.AddListener(GuideCloseButtonClick);
         FailButton.onClick.AddListener(() => UIManager.Instance.FailUIControl(false));
         InventoryCloseButton.onClick.AddListener(() => UIManager.Instance.InventoryUIControl());
-        GuildCloseButton.onClick.AddListener(() => UIManager.Instance.GuildUIControl());
     }
 
     public void ButtonUpdate(int caseId) //버튼 설정 함수.

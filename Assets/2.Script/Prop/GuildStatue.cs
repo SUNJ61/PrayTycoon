@@ -11,11 +11,11 @@ public class GuildStatue : MonoBehaviour
 
     private void OnTigerEnter2D(Collider2D col)
     {
-        //UI 띄우기 (길드 UI 새로 만들어야함.)
+        UIManager.Instance.GuildUIControl();
     }
 
     private void OnTriggerExit2D(Collider2D col)
     {
-        
+        UIManager.Instance.GuildUIControl();
     }
 }
