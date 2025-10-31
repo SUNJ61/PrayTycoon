@@ -59,6 +59,12 @@
             "Title": "길드 포탈",
             "Text": "길드로\n이동하시겠습니까?",
             "FailText": "이동하지 못 했습니다."
+        },
+        {
+            "Key": "GuildAdd",
+            "Title": null,
+            "Text": null,
+            "FailText": "해당 소환석이 부족합니다."
         }
     ]
     

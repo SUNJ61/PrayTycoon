@@ -11,11 +11,11 @@ public class GuildStatue : MonoBehaviour
 
     private void OnTigerEnter2D(Collider2D col)
     {
-        UIManager.Instance.GuildUIControl();
+        UIManager.Instance.GuildUIControl(true);
     }
 
     private void OnTriggerExit2D(Collider2D col)
     {
-        UIManager.Instance.GuildUIControl();
+        UIManager.Instance.GuildUIControl(false);
     }
 }

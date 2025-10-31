@@ -5,7 +5,6 @@ using System;
 public class ButtonManager : Singleton<ButtonManager>
 {
     public static event Action OnTeleport;
-    private GameObject UI;
 
     public Button GuideButton;
     public Button GuideCloseButton;
@@ -14,7 +13,11 @@ public class ButtonManager : Singleton<ButtonManager>
     public Button SummonCloseButton;
     public Button InventoryCloseButton;
 
+    public Button[] GuildAddButton;
+
     private Vector3 CurrentspawnPoint;
+
+    private readonly int[] GuildItemIds = { 14, 15, 16, 24, 25, 26, 34, 35, 36 };
 
     private int CurrentQuestId;
     private int CurrentSummonId;
@@ -27,6 +30,12 @@ public class ButtonManager : Singleton<ButtonManager>
         GuideCloseButton.onClick.AddListener(GuideCloseButtonClick);
         FailButton.onClick.AddListener(() => UIManager.Instance.FailUIControl(false));
         InventoryCloseButton.onClick.AddListener(() => UIManager.Instance.InventoryUIControl());
+
+        for(int i = 0; i < GuildItemIds.Length; i++)
+        {
+            int index = i;
+            GuildAddButton[i].onClick.AddListener(() => GuildAdd(index));
+        }
     }
 
     public void ButtonUpdate(int caseId) //버튼 설정 함수.
@@ -114,6 +123,23 @@ public class ButtonManager : Singleton<ButtonManager>
     {
         GuideButton.onClick.RemoveAllListeners();
         UIManager.Instance.GuideUIControl(false);
+    }
+
+    private void GuildAdd(int caseId)
+    {
+        int itemId = GuildItemIds[caseId];
+
+        if (Inventory.Instance.RemoveItem(itemId, 1))
+        {
+            //길드 등록후 발동되는 추가효과 함수 불러올 것.
+            UIManager.Instance.GuildUIControl(false); //닫기.
+        }
+        else
+        {
+            UIManager.Instance.FailUIEdit("GuildAdd");
+            UIManager.Instance.FailUIControl(true);
+            //등록 아이템이 없음을 알리는 알림창 띄우기. (알림창 버튼 누르면 닫기)
+        }
     }
 
     public void SetCurrentQuest(int questId)

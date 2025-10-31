@@ -26,6 +26,7 @@ public class UIManager : Singleton<UIManager>
     public GameObject SummonUI;
     public GameObject InventoryUI;
     public GameObject GuildUI;
+    public GameObject GuildAddUI;
 
     void Start()
     {
@@ -77,9 +78,14 @@ public class UIManager : Singleton<UIManager>
         InventoryUI.SetActive(!InventoryUI.activeSelf); //인벤토리 UI 활성화, 비활성화 함수.
     }
 
-    public void GuildUIControl()
+    public void GuildUIControl(bool active)
     {
-        GuildUI.SetActive(!GuildUI.activeSelf); //길드 UI 활성화, 비활성화 함수.
+        GuildUI.SetActive(active); //길드 UI 활성화, 비활성화 함수.
+    }
+
+    public void GuilAddUIControl(bool active)
+    {
+        GuildAddUI.SetActive(active); //소환석 추가 UI 활성화, 비활성화 함수.
     }
 
     public void QuestUIEdit(string key) //키 값에 해당하는 미션의 문구로 변경하는 함수.
