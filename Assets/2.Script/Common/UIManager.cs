@@ -88,9 +88,7 @@ public class UIManager : Singleton<UIManager>
 
     public void GuilAddUIControl(bool active)
     {
-        GuildAddUI.SetActive(active); //소환석 추가 UI 활성화, 비활성화 함수.
-
-        if (active)
+        if (active) //활성화시 갯수 초기화.
         {
             int Amount;
             for (int i = 0; i < GuildItemIds.Length; i++)
@@ -99,6 +97,8 @@ public class UIManager : Singleton<UIManager>
                 GuildAmountUI[i].text = "개수 : " + Amount.ToString();
             }
         }
+
+        GuildAddUI.SetActive(active); //소환석 추가 UI 활성화, 비활성화 함수.
     }
 
     public void QuestUIEdit(string key) //키 값에 해당하는 미션의 문구로 변경하는 함수.

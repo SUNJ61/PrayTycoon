@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CreditManager : Singleton<CreditManager>
@@ -114,8 +115,10 @@ public class CreditManager : Singleton<CreditManager>
         return itemCode;
     }
 
-    public void GuildCreditAdd(int ItemID)
+    public void GuildSlotAdd(int ItemID, int GuildSlotIndex)
     {
+        int pray = 0, stone = 0, gold = 0;
+
         //길드 용병 등록시 추가되는 재화.
         switch (ItemID)
         {
@@ -145,6 +148,71 @@ public class CreditManager : Singleton<CreditManager>
 
             case 36: //U 연금술사
                 break;
+        }
+
+        //등록 슬롯
+        switch (GuildSlotIndex)
+        {
+            case 0:
+                GuildSolt1 = StartCoroutine(AddCredit(pray,stone,gold));
+                break;
+            case 1:
+                GuildSolt2 = StartCoroutine(AddCredit(pray,stone,gold));
+                break;
+            case 2:
+                GuildSolt3 = StartCoroutine(AddCredit(pray,stone,gold));
+                break;
+        }
+    }
+
+    public bool CheckGuildSlot(int SlotIndex)
+    {
+        switch (SlotIndex)
+        {
+            case 0:
+                if (GuildSolt1 != null)
+                    return true;
+                break;
+
+            case 1:
+                if (GuildSolt2 != null)
+                    return true;
+                break;
+
+            case 2:
+                if (GuildSolt3 != null)
+                    return true;
+                break;
+        }
+
+        return false;
+    }
+
+    public void RemoveGuildSlot(int SlotIndex) //슬롯 용병제거시 크레딧 증가효과 제거.
+    {
+        switch (SlotIndex)
+        {
+            case 0:
+                StopCoroutine(GuildSolt1);
+                break;
+            case 1:
+                StopCoroutine(GuildSolt2);
+                break;
+            case 2:
+                StopCoroutine(GuildSolt3);
+                break;
+        }
+    }
+    
+    private IEnumerator AddCredit(int PrayAdd, int StoneAdd, int GoldAdd)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(5);
+
+            Credit["Pray"] += PrayAdd;
+            Credit["Stone"] += StoneAdd;
+            Credit["Gold"] += GoldAdd;
         }
     }
 }

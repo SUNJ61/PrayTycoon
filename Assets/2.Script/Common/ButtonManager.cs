@@ -13,9 +13,7 @@ public class ButtonManager : Singleton<ButtonManager>
     public Button SummonCloseButton;
     public Button InventoryCloseButton;
 
-    public Button[] GuildSlot1;
-    public Button[] GuildSlot2;
-    public Button[] GuildSlot3;
+    public Button[] GuildSlot;
     public Button[] GuildAddButton;
 
     private Vector3 CurrentspawnPoint;
@@ -24,6 +22,7 @@ public class ButtonManager : Singleton<ButtonManager>
 
     private int CurrentQuestId;
     private int CurrentSummonId;
+    private int CurrnetGuildSlot;
 
     private string NextScene;
 
@@ -34,16 +33,23 @@ public class ButtonManager : Singleton<ButtonManager>
         FailButton.onClick.AddListener(() => UIManager.Instance.FailUIControl(false));
         InventoryCloseButton.onClick.AddListener(() => UIManager.Instance.InventoryUIControl());
 
-        //GuildSlot1[1].onClick.AddListener();
+        for(int i=0; i < GuildSlot.Length; i++)
+        {
+            if (i < 3) //길드 슬롯 추가 버튼 함수 등록
+                GuildSlot[i].onClick.AddListener(() => GuildSlotAddBT(i));
 
-        for(int i = 0; i < GuildItemIds.Length; i++)
+            else //길드 슬롯 제거 버튼 함수 등록
+                GuildSlot[i].onClick.AddListener(() => GuildSoltRemoveBT(i - 3));
+        }
+
+        for(int i = 0; i < GuildItemIds.Length; i++) //용병 추가 버튼 함수 등록
         {
             int index = i;
-            GuildAddButton[i].onClick.AddListener(() => GuildAdd(index));
+            GuildAddButton[i].onClick.AddListener(() => AddMercenary(index));
         }
     }
 
-    public void ButtonUpdate(int caseId) //버튼 설정 함수.
+    public void ButtonUpdate(int caseId) //가이드 버튼 설정 함수.
     {
         switch (caseId)
         {
@@ -130,14 +136,33 @@ public class ButtonManager : Singleton<ButtonManager>
         UIManager.Instance.GuideUIControl(false);
     }
 
-    private void GuildAdd(int caseId)
+    private void GuildSlotAddBT(int index) //길드 슬롯에 용병추가 버튼
+    {
+        CurrnetGuildSlot = index;
+        UIManager.Instance.GuilAddUIControl(true);
+    }
+
+    private void GuildSoltRemoveBT(int index) //길드 슬롯에 용병 제거
+    {
+        CurrnetGuildSlot = index;
+    }
+
+    private void AddMercenary(int caseId) //용병 등록
     {
         int itemId = GuildItemIds[caseId];
 
-        if (Inventory.Instance.RemoveItem(itemId, 1)) //성공시
+        if(Inventory.Instance.RemoveItem(itemId, 1) && CreditManager.Instance.CheckGuildSlot(CurrnetGuildSlot)) //슬롯에 용병이 있을 때 등록 성공시 (해당 슬롯에 아이콘 등록 필요.)
         {
-            CreditManager.Instance.GuildCreditAdd(itemId);//길드 등록 추가 효과.
-            UIManager.Instance.GuildUIControl(false); //닫기.
+            CreditManager.Instance.RemoveGuildSlot(CurrnetGuildSlot); //진행중인 추가 효과 제거.
+            CreditManager.Instance.GuildSlotAdd(itemId, CurrnetGuildSlot); //길드 등록 추가 효과.
+
+            UIManager.Instance.GuilAddUIControl(false); //용병 추가 UI 닫기
+        }
+        else if(Inventory.Instance.RemoveItem(itemId, 1) && !CreditManager.Instance.CheckGuildSlot(CurrnetGuildSlot)) //슬롯에 용병이 없을 때 등록 성공시 (해당 슬롯에 아이콘 등록 필요.)
+        {
+            CreditManager.Instance.GuildSlotAdd(itemId, CurrnetGuildSlot);
+
+            UIManager.Instance.GuilAddUIControl(false);
         }
         else //실패시 UI
         {
@@ -145,6 +170,8 @@ public class ButtonManager : Singleton<ButtonManager>
             UIManager.Instance.FailUIControl(true);
             //실패 버튼에 길드 UI 닫기 등록 필요.
         }
+
+        CurrnetGuildSlot = -1;
     }
 
     public void SetCurrentQuest(int questId)

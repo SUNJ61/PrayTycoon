@@ -5278,7 +5278,7 @@ GameObject:
   - component: {fileID: 360849966}
   - component: {fileID: 360849965}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: NM-Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6168,7 +6168,7 @@ GameObject:
   - component: {fileID: 486055579}
   - component: {fileID: 486055578}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: UW-Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13273,7 +13273,7 @@ GameObject:
   - component: {fileID: 712017242}
   - component: {fileID: 712017241}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: UK-Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13979,7 +13979,7 @@ GameObject:
   - component: {fileID: 770588996}
   - component: {fileID: 770588995}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: RW-Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17792,15 +17792,15 @@ MonoBehaviour:
   PrayUI: {fileID: 386341265}
   StoneUI: {fileID: 1669089368}
   GuildAmountUI:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1975800367}
+  - {fileID: 1975800367}
+  - {fileID: 1917690466}
+  - {fileID: 1923351149}
+  - {fileID: 2100105212}
+  - {fileID: 770588995}
+  - {fileID: 1620874075}
+  - {fileID: 712017241}
+  - {fileID: 486055578}
   GuideUI: {fileID: 1204111354}
   FailUI: {fileID: 1394013878}
   SummonUI: {fileID: 1243237718}
@@ -23882,7 +23882,7 @@ GameObject:
   - component: {fileID: 1620874076}
   - component: {fileID: 1620874075}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: UM-Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25566,6 +25566,15 @@ MonoBehaviour:
   SummonButton: {fileID: 2126140796}
   SummonCloseButton: {fileID: 1015573098}
   InventoryCloseButton: {fileID: 1626371040}
+  GuildSlot1:
+  - {fileID: 1015573098}
+  - {fileID: 2126140796}
+  GuildSlot2:
+  - {fileID: 1316980683}
+  - {fileID: 1174767580}
+  GuildSlot3:
+  - {fileID: 1667279194}
+  - {fileID: 1592112090}
   GuildAddButton:
   - {fileID: 770098667}
   - {fileID: 2066388688}
@@ -44454,7 +44463,7 @@ GameObject:
   - component: {fileID: 1917690467}
   - component: {fileID: 1917690466}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: NW-Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45205,7 +45214,7 @@ GameObject:
   - component: {fileID: 1923351150}
   - component: {fileID: 1923351149}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: RM-Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45541,7 +45550,7 @@ GameObject:
   - component: {fileID: 1975800368}
   - component: {fileID: 1975800367}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: NK-Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46091,7 +46100,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2011107658
 RectTransform:
   m_ObjectHideFlags: 0
@@ -46704,7 +46713,7 @@ GameObject:
   - component: {fileID: 2100105213}
   - component: {fileID: 2100105212}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: RK-Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
