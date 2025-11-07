@@ -23,10 +23,17 @@ public class CreditManager : Singleton<CreditManager>
         get { return Credit; }
     }
 
+    private Coroutine GuildSolt1;
+    private Coroutine GuildSolt2;
+    private Coroutine GuildSolt3;
+
     private int PrayAdd = 5;
     private int PrayDelay = 1;
     private int AddGold = 10;
     private int AddStone = 10;
+    private int GuildPrayAdd;
+    private int GuildStoneAdd;
+    private int GuildGoldAdd;
 
     private void Start()
     {
@@ -105,5 +112,39 @@ public class CreditManager : Singleton<CreditManager>
             itemCode += 6;
 
         return itemCode;
+    }
+
+    public void GuildCreditAdd(int ItemID)
+    {
+        //길드 용병 등록시 추가되는 재화.
+        switch (ItemID)
+        {
+            case 14: //N 광부
+                break;
+
+            case 15: //N 기사
+                break;
+
+            case 16: //N 연금술사
+                break;
+
+            case 24: //R 광부
+                break;
+
+            case 25: //R 기사
+                break;
+
+            case 26: //R 연금술사
+                break;
+
+            case 34: //U 광부
+                break;
+
+            case 35: //U 기사
+                break;
+
+            case 36: //U 연금술사
+                break;
+        }
     }
 }

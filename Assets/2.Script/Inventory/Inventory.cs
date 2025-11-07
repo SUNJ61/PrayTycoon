@@ -86,9 +86,20 @@ public class Inventory : Singleton<Inventory>
     {
         int total = 0;
         foreach (var slot in Slots)
-            if(slot.ItemId == ItemId)
+            if (slot.ItemId == ItemId)
                 total += slot.Amount;
 
         return total >= Amount;
+    }
+    
+    public int AmountItem(int ItemId) //인벤토리에 가진 총 아이템 개수 출력
+    {
+        int total = 0;
+
+        foreach (var slot in Slots)
+            if(slot.ItemId == ItemId)
+                total += slot.Amount;
+
+        return total;
     }
 }

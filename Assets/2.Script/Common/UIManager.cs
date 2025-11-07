@@ -20,6 +20,7 @@ public class UIManager : Singleton<UIManager>
     public TextMeshProUGUI GoldUI;
     public TextMeshProUGUI PrayUI;
     public TextMeshProUGUI StoneUI;
+    public TextMeshProUGUI[] GuildAmountUI;
 
     public GameObject GuideUI;
     public GameObject FailUI;
@@ -27,6 +28,8 @@ public class UIManager : Singleton<UIManager>
     public GameObject InventoryUI;
     public GameObject GuildUI;
     public GameObject GuildAddUI;
+
+    private readonly int[] GuildItemIds = { 14, 15, 16, 24, 25, 26, 34, 35, 36 };
 
     void Start()
     {
@@ -86,6 +89,16 @@ public class UIManager : Singleton<UIManager>
     public void GuilAddUIControl(bool active)
     {
         GuildAddUI.SetActive(active); //소환석 추가 UI 활성화, 비활성화 함수.
+
+        if (active)
+        {
+            int Amount;
+            for (int i = 0; i < GuildItemIds.Length; i++)
+            {
+                Amount = Inventory.Instance.AmountItem(GuildItemIds[i]);
+                GuildAmountUI[i].text = "개수 : " + Amount.ToString();
+            }
+        }
     }
 
     public void QuestUIEdit(string key) //키 값에 해당하는 미션의 문구로 변경하는 함수.

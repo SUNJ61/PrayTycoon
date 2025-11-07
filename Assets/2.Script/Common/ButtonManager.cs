@@ -13,6 +13,9 @@ public class ButtonManager : Singleton<ButtonManager>
     public Button SummonCloseButton;
     public Button InventoryCloseButton;
 
+    public Button[] GuildSlot1;
+    public Button[] GuildSlot2;
+    public Button[] GuildSlot3;
     public Button[] GuildAddButton;
 
     private Vector3 CurrentspawnPoint;
@@ -30,6 +33,8 @@ public class ButtonManager : Singleton<ButtonManager>
         GuideCloseButton.onClick.AddListener(GuideCloseButtonClick);
         FailButton.onClick.AddListener(() => UIManager.Instance.FailUIControl(false));
         InventoryCloseButton.onClick.AddListener(() => UIManager.Instance.InventoryUIControl());
+
+        //GuildSlot1[1].onClick.AddListener();
 
         for(int i = 0; i < GuildItemIds.Length; i++)
         {
@@ -129,16 +134,16 @@ public class ButtonManager : Singleton<ButtonManager>
     {
         int itemId = GuildItemIds[caseId];
 
-        if (Inventory.Instance.RemoveItem(itemId, 1))
+        if (Inventory.Instance.RemoveItem(itemId, 1)) //성공시
         {
-            //길드 등록후 발동되는 추가효과 함수 불러올 것.
+            CreditManager.Instance.GuildCreditAdd(itemId);//길드 등록 추가 효과.
             UIManager.Instance.GuildUIControl(false); //닫기.
         }
-        else
+        else //실패시 UI
         {
             UIManager.Instance.FailUIEdit("GuildAdd");
             UIManager.Instance.FailUIControl(true);
-            //등록 아이템이 없음을 알리는 알림창 띄우기. (알림창 버튼 누르면 닫기)
+            //실패 버튼에 길드 UI 닫기 등록 필요.
         }
     }
 
