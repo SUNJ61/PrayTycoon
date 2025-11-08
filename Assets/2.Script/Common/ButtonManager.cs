@@ -36,15 +36,21 @@ public class ButtonManager : Singleton<ButtonManager>
         for(int i=0; i < GuildSlot.Length; i++)
         {
             if (i < 3) //길드 슬롯 추가 버튼 함수 등록
-                GuildSlot[i].onClick.AddListener(() => GuildSlotAddBT(i));
+            {
+                int index = i;
+                GuildSlot[i].onClick.AddListener(() => GuildSlotAddBT(index));
+            }
 
             else //길드 슬롯 제거 버튼 함수 등록
-                GuildSlot[i].onClick.AddListener(() => GuildSoltRemoveBT(i - 3));
+            {
+                int index = i - 3;
+                GuildSlot[i].onClick.AddListener(() => GuildSoltRemoveBT(index));
+            }
         }
 
-        for(int i = 0; i < GuildItemIds.Length; i++) //용병 추가 버튼 함수 등록
+        for (int i = 0; i < GuildAddButton.Length; i++) //용병 추가 버튼 함수 등록
         {
-            int index = i;
+            int index = i; //버튼 등록시 i로 등록하면 for문이 끝난후의 i값이 일괄적용 즉, 9가 적용됨.
             GuildAddButton[i].onClick.AddListener(() => AddMercenary(index));
         }
     }
@@ -144,31 +150,42 @@ public class ButtonManager : Singleton<ButtonManager>
 
     private void GuildSoltRemoveBT(int index) //길드 슬롯에 용병 제거
     {
-        CurrnetGuildSlot = index;
+        CreditManager.Instance.RemoveGuildSlot(index);
+        UIManager.Instance.GuilAddUIControl(false);
+        
+        CurrnetGuildSlot = -1;
     }
 
     private void AddMercenary(int caseId) //용병 등록
     {
         int itemId = GuildItemIds[caseId];
 
-        if(Inventory.Instance.RemoveItem(itemId, 1) && CreditManager.Instance.CheckGuildSlot(CurrnetGuildSlot)) //슬롯에 용병이 있을 때 등록 성공시 (해당 슬롯에 아이콘 등록 필요.)
+        if(Inventory.Instance.HasItem(itemId, 1) && CreditManager.Instance.CheckGuildSlot(CurrnetGuildSlot)) //슬롯에 용병이 있을 때 등록 성공시 (해당 슬롯에 아이콘 등록 필요.)
         {
+            Debug.Log("기존 소환석 삭제 후 등록 진행");
+            Inventory.Instance.RemoveItem(itemId, 1); //인벤토리 아이템 1개 제거.
+
             CreditManager.Instance.RemoveGuildSlot(CurrnetGuildSlot); //진행중인 추가 효과 제거.
             CreditManager.Instance.GuildSlotAdd(itemId, CurrnetGuildSlot); //길드 등록 추가 효과.
 
             UIManager.Instance.GuilAddUIControl(false); //용병 추가 UI 닫기
         }
-        else if(Inventory.Instance.RemoveItem(itemId, 1) && !CreditManager.Instance.CheckGuildSlot(CurrnetGuildSlot)) //슬롯에 용병이 없을 때 등록 성공시 (해당 슬롯에 아이콘 등록 필요.)
+        else if(Inventory.Instance.HasItem(itemId, 1) && !CreditManager.Instance.CheckGuildSlot(CurrnetGuildSlot)) //슬롯에 용병이 없을 때 등록 성공시 (해당 슬롯에 아이콘 등록 필요.)
         {
+            Debug.Log("소환석 등록");
+            Inventory.Instance.RemoveItem(itemId, 1);
+
             CreditManager.Instance.GuildSlotAdd(itemId, CurrnetGuildSlot);
 
             UIManager.Instance.GuilAddUIControl(false);
         }
         else //실패시 UI
         {
+            Debug.Log("소환석 없음");
+            UIManager.Instance.GuilAddUIControl(false);
+
             UIManager.Instance.FailUIEdit("GuildAdd");
             UIManager.Instance.FailUIControl(true);
-            //실패 버튼에 길드 UI 닫기 등록 필요.
         }
 
         CurrnetGuildSlot = -1;

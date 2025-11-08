@@ -6,6 +6,9 @@ using UnityEngine;
 public class CreditManager : Singleton<CreditManager>
 {
     private Coroutine PrayCoroutine;
+    private Coroutine GuildSolt1;
+    private Coroutine GuildSolt2;
+    private Coroutine GuildSolt3;
 
     private Dictionary<string, int> CreditItemCode = new Dictionary<string, int>()
     {
@@ -24,17 +27,10 @@ public class CreditManager : Singleton<CreditManager>
         get { return Credit; }
     }
 
-    private Coroutine GuildSolt1;
-    private Coroutine GuildSolt2;
-    private Coroutine GuildSolt3;
-
     private int PrayAdd = 5;
     private int PrayDelay = 1;
     private int AddGold = 10;
     private int AddStone = 10;
-    private int GuildPrayAdd;
-    private int GuildStoneAdd;
-    private int GuildGoldAdd;
 
     private void Start()
     {
@@ -123,30 +119,51 @@ public class CreditManager : Singleton<CreditManager>
         switch (ItemID)
         {
             case 14: //N 광부
+                pray = 5;
+                stone = 5;
                 break;
 
             case 15: //N 기사
+                pray = 5;
+                gold = 1;
                 break;
 
             case 16: //N 연금술사
+                pray = 5;
+                stone = 5;
+                gold = 1;
                 break;
 
             case 24: //R 광부
+                pray = 10;
+                stone = 10;
                 break;
 
             case 25: //R 기사
+                pray = 10;
+                gold = 2;
                 break;
 
             case 26: //R 연금술사
+                pray = 10;
+                stone = 10;
+                gold = 2;
                 break;
 
             case 34: //U 광부
+                pray = 15;
+                stone = 15;
                 break;
 
             case 35: //U 기사
+                pray = 20;
+                gold = 3;
                 break;
 
             case 36: //U 연금술사
+                pray = 20;
+                stone = 15;
+                gold = 5;
                 break;
         }
 
@@ -194,12 +211,15 @@ public class CreditManager : Singleton<CreditManager>
         {
             case 0:
                 StopCoroutine(GuildSolt1);
+                GuildSolt1 = null;
                 break;
             case 1:
                 StopCoroutine(GuildSolt2);
+                GuildSolt2 = null;
                 break;
             case 2:
                 StopCoroutine(GuildSolt3);
+                GuildSolt3 = null;
                 break;
         }
     }
@@ -213,6 +233,8 @@ public class CreditManager : Singleton<CreditManager>
             Credit["Pray"] += PrayAdd;
             Credit["Stone"] += StoneAdd;
             Credit["Gold"] += GoldAdd;
+
+            UIManager.Instance.CreditUIEdit();
         }
     }
 }

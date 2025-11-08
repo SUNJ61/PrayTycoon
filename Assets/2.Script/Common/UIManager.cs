@@ -34,7 +34,7 @@ public class UIManager : Singleton<UIManager>
     void Start()
     {
         GuideUI_List = ObjectManager.Instance.GetObject("UI", 1);
-        FailUI_List = ObjectManager.Instance.GetObject("UI", 2);
+        FailUI_List = ObjectManager.Instance.GetObject("UI", 3);
         InventorySlot_List = ObjectManager.Instance.GetObject(InventoryUI, 0);
 
         GuideUIText = GuideUI_List[0].GetComponent<TextMeshProUGUI>();
