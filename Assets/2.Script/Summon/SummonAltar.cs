@@ -19,7 +19,7 @@ public class SummonAltar : MonoBehaviour, IQuest
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        ButtonManager.Instance.SetCurrentSummon(QuestID);
+        ButtonManager.Instance.SetCurrentSummon(0);
         ButtonManager.Instance.ButtonUpdate(1);
 
         UIManager.Instance.SummonUIEdit(Key);

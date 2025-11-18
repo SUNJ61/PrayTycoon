@@ -33,7 +33,7 @@ public class UIManager : Singleton<UIManager>
     public GameObject GuildUI;
     public GameObject GuildAddUI;
 
-    private readonly int[] GuildItemIds = { 14, 15, 16, 24, 25, 26, 34, 35, 36 };
+    private readonly int[] GuildItemIds = {14, 15, 16, 24, 25, 26, 34, 35, 36};
 
     void Start()
     {

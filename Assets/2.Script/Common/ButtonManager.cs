@@ -18,7 +18,7 @@ public class ButtonManager : Singleton<ButtonManager>
 
     private Vector3 CurrentspawnPoint;
 
-    private readonly int[] GuildItemIds = { 14, 15, 16, 24, 25, 26, 34, 35, 36 };
+    private readonly int[] GuildItemIds = {14, 24, 34, 15, 25, 35, 16, 26, 36};
 
     private int CurrentQuestId;
     private int CurrentSummonId;
