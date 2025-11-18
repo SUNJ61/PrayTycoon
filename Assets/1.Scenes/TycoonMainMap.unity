@@ -17788,11 +17788,12 @@ MonoBehaviour:
   GuideUI_List: []
   FailUI_List: []
   InventorySlot_List: []
+  GuildSlot_List: []
   GoldUI: {fileID: 2044068398}
   PrayUI: {fileID: 386341265}
   StoneUI: {fileID: 1669089368}
   GuildAmountUI:
-  - {fileID: 1975800367}
+  - {fileID: 360849965}
   - {fileID: 1975800367}
   - {fileID: 1917690466}
   - {fileID: 1923351149}

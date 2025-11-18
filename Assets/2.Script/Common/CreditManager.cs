@@ -210,15 +210,21 @@ public class CreditManager : Singleton<CreditManager>
         switch (SlotIndex)
         {
             case 0:
-                StopCoroutine(GuildSolt1);
+                if (GuildSolt1 != null)
+                    StopCoroutine(GuildSolt1);
+                
                 GuildSolt1 = null;
                 break;
             case 1:
-                StopCoroutine(GuildSolt2);
+                if (GuildSolt2 != null)
+                    StopCoroutine(GuildSolt2);
+                
                 GuildSolt2 = null;
                 break;
             case 2:
-                StopCoroutine(GuildSolt3);
+                if (GuildSolt3 != null)
+                    StopCoroutine(GuildSolt3);
+                
                 GuildSolt3 = null;
                 break;
         }

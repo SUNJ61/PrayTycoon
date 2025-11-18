@@ -12,6 +12,7 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private List<GameObject> GuideUI_List;
     [SerializeField] private List<GameObject> FailUI_List;
     [SerializeField] private List<GameObject> InventorySlot_List;
+    [SerializeField] private List<GameObject> GuildSlot_List;
 
     private TextMeshProUGUI GuideUIText;
     private TextMeshProUGUI GuideCondition;
@@ -22,6 +23,9 @@ public class UIManager : Singleton<UIManager>
     public TextMeshProUGUI StoneUI;
     public TextMeshProUGUI[] GuildAmountUI;
 
+    private GameObject GuildSolt1 = null;
+    private GameObject GuildSolt2 = null;
+    private GameObject GuildSolt3 = null;
     public GameObject GuideUI;
     public GameObject FailUI;
     public GameObject SummonUI;
@@ -36,6 +40,7 @@ public class UIManager : Singleton<UIManager>
         GuideUI_List = ObjectManager.Instance.GetObject("UI", 1);
         FailUI_List = ObjectManager.Instance.GetObject("UI", 3);
         InventorySlot_List = ObjectManager.Instance.GetObject(InventoryUI, 0);
+        GuildSlot_List = ObjectManager.Instance.GetObject(GuildUI, 1);
 
         GuideUIText = GuideUI_List[0].GetComponent<TextMeshProUGUI>();
         GuideCondition = GuideUI_List[1].GetComponent<TextMeshProUGUI>();
@@ -146,11 +151,74 @@ public class UIManager : Singleton<UIManager>
         AmountText.text = Amount.ToString();
     }
 
-    public void InventoryDeleteEdit(int Index)
+    public void InventoryDeleteEdit(int Index) //인벤토리 0개 물품 제거
     {
         GameObject CloneItem = InventorySlot_List[Index].transform.GetChild(1).gameObject;
 
         if (CloneItem != null)
             Destroy(CloneItem);
+    }
+
+    public void GuildSlotEdit(int ItemID, int Index) //길드 슬롯에 소환석 추가시 UI 추가 함수.
+    {
+        ItemData Item = ObjectManager.Instance.itemDatabase.GetItem(ItemID);
+        RectTransform Size;
+
+        switch (Index)
+        {
+            case 0:
+                if (GuildSolt1 != null)
+                    GuildSolt1 = null;
+                GuildSolt1 = Instantiate(Item.Icon, GuildSlot_List[Index].transform);
+                Size = GuildSolt1.GetComponent<RectTransform>();
+
+                Size.localScale = new Vector3(2.0f, 2.0f, 1f);
+                break;
+
+            case 1:
+                if (GuildSolt2 != null)
+                    GuildSolt2 = null;
+                GuildSolt2 = Instantiate(Item.Icon, GuildSlot_List[Index].transform);
+                Size = GuildSolt2.GetComponent<RectTransform>();
+
+                Size.localScale = new Vector3(2.0f, 2.0f, 1f);
+                break;
+
+            case 2:
+                if (GuildSolt3 != null)
+                    GuildSolt3 = null;
+                GuildSolt3 = Instantiate(Item.Icon, GuildSlot_List[Index].transform);
+                Size = GuildSolt3.GetComponent<RectTransform>();
+
+                Size.localScale = new Vector3(2.0f, 2.0f, 1f);
+                break;
+        }
+    }
+    
+    public void GuildSlotRemove(int Index) //길드 슬롯 제거 함수
+    {
+        switch (Index)
+        {
+            case 0:
+                if (GuildSolt1 != null)
+                    Destroy(GuildSolt1);
+                
+                GuildSolt1 = null;
+                break;
+
+            case 1:
+                if (GuildSolt2 != null)
+                    Destroy(GuildSolt2);
+                
+                GuildSolt2 = null;
+                break;
+
+            case 2:
+                if (GuildSolt3 != null)
+                    Destroy(GuildSolt3);
+                
+                GuildSolt3 = null;
+                break;
+        }
     }
 }

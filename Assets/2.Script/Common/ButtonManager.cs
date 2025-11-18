@@ -151,6 +151,8 @@ public class ButtonManager : Singleton<ButtonManager>
     private void GuildSoltRemoveBT(int index) //길드 슬롯에 용병 제거
     {
         CreditManager.Instance.RemoveGuildSlot(index);
+
+        UIManager.Instance.GuildSlotRemove(index);
         UIManager.Instance.GuilAddUIControl(false);
         
         CurrnetGuildSlot = -1;
@@ -168,6 +170,7 @@ public class ButtonManager : Singleton<ButtonManager>
             CreditManager.Instance.RemoveGuildSlot(CurrnetGuildSlot); //진행중인 추가 효과 제거.
             CreditManager.Instance.GuildSlotAdd(itemId, CurrnetGuildSlot); //길드 등록 추가 효과.
 
+            UIManager.Instance.GuildSlotEdit(itemId, CurrnetGuildSlot);
             UIManager.Instance.GuilAddUIControl(false); //용병 추가 UI 닫기
         }
         else if(Inventory.Instance.HasItem(itemId, 1) && !CreditManager.Instance.CheckGuildSlot(CurrnetGuildSlot)) //슬롯에 용병이 없을 때 등록 성공시 (해당 슬롯에 아이콘 등록 필요.)
@@ -177,6 +180,7 @@ public class ButtonManager : Singleton<ButtonManager>
 
             CreditManager.Instance.GuildSlotAdd(itemId, CurrnetGuildSlot);
 
+            UIManager.Instance.GuildSlotEdit(itemId, CurrnetGuildSlot);
             UIManager.Instance.GuilAddUIControl(false);
         }
         else //실패시 UI
