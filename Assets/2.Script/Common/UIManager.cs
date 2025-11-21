@@ -117,12 +117,6 @@ public class UIManager : Singleton<UIManager>
         failCondition.text = textDictionary[key].FailText;
     }
 
-    public void SummonUIEdit(string key) //키 값에 해당하는 소환의 문구로 변경하는 함수.
-    {
-        GuideUIText.text = textDictionary[key].Title;
-        GuideCondition.text = textDictionary[key].Text;
-    }
-
     public void PortalUIEdit(string key) //키 값에 해당하는 포탈의 문구로 변경하는 함수.
     {
         GuideUIText.text = textDictionary[key].Title;

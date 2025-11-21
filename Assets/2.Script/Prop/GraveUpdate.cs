@@ -37,10 +37,10 @@ public class GraveUpdate : MonoBehaviour, IQuest
         }
         else //수리가 된 후 사용함수.
         {
-            ButtonManager.Instance.SetCurrentSummon(SummonID);
+            ButtonManager.Instance.SetCurrentQuest(SummonID);
             ButtonManager.Instance.ButtonUpdate(1);
 
-            UIManager.Instance.SummonUIEdit(SpawnKey);
+            UIManager.Instance.QuestUIEdit(SpawnKey);
             QuestManager.Instance.QuestCheck(SpawnKey, SpawnCreditType, SpawnCredit, this);
 
             UIManager.Instance.GuideUIControl(true);

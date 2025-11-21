@@ -35,13 +35,13 @@ public class EndingChest : MonoBehaviour, IQuest
         }
         else //수리가 된 후 사용함수.
         {
-            //ButtonManager.Instance.SetCurrentSummon(SummonID);
-            //ButtonManager.Instance.ButtonUpdate(1);
+            ButtonManager.Instance.SetCurrentQuest(QuestID);
+            ButtonManager.Instance.ButtonUpdate(1);
 
-            //UIManager.Instance.SummonUIEdit(SpawnKey);
-            //QuestManager.Instance.QuestCheck(SpawnKey, SpawnCreditType, SpawnCredit, this);
+            UIManager.Instance.QuestUIEdit(EndingKey);
+            QuestManager.Instance.QuestCheck(EndingKey, EndingCreditType, EndingCredit, this);
 
-            //UIManager.Instance.GuideUIControl(true);
+            UIManager.Instance.GuideUIControl(true);
         }
     }
 
@@ -51,8 +51,13 @@ public class EndingChest : MonoBehaviour, IQuest
         UIManager.Instance.GuideUIControl(false);
     }
 
-    public void SetQuestClear() // 퀘스트가 성공하면 발생하는 이벤트.
+    private void LoadEndingChest()
     {
         
+    }
+
+    public void SetQuestClear() // 퀘스트가 성공하면 발생하는 이벤트.
+    {
+        //열린 상자가 되도록 해야함.
     }
 }

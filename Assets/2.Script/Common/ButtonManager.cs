@@ -21,8 +21,9 @@ public class ButtonManager : Singleton<ButtonManager>
     private readonly int[] GuildItemIds = {14, 24, 34, 15, 25, 35, 16, 26, 36};
 
     private int CurrentQuestId;
-    private int CurrentSummonId;
     private int CurrnetGuildSlot;
+    private int EndingPray = 5;
+    private int EndingGold = 5;
 
     private string NextScene;
 
@@ -102,7 +103,7 @@ public class ButtonManager : Singleton<ButtonManager>
         (QuestManager.Instance.questCredit[QuestManager.Instance.currentKey], QuestManager.Instance.questCreditType[QuestManager.Instance.currentKey])) //현재 미션에 대해 크레딧이 소모 가능으로 판단하면 미션 업데이트. (소환 구분 법 필요.)
         {
             UIManager.Instance.GuideUIControl(false);
-            switch (CurrentSummonId)
+            switch (CurrentQuestId)
             {
                 case 0:
                     CreditManager.Instance.SummonCredit(); // 0번 골드, 석재 소환
@@ -122,6 +123,23 @@ public class ButtonManager : Singleton<ButtonManager>
         }
 
         GuideButton.onClick.RemoveListener(SummonButtonClick);
+    }
+
+    private void EndingButtonClick()
+    {
+        if(CreditManager.Instance.credit["Pray"] >= EndingPray && CreditManager.Instance.credit["Gold"] >= EndingGold) //엔딩 조건에 만족할 경우.
+        {
+            CreditManager.Instance.UseCredit(EndingPray,"pray"); //pray 차감.
+            CreditManager.Instance.UseCredit(EndingPray,"Gold"); //gold 차감.
+
+            //엔딩 요소 작동 코드 필요.
+        }
+        else //엔딩 조건에 만족하지 않을 경우.
+        {
+            UIManager.Instance.GuideUIControl(false);
+            UIManager.Instance.FailUIEdit(QuestManager.Instance.currentKey);
+            UIManager.Instance.FailUIControl(true);
+        }
     }
 
     private void PortalButtonClick() //포탈 버튼 클릭시 발동하는 함수.
@@ -202,7 +220,7 @@ public class ButtonManager : Singleton<ButtonManager>
 
     public void SetCurrentSummon(int summonId)
     {
-        CurrentSummonId = summonId;
+        CurrentQuestId = summonId;
     }
 
     public void SetCurrentPortal(string sceneName, Vector3 spawnPoint)

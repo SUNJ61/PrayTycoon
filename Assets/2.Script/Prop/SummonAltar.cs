@@ -22,7 +22,7 @@ public class SummonAltar : MonoBehaviour, IQuest
         ButtonManager.Instance.SetCurrentSummon(0);
         ButtonManager.Instance.ButtonUpdate(1);
 
-        UIManager.Instance.SummonUIEdit(Key);
+        UIManager.Instance.QuestUIEdit(Key);
         QuestManager.Instance.QuestCheck(Key, CreditType, Credit, this);
 
         UIManager.Instance.GuideUIControl(true);
