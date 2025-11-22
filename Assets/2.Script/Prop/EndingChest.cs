@@ -8,7 +8,9 @@ public class EndingChest : MonoBehaviour, IQuest
     public bool IQuestClear => QuestClear;
 
     private int FixCredit = 5;
+    private int FixID = 0;
     private int EndingCredit = 5;
+    private int EndingID = 3;
 
     private string FixKey = "Chest";
     private string EndingKey = "Ending";
@@ -19,14 +21,16 @@ public class EndingChest : MonoBehaviour, IQuest
     private void Start()
     {
         QuestID = 4;
+
+        LoadEndingChest();
     }
 
-    private void OnTiggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (QuestClear == false) //수리가 되기 전 사용함수.
         {
             ButtonManager.Instance.SetCurrentQuest(QuestID);
-            ButtonManager.Instance.ButtonUpdate(0);
+            ButtonManager.Instance.ButtonUpdate(FixID);
 
             UIManager.Instance.QuestUIEdit(FixKey);
             QuestManager.Instance.QuestCheck(FixKey, FixCreditType, FixCredit, this);
@@ -36,7 +40,7 @@ public class EndingChest : MonoBehaviour, IQuest
         else //수리가 된 후 사용함수.
         {
             ButtonManager.Instance.SetCurrentQuest(QuestID);
-            ButtonManager.Instance.ButtonUpdate(1);
+            ButtonManager.Instance.ButtonUpdate(EndingID);
 
             UIManager.Instance.QuestUIEdit(EndingKey);
             QuestManager.Instance.QuestCheck(EndingKey, EndingCreditType, EndingCredit, this);
@@ -51,13 +55,29 @@ public class EndingChest : MonoBehaviour, IQuest
         UIManager.Instance.GuideUIControl(false);
     }
 
-    private void LoadEndingChest()
+    private void LoadEndingChest() //저장된 상자 오브젝트 불러옴.
     {
-        
+        GameObject EndingChest_C = gameObject.transform.GetChild(0).gameObject;
+        SaveObject EndingChest_C_Data = EndingChest_C.GetComponent<SaveObject>();
+        EndingChest_C.SetActive(EndingChest_C_Data.isRepaired);
+
+        GameObject EndingChest_O = gameObject.transform.GetChild(1).gameObject;
+        SaveObject EndingChest_O_Data = EndingChest_O.GetComponent<SaveObject>();
+        EndingChest_O.SetActive(EndingChest_O_Data.isRepaired);
     }
 
-    public void SetQuestClear() // 퀘스트가 성공하면 발생하는 이벤트.
+    public void SetQuestClear() // 퀘스트가 성공하면 발생하는 이벤트. (상자 열림)
     {
-        //열린 상자가 되도록 해야함.
+        QuestClear = true;
+
+        GameObject EndingChest_C = gameObject.transform.GetChild(0).gameObject;
+        SaveObject EndingChest_C_Data = EndingChest_C.GetComponent<SaveObject>();
+        EndingChest_C.SetActive(false);
+        EndingChest_C_Data.isRepaired = false;
+
+        GameObject EndingChest_O = gameObject.transform.GetChild(1).gameObject;
+        SaveObject EndingChest_O_Data = EndingChest_O.GetComponent<SaveObject>();
+        EndingChest_O.SetActive(true);
+        EndingChest_O_Data.isRepaired = true;
     }
 }

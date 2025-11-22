@@ -71,6 +71,10 @@ public class ButtonManager : Singleton<ButtonManager>
             case 2: //포탈 일때 ID 2번.
                 GuideButton.onClick.AddListener(PortalButtonClick);
                 break;
+
+            case 3: //엔딩 일때 ID 3번.
+                GuideButton.onClick.AddListener(EndingButtonClick);
+                break;
         }
     }
 

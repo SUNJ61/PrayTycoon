@@ -22635,8 +22635,7 @@ GameObject:
   - component: {fileID: 1442051348}
   - component: {fileID: 1442051347}
   - component: {fileID: 1442051350}
-  - component: {fileID: 1442051349}
-  m_Layer: 20
+  m_Layer: 21
   m_Name: EndingCheat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22689,7 +22688,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.5}
@@ -22840,20 +22839,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &1442051349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1442051344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99d6a4f6e6c03104d81c3615b7e79b1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectId: EndingChest
-  isRepaired: 0
 --- !u!114 &1442051350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50926,7 +50911,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -44025399
   m_SortingLayer: 2
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -50949,7 +50934,8 @@ GameObject:
   - component: {fileID: 8889318062780875901}
   - component: {fileID: 8889318062780875898}
   - component: {fileID: 8889318062780875900}
-  m_Layer: 20
+  - component: {fileID: 8889318062780875902}
+  m_Layer: 21
   m_Name: EndingChest_Close
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51017,6 +51003,20 @@ Transform:
   - {fileID: 8889318062928002227}
   m_Father: {fileID: 1442051345}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8889318062780875902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8889318062780875899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99d6a4f6e6c03104d81c3615b7e79b1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectId: EndingChest_Close
+  isRepaired: 1
 --- !u!1 &8889318062928002224
 GameObject:
   m_ObjectHideFlags: 0
@@ -51027,7 +51027,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8889318062928002227}
   - component: {fileID: 8889318062928002226}
-  m_Layer: 20
+  m_Layer: 21
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51143,7 +51143,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9198095107204055827}
   - component: {fileID: 9198095107204055826}
-  m_Layer: 20
+  m_Layer: 21
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51257,7 +51257,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -44025399
   m_SortingLayer: 2
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300040, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -51280,8 +51280,9 @@ GameObject:
   - component: {fileID: 9198095107367500765}
   - component: {fileID: 9198095107367500762}
   - component: {fileID: 9198095107367500764}
-  m_Layer: 20
-  m_Name: PF Props Chest Open
+  - component: {fileID: 9198095107367500766}
+  m_Layer: 21
+  m_Name: EndingChest_Open
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51348,6 +51349,20 @@ Transform:
   - {fileID: 9198095107204055827}
   m_Father: {fileID: 1442051345}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9198095107367500766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9198095107367500763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99d6a4f6e6c03104d81c3615b7e79b1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectId: EndingChest_Open
+  isRepaired: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
