@@ -107,6 +107,7 @@ public class ButtonManager : Singleton<ButtonManager>
         (QuestManager.Instance.questCredit[QuestManager.Instance.currentKey], QuestManager.Instance.questCreditType[QuestManager.Instance.currentKey])) //현재 미션에 대해 크레딧이 소모 가능으로 판단하면 미션 업데이트. (소환 구분 법 필요.)
         {
             UIManager.Instance.GuideUIControl(false);
+            
             switch (CurrentQuestId)
             {
                 case 0:
@@ -133,6 +134,8 @@ public class ButtonManager : Singleton<ButtonManager>
     {
         if(CreditManager.Instance.credit["Pray"] >= EndingPray && CreditManager.Instance.credit["Gold"] >= EndingGold) //엔딩 조건에 만족할 경우.
         {
+            UIManager.Instance.GuideUIControl(false);
+
             CreditManager.Instance.UseCredit(EndingPray,"pray"); //pray 차감.
             CreditManager.Instance.UseCredit(EndingPray,"Gold"); //gold 차감.
 
