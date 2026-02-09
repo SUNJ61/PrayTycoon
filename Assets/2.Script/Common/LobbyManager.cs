@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class LobbyManager : MonoBehaviour
 {
+    public GameObject OptionUI;
     public TMP_Dropdown resDropdown;
-    private List<Resolution> resolutions = new List<Resolution>();
+
+    private readonly List<int> standardWidths = new List<int> { 1280, 1600, 1920, 2560, 3840 };
+    private List<Resolution> filteredResolutions = new List<Resolution>();
     void Start()
     {
         InitResolution();        
@@ -13,41 +16,74 @@ public class LobbyManager : MonoBehaviour
 
     private void InitResolution()
     {
-        Resolution[] allRes = Screen.resolutions;
+        Resolution[] allResolutions = Screen.resolutions;
         resDropdown.options.Clear();
 
-        int currentResIndex = 0;
-        Resolution nativeRes = Screen.currentResolution;
+        // 현재 모니터의 종횡비 계산
+        float targetAspect = (float)Screen.currentResolution.width / Screen.currentResolution.height;
 
-        for (int i = 0; i < allRes.Length; i++)
+        for (int i = 0; i < allResolutions.Length; i++)
         {
-            // 중복된 해상도 제거 (주사율만 다른 경우 등)
-            if (i > 0 && allRes[i].width == allRes[i-1].width && allRes[i].height == allRes[i-1].height)
-                continue;
+            float currentAspect = (float)allResolutions[i].width / allResolutions[i].height;
 
-            resolutions.Add(allRes[i]);
-
-            string option = allRes[i].width + " x " + allRes[i].height;
-            
-            // 권장 해상도 표시 로직 (PC는 Native, 모바일은 기기 해상도 기준)
-            if (allRes[i].width == nativeRes.width && allRes[i].height == nativeRes.height)
+            //필터링, 위에서 계산한 비율과 비슷한 값의 표준 해상도만 선택.
+            if (Mathf.Abs(currentAspect - targetAspect) < 0.01f)
             {
-                option += " (Recommended)";
-                currentResIndex = resolutions.Count - 1;
-            }
+                if (standardWidths.Contains(allResolutions[i].width))
+                {
+                    // 중복 제거 (주사율 차이 무시)
+                    if (filteredResolutions.Exists(r => r.width == allResolutions[i].width))
+                        continue;
 
-            resDropdown.options.Add(new TMP_Dropdown.OptionData(option));
+                    filteredResolutions.Add(allResolutions[i]);
+                }
+            }
         }
 
-        resDropdown.value = currentResIndex;
+        //만약 필터링된게 하나도 없다면(특수 해상도), 현재 해상도는 무조건 추가
+        if (filteredResolutions.Count == 0)
+        {
+            filteredResolutions.Add(Screen.currentResolution);
+        }
+
+        // 드롭다운 UI 업데이트
+        foreach (var res in filteredResolutions)
+        {
+            string option = $"{res.width} x {res.height}";
+            if (res.width == Screen.currentResolution.width) option += " (권장)";
+            resDropdown.options.Add(new TMP_Dropdown.OptionData(option));
+        }
+        
         resDropdown.RefreshShownValue();
     }
 
     public void SetResolution(int index)
     {
-        Resolution res = resolutions[index];
-        // PC는 FullScreen 모드, 모바일은 기본적으로 FullScreen 처리됨
-        Screen.SetResolution(res.width, res.height, true);
-        Debug.Log($"해상도 변경: {res.width}x{res.height}");
+        if (index < 0 || index >= filteredResolutions.Count) return;
+
+        Resolution selectedRes = filteredResolutions[index];
+        
+        Screen.SetResolution(selectedRes.width, selectedRes.height, Screen.fullScreen);
+        
+        Debug.Log($"선택된 해상도: {selectedRes.width}x{selectedRes.height}");
     }
+
+    public void SetFullScreen(bool isFull)
+    {
+        Screen.fullScreen = isFull;
+
+        Debug.Log($"전체 화면: {isFull}");
+    }
+
+    public void LobbyOptionUI(bool isActive)
+    {
+        OptionUI.SetActive(isActive);
+    }
+
+    /*
+    해야할 것
+    1. 옵션세팅을 로드 매니저로 전달하여 메인 게임 실행시 옵션이 유지되도록 하기.
+    2. 로드 매니저로 메인 게임 화면으로 넘어가기. -> 씬로드 매니저를 로비씬으로 바꾸기
+    3. 데이터 저장과 저장된 데이터를 서버에서 가져와 해당 데이터로 로드하는 것. -> 세이브 매니저를 로비씬으로 옮기고 저장 기능 만들기
+    */
 }
