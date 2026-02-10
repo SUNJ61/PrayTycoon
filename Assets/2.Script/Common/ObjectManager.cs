@@ -40,7 +40,8 @@ public class ObjectManager : Singleton<ObjectManager>
         QuestOJ.Add("Gate", Gate);
         QuestOJ.Add("GraveStone", Grave);
     }
-    void Start()
+
+    private void Start()
     {
         PlayerSpawn(spawnPoint);
     }

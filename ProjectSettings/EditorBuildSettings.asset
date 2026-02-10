@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/1.Scenes/TycoonLobby.unity
+    guid: c4fe07a2cb8c00b4d9d9da28df6797c6
+  - enabled: 1
     path: Assets/1.Scenes/TycoonGrave.unity
     guid: a0015d8e4e6cbbe49a7ce5f4209e2071
   - enabled: 1

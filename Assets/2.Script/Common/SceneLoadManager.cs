@@ -5,7 +5,17 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
 {
     private Vector3 PlayerspawnPoint;
 
-    public void NextSceneLoad(string sceneName, Vector3 spawnPoint) //씬 로드 함수.
+    public void StartGame(string sceneName) // 새 게임 시작시 씬 로드
+    {
+        SceneManager.LoadScene(sceneName);
+    }
+
+    public void LoadGame(string sceneName) // 저장된 게임 시작시 씬 로드
+    {
+        
+    }
+
+    public void NextSceneLoad(string sceneName, Vector3 spawnPoint) // 인게임 씬 로드 함수.
     {
         PlayerspawnPoint = spawnPoint;
 
@@ -22,13 +32,13 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
         ObjectManager.Instance.PlayerSpawn(PlayerspawnPoint);
     }
 
-    private void MapLoad(Scene scene, LoadSceneMode mode) //씬 로드 후 콜백함수. 맵로드
+    private void MapLoad(Scene scene, LoadSceneMode mode) // 씬 로드 후 콜백함수. 맵로드
     {
         SceneManager.sceneLoaded -= MapLoad;
         SaveManager.Instance.LoadMap(scene.name);
     }
 
-    private void DataClear(Scene scene, LoadSceneMode mode) //씬 로드 후 필요 없는 데이터 삭제.
+    private void DataClear(Scene scene, LoadSceneMode mode) // 씬 로드 후 필요 없는 데이터 삭제.
     {
         SceneManager.sceneLoaded -= DataClear;
         QuestManager.Instance.ResetData();
