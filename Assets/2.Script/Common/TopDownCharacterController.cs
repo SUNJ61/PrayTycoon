@@ -59,6 +59,13 @@ namespace Cainos.PixelArtTopDown_Basic
             {
                 UIManager.Instance.InventoryUIControl();
             }
+            else if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if(!UIManager.Instance.MenuUI.activeSelf)
+                    UIManager.Instance.UIOff();
+
+                    UIManager.Instance.MenuUIControl();
+            }
         }
     }
 }

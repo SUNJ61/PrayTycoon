@@ -32,6 +32,9 @@ public class UIManager : Singleton<UIManager>
     public GameObject InventoryUI;
     public GameObject GuildUI;
     public GameObject GuildAddUI;
+    public GameObject MenuUI;
+    public GameObject OptionUI;
+    public GameObject SaveUI;
 
     private readonly int[] GuildItemIds = {14, 15, 16, 24, 25, 26, 34, 35, 36};
 
@@ -89,6 +92,33 @@ public class UIManager : Singleton<UIManager>
     public void GuildUIControl(bool active)
     {
         GuildUI.SetActive(active); //길드 UI 활성화, 비활성화 함수.
+    }
+
+    public void MenuUIControl()
+    {
+        MenuUI.SetActive(!MenuUI.activeSelf);
+    }
+
+    public void OptionUIControl()
+    {
+        MenuUI.SetActive(false);
+        OptionUI.SetActive(!OptionUI.activeSelf);
+    }
+
+    public void SaveUIControl()
+    {
+        MenuUI.SetActive(false);
+        SaveUI.SetActive(!SaveUI.activeSelf);
+    }
+
+    public void UIOff()
+    {
+        GuideUI.SetActive(false);
+        FailUI.SetActive(false);
+        InventoryUI.SetActive(false);
+        GuildUI.SetActive(false);
+        OptionUI.SetActive(false);
+        SaveUI.SetActive(false);
     }
 
     public void GuilAddUIControl(bool active)
