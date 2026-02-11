@@ -1,20 +1,30 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LobbyManager : MonoBehaviour
 {
     public GameObject OptionUI;
+
     public TMP_Dropdown resDropdown;
+    public Slider BGMSlider;
+    public Slider SFXSlider;
+    public Toggle FullScreenToggle;
 
     private readonly List<int> standardWidths = new List<int> { 1280, 1600, 1920, 2560, 3840 };
     private List<Resolution> filteredResolutions = new List<Resolution>();
     void Start()
     {
-        InitResolution();        
+        InitResolution();
+
+        LobbyOptionSet();
+
+        BGMSlider.onValueChanged.AddListener(BGMsetting);
+        SFXSlider.onValueChanged.AddListener(SFXsetting);
     }
 
-    private void InitResolution()
+    public void InitResolution() //정렬순서 바꾸기 필요. 권장 해상도를 가장 위로 올 수 있도록 해야함.
     {
         Resolution[] allResolutions = Screen.resolutions;
         resDropdown.options.Clear();
@@ -57,6 +67,14 @@ public class LobbyManager : MonoBehaviour
         resDropdown.RefreshShownValue();
     }
 
+    private void LobbyOptionSet() //기본 설정으로 초기화
+    {
+        BGMSlider.value = SaveManager.Instance.VolumeBGM;
+        SFXSlider.value = SaveManager.Instance.VolumeSFX;
+        resDropdown.value = SaveManager.Instance.ResIndex;
+        FullScreenToggle.isOn = SaveManager.Instance.isFullScreen;   
+    }
+
     public void SetResolution(int index)
     {
         if (index < 0 || index >= filteredResolutions.Count) return;
@@ -64,6 +82,8 @@ public class LobbyManager : MonoBehaviour
         Resolution selectedRes = filteredResolutions[index];
         
         Screen.SetResolution(selectedRes.width, selectedRes.height, Screen.fullScreen);
+
+        SaveManager.Instance.ResIndex = index;
         
         Debug.Log($"선택된 해상도: {selectedRes.width}x{selectedRes.height}");
     }
@@ -72,7 +92,19 @@ public class LobbyManager : MonoBehaviour
     {
         Screen.fullScreen = isFull;
 
+        SaveManager.Instance.isFullScreen = isFull;
+
         Debug.Log($"전체 화면: {isFull}");
+    }
+
+    public void BGMsetting(float value)
+    {
+        SaveManager.Instance.VolumeBGM = value;
+    }
+
+    public void SFXsetting(float value)
+    {
+        SaveManager.Instance.VolumeSFX = value;
     }
 
     public void LobbyOptionUI(bool isActive)
