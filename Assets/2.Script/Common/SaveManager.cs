@@ -6,12 +6,12 @@ public class SaveManager : Singleton<SaveManager>
     private MapSaveData currentSave = new MapSaveData();
 
     //옵션 값들 기본 값 정하기 필요. 기본 설정시 값이 있어야함.
-    public float VolumeBGM;
-    public float VolumeSFX;
+    public float VolumeBGM = 10.0f;
+    public float VolumeSFX = 10.0f;
 
-    public int ResIndex;
+    public int ResIndex = 0;
 
-    public bool isFullScreen;
+    public bool isFullScreen = true;
 
     public void SaveMap() //맵 오브젝트 데이터 저장, 씬 넘어가기 전에 호출.
     {

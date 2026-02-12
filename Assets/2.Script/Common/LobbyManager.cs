@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class LobbyManager : MonoBehaviour
 {
+    public static LobbyManager Instance;
+
     public GameObject OptionUI;
 
     public TMP_Dropdown resDropdown;
@@ -14,6 +16,14 @@ public class LobbyManager : MonoBehaviour
 
     private readonly List<int> standardWidths = new List<int> { 1280, 1600, 1920, 2560, 3840 };
     private List<Resolution> filteredResolutions = new List<Resolution>();
+    void Awake()
+    {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+    }
+
     void Start()
     {
         InitResolution();

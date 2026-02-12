@@ -25147,6 +25147,10 @@ MonoBehaviour:
   - {fileID: 1620874075}
   - {fileID: 712017241}
   - {fileID: 486055578}
+  resDropdown: {fileID: 1074676299}
+  BGMSlider: {fileID: 1647556957}
+  SFXSlider: {fileID: 40936761}
+  FullScreenToggle: {fileID: 1895625425}
   GuideUI: {fileID: 1204111354}
   FailUI: {fileID: 1394013878}
   SummonUI: {fileID: 1243237718}

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : Singleton<UIManager>
 {
@@ -22,6 +23,11 @@ public class UIManager : Singleton<UIManager>
     public TextMeshProUGUI PrayUI;
     public TextMeshProUGUI StoneUI;
     public TextMeshProUGUI[] GuildAmountUI;
+
+    public TMP_Dropdown resDropdown; //해상도 가져오기 로직 넣어야함, 정렬 변경 후 추가 예정
+    public Slider BGMSlider;
+    public Slider SFXSlider;
+    public Toggle FullScreenToggle;
 
     private GameObject GuildSolt1 = null;
     private GameObject GuildSolt2 = null;

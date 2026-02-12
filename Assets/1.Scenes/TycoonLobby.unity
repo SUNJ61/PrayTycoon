@@ -347,6 +347,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c3ae1e2cb1149c41a8ee9f876aed735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  VolumeBGM: 0
+  VolumeSFX: 0
+  ResIndex: 0
+  isFullScreen: 0
 --- !u!4 &216715623
 Transform:
   m_ObjectHideFlags: 0
@@ -2607,6 +2611,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OptionUI: {fileID: 1841428874}
   resDropdown: {fileID: 1867177706}
+  BGMSlider: {fileID: 390931058}
+  SFXSlider: {fileID: 2044960447}
+  FullScreenToggle: {fileID: 1657425540}
 --- !u!1 &703459167
 GameObject:
   m_ObjectHideFlags: 0
