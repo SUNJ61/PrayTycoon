@@ -1,9 +1,15 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneLoadManager : Singleton<SceneLoadManager>
 {
     private Vector3 PlayerspawnPoint;
+    private readonly HashSet<string> WhiteList = new HashSet<string>
+    {
+      "SceneLoadManager",
+      "SaveManager"  
+    };
 
     public void StartGame(string sceneName) // 새 게임 시작시 씬 로드
     {
@@ -17,9 +23,19 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
         
     }
 
-    public void ExitGame(string sceneName) // 게임 종료시 씬 로드 (로비 씬 이동 + 게임저장 필요.)
+    public void ExitGame(string sceneName) // 게임 종료시 씬 로드 (로비 씬 이동 + 매니저, 인게임 UI삭제 + 게임저장 필요.)
     {
         SceneManager.sceneLoaded += OptionDataLoad;
+
+        GameObject[] ManagerObjects = FindObjectsByType<GameObject>(FindObjectsSortMode.None); // DontDestroyOnLoad로 등록된 오브젝트 모두 찾기.
+        foreach (GameObject ManagerObject in ManagerObjects)
+        {
+            if(ManagerObject.transform.parent == null && ManagerObject.scene.name == "DontDestroyOnLoad") // 부모가 없고 DontDestroyOnLoad씬에 있는 오브젝트만 남김
+            {
+                if(!WhiteList.Contains(ManagerObject.name)) // 화이트 리스트에 없으면 매니저 삭제
+                    Destroy(ManagerObject);
+            }
+        }
 
         SceneManager.LoadScene(sceneName);
     }
@@ -45,6 +61,8 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
             UIManager.Instance.BGMSlider.value = SaveManager.Instance.VolumeBGM;
             UIManager.Instance.SFXSlider.value = SaveManager.Instance.VolumeSFX;
             UIManager.Instance.FullScreenToggle.isOn = SaveManager.Instance.isFullScreen;
+
+            UIManager.Instance.ExitBTN.onClick.AddListener(() => ExitGame("TycoonLobby")); //종료 버튼 연결
         }
         else if(Object.FindAnyObjectByType<LobbyManager>() != null) // 로비 씬 UI 매니저
         {

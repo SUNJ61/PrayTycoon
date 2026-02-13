@@ -25151,6 +25151,7 @@ MonoBehaviour:
   BGMSlider: {fileID: 1647556957}
   SFXSlider: {fileID: 40936761}
   FullScreenToggle: {fileID: 1895625425}
+  ExitBTN: {fileID: 1253295075}
   GuideUI: {fileID: 1204111354}
   FailUI: {fileID: 1394013878}
   SummonUI: {fileID: 1243237718}

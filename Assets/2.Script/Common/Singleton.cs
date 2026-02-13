@@ -34,4 +34,11 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
     }
+
+    //매니저 삭제시 misssing obj를 방지하기 위해 초기화.
+    private void OnDestroy()
+    {
+        if (instance == this)
+            instance = null;
+    }
 }

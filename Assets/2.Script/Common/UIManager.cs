@@ -28,6 +28,7 @@ public class UIManager : Singleton<UIManager>
     public Slider BGMSlider;
     public Slider SFXSlider;
     public Toggle FullScreenToggle;
+    public Button ExitBTN; //버튼 매니저로 옮기기
 
     private GameObject GuildSolt1 = null;
     private GameObject GuildSolt2 = null;
