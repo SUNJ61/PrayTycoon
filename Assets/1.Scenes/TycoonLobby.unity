@@ -347,10 +347,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c3ae1e2cb1149c41a8ee9f876aed735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VolumeBGM: 0
-  VolumeSFX: 0
+  VolumeBGM: 10
+  VolumeSFX: 10
   ResIndex: 0
-  isFullScreen: 0
+  isFullScreen: 1
 --- !u!4 &216715623
 Transform:
   m_ObjectHideFlags: 0
@@ -7991,19 +7991,7 @@ MonoBehaviour:
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 602465913}
-        m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
-        m_MethodName: SetResolution
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &1867177707
 MonoBehaviour:

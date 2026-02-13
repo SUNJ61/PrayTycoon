@@ -27,14 +27,13 @@ public class LobbyManager : MonoBehaviour
     void Start()
     {
         InitResolution();
-
         LobbyOptionSet();
 
         BGMSlider.onValueChanged.AddListener(BGMsetting);
         SFXSlider.onValueChanged.AddListener(SFXsetting);
     }
 
-    public void InitResolution() //정렬순서 바꾸기 필요. 권장 해상도를 가장 위로 올 수 있도록 해야함.
+    private void InitResolution()
     {
         Resolution[] allResolutions = Screen.resolutions;
         resDropdown.options.Clear();
@@ -66,6 +65,8 @@ public class LobbyManager : MonoBehaviour
             filteredResolutions.Add(Screen.currentResolution);
         }
 
+        filteredResolutions.Reverse(); // 리스트 역순으로 뒤집기 (저해상도 먼저 등록됨)
+
         // 드롭다운 UI 업데이트
         foreach (var res in filteredResolutions)
         {
@@ -73,8 +74,23 @@ public class LobbyManager : MonoBehaviour
             if (res.width == Screen.currentResolution.width) option += " (권장)";
             resDropdown.options.Add(new TMP_Dropdown.OptionData(option));
         }
+
+        resDropdown.onValueChanged.AddListener(OnResolutionChanged);
         
         resDropdown.RefreshShownValue();
+    }
+
+    private void OnResolutionChanged(int index)
+    {
+        // filteredResolutions 리스트에서 선택된 인덱스의 해상도 정보를 가져옴
+        Resolution selectedRes = filteredResolutions[index];
+    
+        // 실제 해상도 변경 적용
+        Screen.SetResolution(selectedRes.width, selectedRes.height, Screen.fullScreen);
+    
+        // 변경된 인덱스를 SaveManager 등에 저장
+        SaveManager.Instance.ResIndex = index;
+        Debug.Log($"해상도 변경: {selectedRes.width}x{selectedRes.height}");
     }
 
     private void LobbyOptionSet() //기본 설정으로 초기화
@@ -82,7 +98,7 @@ public class LobbyManager : MonoBehaviour
         BGMSlider.value = SaveManager.Instance.VolumeBGM;
         SFXSlider.value = SaveManager.Instance.VolumeSFX;
         resDropdown.value = SaveManager.Instance.ResIndex;
-        FullScreenToggle.isOn = SaveManager.Instance.isFullScreen;   
+        FullScreenToggle.isOn = SaveManager.Instance.isFullScreen;
     }
 
     public void SetResolution(int index)
@@ -124,7 +140,7 @@ public class LobbyManager : MonoBehaviour
 
     /*
     해야할 것
-    1. 옵션세팅을 로드 매니저로 전달하여 메인 게임 실행시 옵션이 유지되도록 하기.
+    1. 옵션세팅을 로드 매니저로 전달하여 메인 게임 실행시 옵션이 유지되도록 하기. (완)
     2. 로드 매니저로 메인 게임 화면으로 넘어가기. -> 씬로드 매니저를 로비씬으로 바꾸기 (완)
     3. 데이터 저장과 저장된 데이터를 서버에서 가져와 해당 데이터로 로드하는 것. -> 세이브 매니저를 로비씬으로 옮기고 저장 기능 만들기
     */

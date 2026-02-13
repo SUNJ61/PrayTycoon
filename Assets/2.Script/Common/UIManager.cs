@@ -28,7 +28,6 @@ public class UIManager : Singleton<UIManager>
     public Slider BGMSlider;
     public Slider SFXSlider;
     public Toggle FullScreenToggle;
-    public Button ExitBTN; //버튼 매니저로 옮기기
 
     private GameObject GuildSolt1 = null;
     private GameObject GuildSolt2 = null;
@@ -44,6 +43,8 @@ public class UIManager : Singleton<UIManager>
     public GameObject SaveUI;
 
     private readonly int[] GuildItemIds = {14, 15, 16, 24, 25, 26, 34, 35, 36};
+    private readonly List<int> standardWidths = new List<int> { 1280, 1600, 1920, 2560, 3840 };
+    private List<Resolution> filteredResolutions = new List<Resolution>();
 
     void Start()
     {
@@ -57,6 +58,7 @@ public class UIManager : Singleton<UIManager>
         failCondition = FailUI_List[1].GetComponent<TextMeshProUGUI>();
 
         LoadTextData();
+        InitResolution();
     }
 
     private void LoadTextData()
@@ -79,6 +81,66 @@ public class UIManager : Singleton<UIManager>
             if (!textDictionary.ContainsKey(data.Key))
                 textDictionary.Add(data.Key, data);
         }
+    }
+
+    private void InitResolution()
+    {
+        Resolution[] allResolutions = Screen.resolutions;
+        resDropdown.options.Clear();
+
+        // 현재 모니터의 종횡비 계산
+        float targetAspect = (float)Screen.currentResolution.width / Screen.currentResolution.height;
+
+        for (int i = 0; i < allResolutions.Length; i++)
+        {
+            float currentAspect = (float)allResolutions[i].width / allResolutions[i].height;
+
+            //필터링, 위에서 계산한 비율과 비슷한 값의 표준 해상도만 선택.
+            if (Mathf.Abs(currentAspect - targetAspect) < 0.01f)
+            {
+                if (standardWidths.Contains(allResolutions[i].width))
+                {
+                    // 중복 제거 (주사율 차이 무시)
+                    if (filteredResolutions.Exists(r => r.width == allResolutions[i].width))
+                        continue;
+
+                    filteredResolutions.Add(allResolutions[i]);
+                }
+            }
+        }
+
+        //만약 필터링된게 하나도 없다면(특수 해상도), 현재 해상도는 무조건 추가
+        if (filteredResolutions.Count == 0)
+        {
+            filteredResolutions.Add(Screen.currentResolution);
+        }
+
+        filteredResolutions.Reverse(); // 리스트 역순으로 뒤집기 (저해상도 먼저 등록됨)
+
+        // 드롭다운 UI 업데이트
+        foreach (var res in filteredResolutions)
+        {
+            string option = $"{res.width} x {res.height}";
+            if (res.width == Screen.currentResolution.width) option += " (권장)";
+            resDropdown.options.Add(new TMP_Dropdown.OptionData(option));
+        }
+
+        resDropdown.onValueChanged.AddListener(OnResolutionChanged);
+        
+        resDropdown.RefreshShownValue();
+    }
+
+    private void OnResolutionChanged(int index)
+    {
+        // filteredResolutions 리스트에서 선택된 인덱스의 해상도 정보를 가져옴
+        Resolution selectedRes = filteredResolutions[index];
+    
+        // 실제 해상도 변경 적용
+        Screen.SetResolution(selectedRes.width, selectedRes.height, Screen.fullScreen);
+    
+        // 변경된 인덱스를 SaveManager 등에 저장
+        SaveManager.Instance.ResIndex = index;
+        Debug.Log($"해상도 변경: {selectedRes.width}x{selectedRes.height}");
     }
 
     public void GuideUIControl(bool active) //퀘스트 UI 활성화, 비활성화 함수.

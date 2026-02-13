@@ -12,6 +12,7 @@ public class ButtonManager : Singleton<ButtonManager>
     public Button SummonButton;
     public Button SummonCloseButton;
     public Button InventoryCloseButton;
+    public Button ExitBTN;
 
     public Button[] GuildSlot;
     public Button[] GuildAddButton;

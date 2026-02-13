@@ -62,7 +62,7 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
             UIManager.Instance.SFXSlider.value = SaveManager.Instance.VolumeSFX;
             UIManager.Instance.FullScreenToggle.isOn = SaveManager.Instance.isFullScreen;
 
-            UIManager.Instance.ExitBTN.onClick.AddListener(() => ExitGame("TycoonLobby")); //종료 버튼 연결
+            ButtonManager.Instance.ExitBTN.onClick.AddListener(() => ExitGame("TycoonLobby")); //종료 버튼 연결
         }
         else if(Object.FindAnyObjectByType<LobbyManager>() != null) // 로비 씬 UI 매니저
         {
