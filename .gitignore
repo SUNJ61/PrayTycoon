@@ -72,8 +72,8 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 # Firebase / Google Services 보안키 제외
-**/google-services.json
-**/google-services-desktop.json
+**/google-services*.json
+**/google-services*.json.meta
 **/GoogleService-Info.plist
 **/serviceAccountKey.json
 
