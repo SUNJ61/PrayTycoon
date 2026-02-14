@@ -70,3 +70,7 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# 100MB 넘는 파일 제외
+Assets/Firebase/Plugins/x86_64/FirebaseCppApp-13_8_0.bundle
+Assets/Firebase/Plugins/x86_64/FirebaseCppApp-13_8_0.so

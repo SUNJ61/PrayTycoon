@@ -8,7 +8,8 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
     private readonly HashSet<string> WhiteList = new HashSet<string>
     {
       "SceneLoadManager",
-      "SaveManager"  
+      "SaveManager",
+      "FirebaseManager"
     };
 
     public void StartGame(string sceneName) // 새 게임 시작시 씬 로드

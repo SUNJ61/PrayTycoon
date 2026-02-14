@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "265445288359",
+    "project_id": "praytycoondatabase",
+    "storage_bucket": "praytycoondatabase.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:265445288359:android:cd0070ea81fc301cac2e82",
+        "android_client_info": {
+          "package_name": "com.MyCompany.PrayTycoon"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtsJQ3SoIhAqkKKvwQL0iq66t-Kanktxs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
