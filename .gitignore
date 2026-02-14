@@ -71,6 +71,19 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
-# 100MB 넘는 파일 제외
-Assets/Firebase/Plugins/x86_64/FirebaseCppApp-13_8_0.bundle
-Assets/Firebase/Plugins/x86_64/FirebaseCppApp-13_8_0.so
+# Firebase / Google Services 보안키 제외
+**/google-services.json
+**/GoogleService-Info.plist
+**/serviceAccountKey.json
+
+# Firebase Admin SDK (Secret)
+*.config.json
+*.private.json
+
+# Firebase Functions (Node.js)
+functions/node_modules/
+functions/.runtimeconfig.json
+functions/lib/
+
+# Unity Firebase Plugins (대용량 파일 방지)
+Assets/Firebase/Plugins/
