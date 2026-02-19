@@ -14,6 +14,14 @@ public class LobbyManager : MonoBehaviour
     public Slider SFXSlider;
     public Toggle FullScreenToggle;
 
+    public TMP_InputField LogInIdInput;
+    public TMP_InputField LogInPwInput;
+    public TMP_Text LogInErrorText;
+
+    public TMP_InputField SignInIdInput;
+    public TMP_InputField SignInPwInput;
+    public TMP_Text SignInErrorText;
+
     private readonly List<int> standardWidths = new List<int> { 1280, 1600, 1920, 2560, 3840 };
     private List<Resolution> filteredResolutions = new List<Resolution>();
     void Awake()
@@ -138,11 +146,21 @@ public class LobbyManager : MonoBehaviour
         OptionUI.SetActive(isActive);
     }
 
+    public void CloseBTN()
+    {
+        if(transform.parent != null)
+        {
+            GameObject parentObj = transform.parent.gameObject;
+
+            parentObj.SetActive(false);
+        }
+    }
+
     /*
     해야할 것
     1. 옵션세팅을 로드 매니저로 전달하여 메인 게임 실행시 옵션이 유지되도록 하기. (완)
     2. 로드 매니저로 메인 게임 화면으로 넘어가기. -> 씬로드 매니저를 로비씬으로 바꾸기 (완)
-    3. firebaase서버 연동하기. (완?)
+    3. firebaase서버 연동하기. (완)
     4. 로그인 시스템 만들기.
     5. 유저 id 기반으로 설정 데이터를 저장하고 로그인시 불러오는 기능 만들기.
     6. 유저 id 기반으로 게임 세이브, 로드 기능 만들기.

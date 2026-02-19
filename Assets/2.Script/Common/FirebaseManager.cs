@@ -8,6 +8,9 @@ public class FirebaseManager : MonoBehaviour
     public static FirebaseApp App;
     public static FirebaseManager Instance;
 
+    private FirebaseAuth auth;
+    private string dummyDomain = "@test.com";
+
     void Awake()
     {
         if (Instance == null)
@@ -24,32 +27,56 @@ public class FirebaseManager : MonoBehaviour
 
     private void InitializeFirebase()
     {
-        FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task => {
+        FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task => 
+        {
             var dependencyStatus = task.Result;
             if (dependencyStatus == DependencyStatus.Available)
             {
-                App = FirebaseApp.DefaultInstance;
-                Debug.Log("Firebase 초기화 성공");
-
-                TestConnection();
+                App = Firebase.FirebaseApp.DefaultInstance;
+                auth = FirebaseAuth.GetAuth(App); // 인증 객체 가져오기
+                Debug.Log("Firebase 준비 완료");
             }
             else
             {
-                Debug.LogError($"Firebase 초기화 실패: {dependencyStatus}");
+                Debug.LogError($"Firebase 인증 실패: {dependencyStatus}");
             }
         });
     }
 
-    void TestConnection() //익명으로 로그인하는 코드 (추후 삭제 및 firebase에서 익명 로그인 기능 끄기.)
+    public void SignUp()
     {
-        FirebaseAuth.DefaultInstance.SignInAnonymouslyAsync().ContinueWith(task =>
+        string email = LobbyManager.Instance.SignInIdInput.text + dummyDomain;
+        string password = LobbyManager.Instance.SignInPwInput.text;
+
+        auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
         {
-        
-        if (task.IsCompleted && !task.IsFaulted)
-            Debug.Log("서버 연결 확인: 익명 로그인 성공!");
-        
-        else
-            Debug.LogError("장비는 멀쩡한데 서버 응답이 없습니다. (인터넷 혹은 콘솔 설정 확인)");
+            if (task.IsCanceled || task.IsFaulted)
+            {
+                //회원가입 실패 에러 텍스트 잠깐 띄웠다가 종료 코루틴 사용 (텍스트 입력 받기)
+                Debug.Log($"회원가입 실패");
+                return;
+            }
+        });
+    }
+
+    public void Login()
+    {
+        string email = LobbyManager.Instance.LogInIdInput.text + dummyDomain;
+        string password = LobbyManager.Instance.LogInPwInput.text;
+
+        auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
+        {
+            if (task.IsCanceled || task.IsFaulted)
+            {
+                //로그인 실패 에러 텍스트 잠깐 띄웠다가 종료 코루틴 사용
+                Debug.Log($"로그인 실패");
+                return;
+            }
+            
+            FirebaseUser user = task.Result.User;
+            Debug.Log($"로그인 성공: {user.UserId}");
+            
+            // 여기서 세이브 데이터를 불러오는 코드 추가. 로그인 된 UI로 변경되게 하는 코드 추가.
         });
     }
 }
