@@ -57,6 +57,8 @@ public class FirebaseManager : MonoBehaviour
                 return;
             }
         });
+
+        LobbyManager.Instance.LobbySignInUI(false);
     }
 
     public void Login()
@@ -75,8 +77,9 @@ public class FirebaseManager : MonoBehaviour
             
             FirebaseUser user = task.Result.User;
             Debug.Log($"로그인 성공: {user.UserId}");
-            
-            // 여기서 세이브 데이터를 불러오는 코드 추가. 로그인 된 UI로 변경되게 하는 코드 추가.
         });
+
+        LobbyManager.Instance.LobbyLogInUI(false);
+        // 여기서 세이브 데이터를 불러오는 코드 추가. 로그인 된 UI로 변경되게 하는 코드 추가.
     }
 }

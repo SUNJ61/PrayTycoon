@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -8,6 +9,8 @@ public class LobbyManager : MonoBehaviour
     public static LobbyManager Instance;
 
     public GameObject OptionUI;
+    public GameObject LogInUI;
+    public GameObject SignInUI;
 
     public TMP_Dropdown resDropdown;
     public Slider BGMSlider;
@@ -146,12 +149,24 @@ public class LobbyManager : MonoBehaviour
         OptionUI.SetActive(isActive);
     }
 
-    public void CloseBTN()
+    public void LobbyLogInUI(bool isActive)
     {
-        if(transform.parent != null)
-        {
-            GameObject parentObj = transform.parent.gameObject;
+        LogInUI.SetActive(isActive);
+        Debug.Log("입력됨 : " + isActive);
+    }
 
+    public void LobbySignInUI(bool isActive)
+    {
+        SignInUI.SetActive(isActive);
+        Debug.Log("입력됨 : " + isActive);
+    }
+
+    public void CloseBTN(GameObject BTN)
+    {
+        GameObject parentObj = BTN.transform.parent.gameObject;
+
+        if(parentObj != null)
+        {
             parentObj.SetActive(false);
         }
     }
