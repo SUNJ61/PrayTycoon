@@ -80,6 +80,22 @@ public class FirebaseManager : MonoBehaviour
         });
 
         LobbyManager.Instance.LobbyLogInUI(false);
+        LobbyManager.Instance.SetLogInUI();
         // 여기서 세이브 데이터를 불러오는 코드 추가. 로그인 된 UI로 변경되게 하는 코드 추가.
+    }
+
+    public void LogOut()
+    {
+        if (auth.CurrentUser != null)
+        {
+            auth.SignOut();
+            LobbyManager.Instance.SetLogOutUI();
+        
+            Debug.Log("로그아웃 성공");
+        }
+        else
+        {
+            Debug.LogWarning("로그아웃 상태: 현재 로그인된 유저가 없습니다.");
+        }
     }
 }

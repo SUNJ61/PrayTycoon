@@ -11,6 +11,9 @@ public class LobbyManager : MonoBehaviour
     public GameObject OptionUI;
     public GameObject LogInUI;
     public GameObject SignInUI;
+    public GameObject LogInBTN;
+    public GameObject SignInBTN;
+    public GameObject LogOutBTN;
 
     public TMP_Dropdown resDropdown;
     public Slider BGMSlider;
@@ -151,14 +154,32 @@ public class LobbyManager : MonoBehaviour
 
     public void LobbyLogInUI(bool isActive)
     {
+        LogInIdInput.text = "Id...";
+        LogInPwInput.text = "Pw...";
         LogInUI.SetActive(isActive);
         Debug.Log("입력됨 : " + isActive);
     }
 
     public void LobbySignInUI(bool isActive)
     {
+        SignInIdInput.text = "Id...";
+        SignInPwInput.text = "Pw...";
         SignInUI.SetActive(isActive);
         Debug.Log("입력됨 : " + isActive);
+    }
+
+    public void SetLogInUI() //로그인 했을 시
+    {
+        LogInBTN.SetActive(false);
+        SignInBTN.SetActive(false);
+        LogOutBTN.SetActive(true);
+    }
+
+    public void SetLogOutUI() //로그아웃 했을 시
+    {
+        LogInBTN.SetActive(true);
+        SignInBTN.SetActive(true);
+        LogOutBTN.SetActive(false);
     }
 
     public void CloseBTN(GameObject BTN)
@@ -176,7 +197,7 @@ public class LobbyManager : MonoBehaviour
     1. 옵션세팅을 로드 매니저로 전달하여 메인 게임 실행시 옵션이 유지되도록 하기. (완)
     2. 로드 매니저로 메인 게임 화면으로 넘어가기. -> 씬로드 매니저를 로비씬으로 바꾸기 (완)
     3. firebaase서버 연동하기. (완)
-    4. 로그인 시스템 만들기.
+    4. 로그인 시스템 만들기. (완)
     5. 유저 id 기반으로 설정 데이터를 저장하고 로그인시 불러오는 기능 만들기.
     6. 유저 id 기반으로 게임 세이브, 로드 기능 만들기.
     */

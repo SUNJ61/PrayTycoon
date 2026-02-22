@@ -12,6 +12,7 @@ public class SaveManager : Singleton<SaveManager>
     public int ResIndex = 0;
 
     public bool isFullScreen = true;
+    public bool LogInState = false;
 
     public void SaveMap() //맵 오브젝트 데이터 저장, 씬 넘어가기 전에 호출.
     {
@@ -37,5 +38,10 @@ public class SaveManager : Singleton<SaveManager>
                     obj.LoadFromData(data); //불러와진 씬 오브젝트에 딕셔너리에 저장된 데이터 덮어쓰기.
             }
         }
+    }
+
+    public void SetLobbyUI() //로그인 유무 확인후 UI 업데이트
+    {
+        
     }
 }
