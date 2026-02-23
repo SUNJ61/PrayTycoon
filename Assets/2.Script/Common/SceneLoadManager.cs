@@ -38,7 +38,9 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
             }
         }
 
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(sceneName); //씬로드
+
+        SaveManager.Instance.SetLobbyUI(); //로비 UI 변경
     }
 
     public void NextSceneLoad(string sceneName, Vector3 spawnPoint) // 인게임 씬 전환 함수.
@@ -48,8 +50,6 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
         SceneManager.sceneLoaded += PlayerLoad;
         SceneManager.sceneLoaded += MapLoad;
         SceneManager.sceneLoaded += DataClear;
-
-        SceneManager.LoadScene(sceneName);
     }
 
     private void OptionDataLoad(Scene scene, LoadSceneMode mode) // 씬 이동 시 설정 데이터 이동 (로비 -> 메인 / 메인 -> 로비) + 로그인시 데이터 적용
@@ -71,6 +71,8 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
             LobbyManager.Instance.BGMSlider.value = SaveManager.Instance.VolumeBGM;
             LobbyManager.Instance.SFXSlider.value = SaveManager.Instance.VolumeSFX;
             LobbyManager.Instance.FullScreenToggle.isOn = SaveManager.Instance.isFullScreen;
+
+            SaveManager.Instance.SetLobbyUI(); //로비 UI 변경
         }
     }
 

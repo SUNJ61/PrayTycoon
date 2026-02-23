@@ -499,19 +499,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 160311256}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1015723556}
-        m_TargetAssemblyTypeName: FirebaseManager, Assembly-CSharp
-        m_MethodName: LogOut
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &160311256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -633,19 +621,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 184854338}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1015723556}
-        m_TargetAssemblyTypeName: FirebaseManager, Assembly-CSharp
-        m_MethodName: Login
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &184854338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -910,6 +886,7 @@ MonoBehaviour:
   VolumeSFX: 10
   ResIndex: 0
   isFullScreen: 1
+  LogInState: 0
 --- !u!4 &216715623
 Transform:
   m_ObjectHideFlags: 0
@@ -4155,9 +4132,11 @@ MonoBehaviour:
   OptionUI: {fileID: 1841428874}
   LogInUI: {fileID: 1500724226}
   SignInUI: {fileID: 515943675}
-  LogInBTN: {fileID: 1282361897}
-  SignInBTN: {fileID: 946567139}
+  LogInMenuBTN: {fileID: 1282361897}
+  SignInMenuBTN: {fileID: 946567139}
   LogOutBTN: {fileID: 160311253}
+  LogInBTN: {fileID: 184854337}
+  SignInBTN: {fileID: 1320990654}
   resDropdown: {fileID: 1867177706}
   BGMSlider: {fileID: 390931058}
   SFXSlider: {fileID: 2044960447}
@@ -5474,7 +5453,7 @@ GameObject:
   - component: {fileID: 946567142}
   - component: {fileID: 946567141}
   m_Layer: 5
-  m_Name: SignInBTN
+  m_Name: SignInMenuBTN
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7095,7 +7074,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1154664926}
   - component: {fileID: 1154664928}
-  - component: {fileID: 1154664927}
   m_Layer: 5
   m_Name: LoginUI
   m_TagString: Untagged
@@ -7125,36 +7103,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1154664927
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1154664925}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &1154664928
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7902,7 +7850,7 @@ GameObject:
   - component: {fileID: 1282361900}
   - component: {fileID: 1282361899}
   m_Layer: 5
-  m_Name: LogInBTN
+  m_Name: LogInMenuBTN
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8375,19 +8323,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1320990655}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1015723556}
-        m_TargetAssemblyTypeName: FirebaseManager, Assembly-CSharp
-        m_MethodName: SignUp
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1320990655
 MonoBehaviour:
   m_ObjectHideFlags: 0

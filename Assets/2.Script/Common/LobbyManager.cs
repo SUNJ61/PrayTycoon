@@ -11,9 +11,12 @@ public class LobbyManager : MonoBehaviour
     public GameObject OptionUI;
     public GameObject LogInUI;
     public GameObject SignInUI;
-    public GameObject LogInBTN;
-    public GameObject SignInBTN;
+    public GameObject LogInMenuBTN;
+    public GameObject SignInMenuBTN;
     public GameObject LogOutBTN;
+
+    public Button LogInBTN;
+    public Button SignInBTN;
 
     public TMP_Dropdown resDropdown;
     public Slider BGMSlider;
@@ -40,6 +43,7 @@ public class LobbyManager : MonoBehaviour
 
     void Start()
     {
+        LobbyBTNSet();
         InitResolution();
         LobbyOptionSet();
 
@@ -47,6 +51,21 @@ public class LobbyManager : MonoBehaviour
         SFXSlider.onValueChanged.AddListener(SFXsetting);
     }
 
+    private void LobbyBTNSet()
+    {
+        Button LogOutbtn = LogOutBTN.GetComponent<Button>();
+
+        if (FirebaseManager.Instance != null)
+        {
+            LogInBTN.onClick.RemoveAllListeners();
+            SignInBTN.onClick.RemoveAllListeners();
+            LogOutbtn.onClick.RemoveAllListeners();
+
+            LogInBTN.onClick.AddListener(FirebaseManager.Instance.Login);
+            SignInBTN.onClick.AddListener(FirebaseManager.Instance.SignIn);
+            LogOutbtn.onClick.AddListener(FirebaseManager.Instance.LogOut);
+        }
+    }
     private void InitResolution()
     {
         Resolution[] allResolutions = Screen.resolutions;
@@ -168,18 +187,22 @@ public class LobbyManager : MonoBehaviour
         Debug.Log("입력됨 : " + isActive);
     }
 
-    public void SetLogInUI() //로그인 했을 시
+    public void SetLogInUI() //로그인 했을 시 (씬로드 이후 로딩하면 하이라키에서 연결한 오브젝트를 찾지 못하는 문제 발생.)
     {
-        LogInBTN.SetActive(false);
-        SignInBTN.SetActive(false);
+        LogInMenuBTN.SetActive(false);
+        SignInMenuBTN.SetActive(false);
         LogOutBTN.SetActive(true);
+
+        SaveManager.Instance.LogInState = true;
     }
 
     public void SetLogOutUI() //로그아웃 했을 시
     {
-        LogInBTN.SetActive(true);
-        SignInBTN.SetActive(true);
+        LogInMenuBTN.SetActive(true);
+        SignInMenuBTN.SetActive(true);
         LogOutBTN.SetActive(false);
+
+        SaveManager.Instance.LogInState = false;
     }
 
     public void CloseBTN(GameObject BTN)

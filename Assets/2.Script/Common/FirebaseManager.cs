@@ -43,7 +43,7 @@ public class FirebaseManager : MonoBehaviour
         });
     }
 
-    public void SignUp()
+    public void SignIn()
     {
         string email = LobbyManager.Instance.SignInIdInput.text + dummyDomain;
         string password = LobbyManager.Instance.SignInPwInput.text;

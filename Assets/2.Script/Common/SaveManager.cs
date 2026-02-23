@@ -40,8 +40,11 @@ public class SaveManager : Singleton<SaveManager>
         }
     }
 
-    public void SetLobbyUI() //로그인 유무 확인후 UI 업데이트
+    public void SetLobbyUI() //로그인 유무 확인후 UI 업데이트 (로비씬 호출 시 마다 작동해야함)
     {
-        
+        if(LogInState == true)
+            LobbyManager.Instance.SetLogInUI();
+        else
+            LobbyManager.Instance.SetLogOutUI();
     }
 }
