@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -11,9 +12,9 @@ public class LobbyManager : MonoBehaviour
     public GameObject OptionUI;
     public GameObject LogInUI;
     public GameObject SignInUI;
-    public GameObject LogInMenuBTN;
-    public GameObject SignInMenuBTN;
-    public GameObject LogOutBTN;
+    public GameObject LogInMenuBTN; //직접 찾기
+    public GameObject SignInMenuBTN; //직접 찾기
+    public GameObject LogOutBTN; //직접 찾기
 
     public Button LogInBTN;
     public Button SignInBTN;
@@ -33,6 +34,8 @@ public class LobbyManager : MonoBehaviour
 
     private readonly List<int> standardWidths = new List<int> { 1280, 1600, 1920, 2560, 3840 };
     private List<Resolution> filteredResolutions = new List<Resolution>();
+
+    private Coroutine ErrorCorutine;
     void Awake()
     {
         if(Instance == null)
@@ -43,6 +46,9 @@ public class LobbyManager : MonoBehaviour
 
     void Start()
     {
+        if(SaveManager.Instance != null)
+            SaveManager.Instance.SetLobbyUI(); //로비 UI 변경
+        
         LobbyBTNSet();
         InitResolution();
         LobbyOptionSet();
@@ -187,7 +193,7 @@ public class LobbyManager : MonoBehaviour
         Debug.Log("입력됨 : " + isActive);
     }
 
-    public void SetLogInUI() //로그인 했을 시 (씬로드 이후 로딩하면 하이라키에서 연결한 오브젝트를 찾지 못하는 문제 발생.)
+    public void SetLogInUI() //로그인 했을 시
     {
         LogInMenuBTN.SetActive(false);
         SignInMenuBTN.SetActive(false);
@@ -213,6 +219,23 @@ public class LobbyManager : MonoBehaviour
         {
             parentObj.SetActive(false);
         }
+    }
+
+    public void ShowErrorText(GameObject ErrorObj,float delay = 2.0f)
+    {
+        if (ErrorCorutine != null)
+            StopCoroutine(ErrorCorutine);
+
+        ErrorCorutine = StartCoroutine(ShowError(ErrorObj, delay));
+    }
+
+    private IEnumerator ShowError(GameObject ErrorObj, float delay)
+    {
+        ErrorObj.SetActive(true);
+
+        yield return new WaitForSeconds(delay);
+
+        ErrorObj.SetActive(false);
     }
 
     /*

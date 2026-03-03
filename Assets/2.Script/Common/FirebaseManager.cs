@@ -48,17 +48,23 @@ public class FirebaseManager : MonoBehaviour
         string email = LobbyManager.Instance.SignInIdInput.text + dummyDomain;
         string password = LobbyManager.Instance.SignInPwInput.text;
 
-        auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
+        if (password.Length < 6 || email.Length < 6) //아이디 비밀번호 6자 이하 회원가입 불가.
+        {
+            LobbyManager.Instance.ShowErrorText(LobbyManager.Instance.SignInErrorText.gameObject);
+            return;
+        }
+
+        auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread(task =>
         {
             if (task.IsCanceled || task.IsFaulted)
             {
-                //회원가입 실패 에러 텍스트 잠깐 띄웠다가 종료 코루틴 사용 (텍스트 입력 받기)
+                LobbyManager.Instance.ShowErrorText(LobbyManager.Instance.SignInErrorText.gameObject);
                 Debug.Log($"회원가입 실패");
                 return;
             }
-        });
 
-        LobbyManager.Instance.LobbySignInUI(false);
+            LobbyManager.Instance.LobbySignInUI(false);
+        });
     }
 
     public void Login()
@@ -66,22 +72,23 @@ public class FirebaseManager : MonoBehaviour
         string email = LobbyManager.Instance.LogInIdInput.text + dummyDomain;
         string password = LobbyManager.Instance.LogInPwInput.text;
 
-        auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
+        auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread(task =>
         {
             if (task.IsCanceled || task.IsFaulted)
             {
-                //로그인 실패 에러 텍스트 잠깐 띄웠다가 종료 코루틴 사용
+                LobbyManager.Instance.ShowErrorText(LobbyManager.Instance.LogInErrorText.gameObject);
                 Debug.Log($"로그인 실패");
                 return;
             }
             
             FirebaseUser user = task.Result.User;
             Debug.Log($"로그인 성공: {user.UserId}");
-        });
 
-        LobbyManager.Instance.LobbyLogInUI(false);
-        LobbyManager.Instance.SetLogInUI();
-        // 여기서 세이브 데이터를 불러오는 코드 추가. 로그인 된 UI로 변경되게 하는 코드 추가.
+            LobbyManager.Instance.LobbyLogInUI(false); //유니티 요소인 Setactive함수는 메인스레드에서만 조작가능
+            LobbyManager.Instance.SetLogInUI();
+
+            // 여기서 세이브 데이터를 불러오는 코드 추가. 로그인 된 UI로 변경되게 하는 코드 추가.
+        });
     }
 
     public void LogOut()

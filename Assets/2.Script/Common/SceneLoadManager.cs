@@ -39,8 +39,6 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
         }
 
         SceneManager.LoadScene(sceneName); //씬로드
-
-        SaveManager.Instance.SetLobbyUI(); //로비 UI 변경
     }
 
     public void NextSceneLoad(string sceneName, Vector3 spawnPoint) // 인게임 씬 전환 함수.
