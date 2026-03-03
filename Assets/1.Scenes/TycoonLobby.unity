@@ -882,10 +882,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c3ae1e2cb1149c41a8ee9f876aed735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VolumeBGM: 10
-  VolumeSFX: 10
-  ResIndex: 0
-  isFullScreen: 1
+  currentSettings:
+    Volume_BGM: 10
+    Volume_SFX: 10
+    ResolutionIndex: 0
+    isFullScreen: 1
   LogInState: 0
 --- !u!4 &216715623
 Transform:
@@ -4310,8 +4311,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 153377135}
-  - {fileID: 1841428875}
   - {fileID: 1154664926}
+  - {fileID: 1841428875}
   - {fileID: 286143966}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

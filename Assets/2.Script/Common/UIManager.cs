@@ -57,6 +57,9 @@ public class UIManager : Singleton<UIManager>
         GuideCondition = GuideUI_List[1].GetComponent<TextMeshProUGUI>();
         failCondition = FailUI_List[1].GetComponent<TextMeshProUGUI>();
 
+        BGMSlider.onValueChanged.AddListener(BGMsetting);
+        SFXSlider.onValueChanged.AddListener(SFXsetting);
+
         LoadTextData();
         InitResolution();
     }
@@ -139,9 +142,29 @@ public class UIManager : Singleton<UIManager>
         Screen.SetResolution(selectedRes.width, selectedRes.height, Screen.fullScreen);
     
         // 변경된 인덱스를 SaveManager 등에 저장
-        SaveManager.Instance.ResIndex = index;
+        SaveManager.Instance.currentSettings.ResolutionIndex = index;
         Debug.Log($"해상도 변경: {selectedRes.width}x{selectedRes.height}");
     }
+
+    public void SetFullScreen(bool isFull)
+    {
+        Screen.fullScreen = isFull;
+
+        SaveManager.Instance.currentSettings.isFullScreen = isFull;
+
+        Debug.Log($"전체 화면: {isFull}");
+    }
+
+    public void BGMsetting(float value)
+    {
+        SaveManager.Instance.currentSettings.Volume_BGM = value;
+    }
+
+    public void SFXsetting(float value)
+    {
+        SaveManager.Instance.currentSettings.Volume_SFX = value;
+    }
+
 
     public void GuideUIControl(bool active) //퀘스트 UI 활성화, 비활성화 함수.
     {
@@ -170,6 +193,15 @@ public class UIManager : Singleton<UIManager>
 
     public void OptionUIControl()
     {
+        if(OptionUI.activeSelf == true && SaveManager.Instance.LogInState == true)
+        {
+            string uid = Firebase.Auth.FirebaseAuth.DefaultInstance.CurrentUser.UserId;
+            SaveManager.Instance.SaveSettingsToServer(uid);
+            Debug.Log("설정 저장됨");
+        }
+
+        Debug.Log("설정 저장됨");
+
         MenuUI.SetActive(false);
         OptionUI.SetActive(!OptionUI.activeSelf);
     }
@@ -186,7 +218,6 @@ public class UIManager : Singleton<UIManager>
         FailUI.SetActive(false);
         InventoryUI.SetActive(false);
         GuildUI.SetActive(false);
-        OptionUI.SetActive(false);
         SaveUI.SetActive(false);
     }
 

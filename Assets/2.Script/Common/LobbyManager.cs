@@ -12,9 +12,9 @@ public class LobbyManager : MonoBehaviour
     public GameObject OptionUI;
     public GameObject LogInUI;
     public GameObject SignInUI;
-    public GameObject LogInMenuBTN; //직접 찾기
-    public GameObject SignInMenuBTN; //직접 찾기
-    public GameObject LogOutBTN; //직접 찾기
+    public GameObject LogInMenuBTN; 
+    public GameObject SignInMenuBTN;
+    public GameObject LogOutBTN;
 
     public Button LogInBTN;
     public Button SignInBTN;
@@ -128,16 +128,16 @@ public class LobbyManager : MonoBehaviour
         Screen.SetResolution(selectedRes.width, selectedRes.height, Screen.fullScreen);
     
         // 변경된 인덱스를 SaveManager 등에 저장
-        SaveManager.Instance.ResIndex = index;
+        SaveManager.Instance.currentSettings.ResolutionIndex = index;
         Debug.Log($"해상도 변경: {selectedRes.width}x{selectedRes.height}");
     }
 
-    private void LobbyOptionSet() //기본 설정으로 초기화
+    public void LobbyOptionSet() //기본 설정으로 초기화
     {
-        BGMSlider.value = SaveManager.Instance.VolumeBGM;
-        SFXSlider.value = SaveManager.Instance.VolumeSFX;
-        resDropdown.value = SaveManager.Instance.ResIndex;
-        FullScreenToggle.isOn = SaveManager.Instance.isFullScreen;
+        BGMSlider.value = SaveManager.Instance.currentSettings.Volume_BGM;
+        SFXSlider.value = SaveManager.Instance.currentSettings.Volume_SFX;
+        resDropdown.value = SaveManager.Instance.currentSettings.ResolutionIndex;
+        FullScreenToggle.isOn = SaveManager.Instance.currentSettings.isFullScreen;
     }
 
     public void SetResolution(int index)
@@ -148,7 +148,8 @@ public class LobbyManager : MonoBehaviour
         
         Screen.SetResolution(selectedRes.width, selectedRes.height, Screen.fullScreen);
 
-        SaveManager.Instance.ResIndex = index;
+        SaveManager.Instance.currentSettings.ResolutionIndex = index;
+        
         
         Debug.Log($"선택된 해상도: {selectedRes.width}x{selectedRes.height}");
     }
@@ -157,23 +158,30 @@ public class LobbyManager : MonoBehaviour
     {
         Screen.fullScreen = isFull;
 
-        SaveManager.Instance.isFullScreen = isFull;
+        SaveManager.Instance.currentSettings.isFullScreen = isFull;
 
         Debug.Log($"전체 화면: {isFull}");
     }
 
     public void BGMsetting(float value)
     {
-        SaveManager.Instance.VolumeBGM = value;
+        SaveManager.Instance.currentSettings.Volume_BGM = value;
     }
 
     public void SFXsetting(float value)
     {
-        SaveManager.Instance.VolumeSFX = value;
+        SaveManager.Instance.currentSettings.Volume_SFX = value;
     }
 
     public void LobbyOptionUI(bool isActive)
     {
+        if(isActive == false && SaveManager.Instance.LogInState == true)
+        {
+            string uid = Firebase.Auth.FirebaseAuth.DefaultInstance.CurrentUser.UserId;
+            SaveManager.Instance.SaveSettingsToServer(uid);
+            Debug.Log("설정 저장됨");
+        }
+
         OptionUI.SetActive(isActive);
     }
 

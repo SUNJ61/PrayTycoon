@@ -87,6 +87,10 @@ public class FirebaseManager : MonoBehaviour
             LobbyManager.Instance.LobbyLogInUI(false); //유니티 요소인 Setactive함수는 메인스레드에서만 조작가능
             LobbyManager.Instance.SetLogInUI();
 
+            string uid = task.Result.User.UserId;
+        
+            //uid기준 데이터 불러오기 요청
+            SaveManager.Instance.LoadSettingsFromServer(uid);
             // 여기서 세이브 데이터를 불러오는 코드 추가. 로그인 된 UI로 변경되게 하는 코드 추가.
         });
     }

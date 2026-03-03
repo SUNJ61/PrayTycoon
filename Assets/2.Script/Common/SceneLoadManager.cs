@@ -56,19 +56,19 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
 
         if(Object.FindAnyObjectByType<UIManager>() != null) // 메인 게임 씬 UI매니저
         {
-            UIManager.Instance.resDropdown.value = SaveManager.Instance.ResIndex;
-            UIManager.Instance.BGMSlider.value = SaveManager.Instance.VolumeBGM;
-            UIManager.Instance.SFXSlider.value = SaveManager.Instance.VolumeSFX;
-            UIManager.Instance.FullScreenToggle.isOn = SaveManager.Instance.isFullScreen;
+            UIManager.Instance.resDropdown.value = SaveManager.Instance.currentSettings.ResolutionIndex;
+            UIManager.Instance.BGMSlider.value = SaveManager.Instance.currentSettings.Volume_BGM;
+            UIManager.Instance.SFXSlider.value = SaveManager.Instance.currentSettings.Volume_SFX;
+            UIManager.Instance.FullScreenToggle.isOn = SaveManager.Instance.currentSettings.isFullScreen;
 
             ButtonManager.Instance.ExitBTN.onClick.AddListener(() => ExitGame("TycoonLobby")); //종료 버튼 연결
         }
         else if(Object.FindAnyObjectByType<LobbyManager>() != null) // 로비 씬 UI 매니저
         {
-            LobbyManager.Instance.resDropdown.value = SaveManager.Instance.ResIndex;
-            LobbyManager.Instance.BGMSlider.value = SaveManager.Instance.VolumeBGM;
-            LobbyManager.Instance.SFXSlider.value = SaveManager.Instance.VolumeSFX;
-            LobbyManager.Instance.FullScreenToggle.isOn = SaveManager.Instance.isFullScreen;
+            LobbyManager.Instance.resDropdown.value = SaveManager.Instance.currentSettings.ResolutionIndex;
+            LobbyManager.Instance.BGMSlider.value = SaveManager.Instance.currentSettings.Volume_BGM;
+            LobbyManager.Instance.SFXSlider.value = SaveManager.Instance.currentSettings.Volume_SFX;
+            LobbyManager.Instance.FullScreenToggle.isOn = SaveManager.Instance.currentSettings.isFullScreen;
 
             SaveManager.Instance.SetLobbyUI(); //로비 UI 변경
         }
