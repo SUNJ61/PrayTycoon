@@ -17,7 +17,6 @@ public class SaveManager : Singleton<SaveManager>
     protected override void OnAwake()
     {
         database = FirebaseFirestore.DefaultInstance;
-        Debug.Log("DB 연결 성공");
     }
 
     public void SaveMap() //맵 오브젝트 데이터 저장, 씬 넘어가기 전에 호출.
@@ -58,7 +57,6 @@ public class SaveManager : Singleton<SaveManager>
     {
         if(string.IsNullOrEmpty(uid))
         {
-            Debug.Log("로그인이 되어있지 않거나 UID가 없습니다.");
             return;
         }
 
@@ -83,11 +81,10 @@ public class SaveManager : Singleton<SaveManager>
                 // 데이터를 클래스 형태로 역직렬화
                 currentSettings = snapshot.ConvertTo<UserSetting>();
                 ApplyLoadedSettings(); // 불러온 설정 적용
-                Debug.Log("설정 불러오기 및 적용 완료!");
             }
             else
             {
-                Debug.Log("저장된 데이터가 없어 기본값으로 시작합니다.");
+                
             }
         });
     }

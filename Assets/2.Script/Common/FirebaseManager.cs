@@ -34,11 +34,10 @@ public class FirebaseManager : MonoBehaviour
             {
                 App = Firebase.FirebaseApp.DefaultInstance;
                 auth = FirebaseAuth.GetAuth(App); // 인증 객체 가져오기
-                Debug.Log("Firebase 준비 완료");
             }
             else
             {
-                Debug.LogError($"Firebase 인증 실패: {dependencyStatus}");
+                
             }
         });
     }
@@ -59,7 +58,6 @@ public class FirebaseManager : MonoBehaviour
             if (task.IsCanceled || task.IsFaulted)
             {
                 LobbyManager.Instance.ShowErrorText(LobbyManager.Instance.SignInErrorText.gameObject);
-                Debug.Log($"회원가입 실패");
                 return;
             }
 
@@ -77,12 +75,10 @@ public class FirebaseManager : MonoBehaviour
             if (task.IsCanceled || task.IsFaulted)
             {
                 LobbyManager.Instance.ShowErrorText(LobbyManager.Instance.LogInErrorText.gameObject);
-                Debug.Log($"로그인 실패");
                 return;
             }
             
             FirebaseUser user = task.Result.User;
-            Debug.Log($"로그인 성공: {user.UserId}");
 
             LobbyManager.Instance.LobbyLogInUI(false); //유니티 요소인 Setactive함수는 메인스레드에서만 조작가능
             LobbyManager.Instance.SetLogInUI();
@@ -102,11 +98,10 @@ public class FirebaseManager : MonoBehaviour
             auth.SignOut();
             LobbyManager.Instance.SetLogOutUI();
         
-            Debug.Log("로그아웃 성공");
         }
         else
         {
-            Debug.LogWarning("로그아웃 상태: 현재 로그인된 유저가 없습니다.");
+            
         }
     }
 }

@@ -129,7 +129,6 @@ public class LobbyManager : MonoBehaviour
     
         // 변경된 인덱스를 SaveManager 등에 저장
         SaveManager.Instance.currentSettings.ResolutionIndex = index;
-        Debug.Log($"해상도 변경: {selectedRes.width}x{selectedRes.height}");
     }
 
     public void LobbyOptionSet() //기본 설정으로 초기화
@@ -149,9 +148,6 @@ public class LobbyManager : MonoBehaviour
         Screen.SetResolution(selectedRes.width, selectedRes.height, Screen.fullScreen);
 
         SaveManager.Instance.currentSettings.ResolutionIndex = index;
-        
-        
-        Debug.Log($"선택된 해상도: {selectedRes.width}x{selectedRes.height}");
     }
 
     public void SetFullScreen(bool isFull)
@@ -159,8 +155,6 @@ public class LobbyManager : MonoBehaviour
         Screen.fullScreen = isFull;
 
         SaveManager.Instance.currentSettings.isFullScreen = isFull;
-
-        Debug.Log($"전체 화면: {isFull}");
     }
 
     public void BGMsetting(float value)
@@ -250,7 +244,7 @@ public class LobbyManager : MonoBehaviour
     2. 로드 매니저로 메인 게임 화면으로 넘어가기. -> 씬로드 매니저를 로비씬으로 바꾸기 (완)
     3. firebaase서버 연동하기. (완)
     4. 로그인 시스템 만들기. (완)
-    5. 유저 id 기반으로 설정 데이터를 저장하고 로그인시 불러오는 기능 만들기.
+    5. 유저 id 기반으로 설정 데이터를 저장하고 로그인시 불러오는 기능 만들기. (완)
     6. 유저 id 기반으로 게임 세이브, 로드 기능 만들기.
     */
 }

@@ -197,7 +197,6 @@ public class UIManager : Singleton<UIManager>
         {
             string uid = Firebase.Auth.FirebaseAuth.DefaultInstance.CurrentUser.UserId;
             SaveManager.Instance.SaveSettingsToServer(uid);
-            Debug.Log("설정 저장됨");
         }
 
         MenuUI.SetActive(false);
