@@ -200,8 +200,6 @@ public class UIManager : Singleton<UIManager>
             Debug.Log("설정 저장됨");
         }
 
-        Debug.Log("설정 저장됨");
-
         MenuUI.SetActive(false);
         OptionUI.SetActive(!OptionUI.activeSelf);
     }

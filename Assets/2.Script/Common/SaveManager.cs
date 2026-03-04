@@ -14,6 +14,12 @@ public class SaveManager : Singleton<SaveManager>
 
     public bool LogInState = false;
 
+    protected override void OnAwake()
+    {
+        database = FirebaseFirestore.DefaultInstance;
+        Debug.Log("DB 연결 성공");
+    }
+
     public void SaveMap() //맵 오브젝트 데이터 저장, 씬 넘어가기 전에 호출.
     {
         string sceneName = SceneManager.GetActiveScene().name;
@@ -50,6 +56,12 @@ public class SaveManager : Singleton<SaveManager>
 
     public void SaveSettingsToServer(string uid)
     {
+        if(string.IsNullOrEmpty(uid))
+        {
+            Debug.Log("로그인이 되어있지 않거나 UID가 없습니다.");
+            return;
+        }
+
         // "users" 컬렉션 -> "유저UID" 문서 -> "settings" 필드에 저장
         DocumentReference docRef = database.Collection("users").Document(uid); // 해당 코드에서 null이 뜬다. 오류 해결 필요.
         

@@ -190,7 +190,6 @@ public class LobbyManager : MonoBehaviour
         LogInIdInput.text = "Id...";
         LogInPwInput.text = "Pw...";
         LogInUI.SetActive(isActive);
-        Debug.Log("입력됨 : " + isActive);
     }
 
     public void LobbySignInUI(bool isActive)
@@ -198,7 +197,6 @@ public class LobbyManager : MonoBehaviour
         SignInIdInput.text = "Id...";
         SignInPwInput.text = "Pw...";
         SignInUI.SetActive(isActive);
-        Debug.Log("입력됨 : " + isActive);
     }
 
     public void SetLogInUI() //로그인 했을 시

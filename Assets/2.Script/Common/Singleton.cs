@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEngine;
 
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
@@ -31,6 +32,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         }
 
         instance = this as T; //기존 매니저가 없다면, T 타입에 해당하는 싱글톤 생성.
+        OnAwake();
 
         DontDestroyOnLoad(gameObject);
     }
@@ -40,5 +42,10 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         if (instance == this)
             instance = null;
+    }
+
+    protected virtual void OnAwake()
+    {
+        //싱글톤 생성시 추가로 필요한 
     }
 }
