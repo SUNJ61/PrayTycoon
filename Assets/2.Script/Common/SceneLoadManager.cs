@@ -48,6 +48,8 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
         SceneManager.sceneLoaded += PlayerLoad;
         SceneManager.sceneLoaded += MapLoad;
         SceneManager.sceneLoaded += DataClear;
+
+        SceneManager.LoadScene(sceneName); //씬로드
     }
 
     private void OptionDataLoad(Scene scene, LoadSceneMode mode) // 씬 이동 시 설정 데이터 이동 (로비 -> 메인 / 메인 -> 로비) + 로그인시 데이터 적용

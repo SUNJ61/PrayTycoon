@@ -102,7 +102,7 @@ public class SaveManager : Singleton<SaveManager>
 
 
 
-    public void SaveGameData(int slotIndex)
+    public void SaveGameData(int SlotIndex)
     {
         var auth = FirebaseAuth.DefaultInstance;
         if (auth.CurrentUser == null) // 로그인 하지 않았으면 저장 x 추후 문구 UI에 문구 추가 필요.
@@ -113,19 +113,19 @@ public class SaveManager : Singleton<SaveManager>
 
         string uid = auth.CurrentUser.UserId;
 
-        currentGameData.SaveDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm"); //저장 시간 업데이트.
+        DataInput(SlotIndex);
 
-        DocumentReference docRef = database.Collection("users").Document(uid).Collection("SaveSlots").Document($"Slot{slotIndex}"); //경로 설정
+        DocumentReference docRef = database.Collection("users").Document(uid).Collection("SaveSlots").Document($"Slot{SlotIndex}"); //경로 설정
 
         docRef.SetAsync(currentGameData).ContinueWithOnMainThread(task =>
         {
             if (task.IsCompleted)
             {
-                UIManager.Instance.SaveSlotText[slotIndex].text = $"Pray : {SaveManager.Instance.currentGameData.pray}\nGold : {SaveManager.Instance.currentGameData.gold}\n[{SaveManager.Instance.currentGameData.SaveDate}]";
+                UIManager.Instance.SaveSlotText[SlotIndex].text = $"Pray : {SaveManager.Instance.currentGameData.pray}\nGold : {SaveManager.Instance.currentGameData.gold}\n[{SaveManager.Instance.currentGameData.SaveDate}]";
             }
             else if (task.IsFaulted)
             {
-                Debug.LogError($"{slotIndex}번 슬롯 저장 실패: {task.Exception}");
+                Debug.LogError($"{SlotIndex}번 슬롯 저장 실패: {task.Exception}");
             }
         });
     }
@@ -133,5 +133,31 @@ public class SaveManager : Singleton<SaveManager>
     public void LoadGameData()
     {
         
+    }
+
+    private void DataInput(int SlotIndex) // 저장할 데이터를 최신화
+    {
+        currentGameData.SaveDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm"); //저장 시간 업데이트.
+
+        //슬롯정보 저장
+        currentGameData.SlotIndex = SlotIndex;
+
+        //재화 저장
+        currentGameData.pray = CreditManager.Instance.credit["Pray"];
+        currentGameData.stone = CreditManager.Instance.credit["Stone"];
+        currentGameData.gold = CreditManager.Instance.credit["Gold"];
+
+        //소환석 저장
+        currentGameData.MineWorker_N = Inventory.Instance.AmountItem(14);
+        currentGameData.MineWorker_R = Inventory.Instance.AmountItem(24);
+        currentGameData.MineWorker_U = Inventory.Instance.AmountItem(34);
+
+        currentGameData.Knight_N = Inventory.Instance.AmountItem(15);
+        currentGameData.Knight_R = Inventory.Instance.AmountItem(25);
+        currentGameData.Knight_U = Inventory.Instance.AmountItem(35);
+
+        currentGameData.Wizard_N = Inventory.Instance.AmountItem(16);
+        currentGameData.Wizard_N = Inventory.Instance.AmountItem(26);
+        currentGameData.Wizard_N = Inventory.Instance.AmountItem(36);
     }
 }

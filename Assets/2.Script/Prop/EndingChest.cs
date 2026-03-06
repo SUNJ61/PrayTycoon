@@ -74,6 +74,7 @@ public class EndingChest : MonoBehaviour, IQuest
         SaveObject EndingChest_C_Data = EndingChest_C.GetComponent<SaveObject>();
         EndingChest_C.SetActive(false);
         EndingChest_C_Data.isRepaired = false;
+        SaveManager.Instance.currentGameData.EndingChest = false;
 
         GameObject EndingChest_O = gameObject.transform.GetChild(1).gameObject;
         SaveObject EndingChest_O_Data = EndingChest_O.GetComponent<SaveObject>();

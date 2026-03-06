@@ -2665,7 +2665,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 134125152}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 897148802}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: SetSaveData
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &134125152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2983,7 +2995,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 151854593}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 897148802}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: SetSaveData
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &151854593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21947,7 +21971,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 794870221}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 897148802}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: SetSaveData
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &794870221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26323,7 +26359,10 @@ MonoBehaviour:
   - {fileID: 1620874075}
   - {fileID: 712017241}
   - {fileID: 486055578}
-  SaveSlotText: []
+  SaveSlotText:
+  - {fileID: 1300488397}
+  - {fileID: 174147413}
+  - {fileID: 1258185352}
   resDropdown: {fileID: 1074676299}
   BGMSlider: {fileID: 1647556957}
   SFXSlider: {fileID: 40936761}
@@ -26337,7 +26376,7 @@ MonoBehaviour:
   MenuUI: {fileID: 1006119092}
   OptionUI: {fileID: 173681653}
   SaveUI: {fileID: 1279887556}
-  SaveDataUI: {fileID: 0}
+  SaveDataUI: {fileID: 2081862330}
 --- !u!1 &899449450
 GameObject:
   m_ObjectHideFlags: 0
@@ -27093,7 +27132,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 964327715}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1800566243}
+        m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
+        m_MethodName: SaveData
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &964327715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33180,7 +33231,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1279887557
 RectTransform:
   m_ObjectHideFlags: 0

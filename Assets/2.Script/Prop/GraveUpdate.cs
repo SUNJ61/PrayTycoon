@@ -75,6 +75,7 @@ public class GraveUpdate : MonoBehaviour, IQuest
             SaveObject Grave_B_Data = Grave_B.transform.GetComponent<SaveObject>();
             Grave_B.SetActive(false);
             Grave_B_Data.isRepaired = false;
+            SaveManager.Instance.currentGameData.Grave = false;
 
             GameObject Grave = gameObject.transform.GetChild(1).gameObject;
             SaveObject Grave_Data = Grave.transform.GetComponent<SaveObject>();

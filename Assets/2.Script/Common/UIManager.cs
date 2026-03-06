@@ -206,7 +206,7 @@ public class UIManager : Singleton<UIManager>
         OptionUI.SetActive(!OptionUI.activeSelf);
     }
 
-    public void SaveUIControl() // 세이브 UI 띄우기
+    public void SaveUIControl() // 세이브 확정 UI 띄우기
     {
         MenuUI.SetActive(false);
         SaveUI.SetActive(!SaveUI.activeSelf);
@@ -214,9 +214,8 @@ public class UIManager : Singleton<UIManager>
 
     public void SetSaveData(int slotIndex) // 데이터 세이브 확인 UI 띄우기
     {
+        ButtonManager.Instance.SaveSlotIndex(slotIndex);
         SaveDataUI.SetActive(!SaveDataUI.activeSelf);
-
-        SaveManager.Instance.SaveGameData(slotIndex); //세이브
     }
 
     public void UIOff()

@@ -23,6 +23,7 @@ public class ButtonManager : Singleton<ButtonManager>
 
     private int CurrentQuestId;
     private int CurrnetGuildSlot;
+    private int CurrentSaveSlot;
     private int EndingPray = 5;
     private int EndingGold = 5;
 
@@ -158,7 +159,6 @@ public class ButtonManager : Singleton<ButtonManager>
         GuideButton.onClick.RemoveListener(PortalButtonClick);
 
         SaveManager.Instance.SaveMap();
-
         SceneLoadManager.Instance.NextSceneLoad(NextScene, CurrentspawnPoint);
     }
 
@@ -235,5 +235,15 @@ public class ButtonManager : Singleton<ButtonManager>
     {
         NextScene = sceneName;
         CurrentspawnPoint = spawnPoint;
+    }
+
+    public void SaveSlotIndex(int SlotIndex)
+    {
+        CurrentSaveSlot = SlotIndex;
+    }
+    public void SaveData() //세이브
+    {
+        UIManager.Instance.SaveUIControl();
+        SaveManager.Instance.SaveGameData(CurrentSaveSlot);
     }
 }
