@@ -2,7 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Firebase.Firestore;
 using Firebase.Extensions;
+using Firebase.Auth;
 using UnityEngine.SceneManagement;
+using System;
 
 public class SaveManager : Singleton<SaveManager>
 {
@@ -10,7 +12,8 @@ public class SaveManager : Singleton<SaveManager>
     
     private FirebaseFirestore database;
 
-    public UserSetting currentSettings = new UserSetting(); //옵션 값 저장
+    public UserSetting currentSettings = new UserSetting(); // 옵션 값 저장
+    public GameData currentGameData = new GameData(); // 게임 데이터 저장
 
     public bool LogInState = false;
 
@@ -45,6 +48,8 @@ public class SaveManager : Singleton<SaveManager>
         }
     }
 
+
+
     public void SetLobbyUI() //로그인 유무 확인후 UI 업데이트 (로비씬 호출 시 마다 작동해야함)
     {
         if(LogInState == true)
@@ -61,7 +66,7 @@ public class SaveManager : Singleton<SaveManager>
         }
 
         // "users" 컬렉션 -> "유저UID" 문서 -> "settings" 필드에 저장
-        DocumentReference docRef = database.Collection("users").Document(uid); // 해당 코드에서 null이 뜬다. 오류 해결 필요.
+        DocumentReference docRef = database.Collection("users").Document(uid);
         
         // 객체를 Dictionary나 JSON으로 변환하여 저장
         docRef.SetAsync(currentSettings).ContinueWithOnMainThread(task => {
@@ -69,7 +74,7 @@ public class SaveManager : Singleton<SaveManager>
         });
     }
 
-    // --- 데이터를 서버에서 불러오기 ---
+    // 데이터를 서버에서 불러오기
     public void LoadSettingsFromServer(string uid)
     {
         DocumentReference docRef = database.Collection("users").Document(uid);
@@ -93,5 +98,40 @@ public class SaveManager : Singleton<SaveManager>
     {
         if(LobbyManager.Instance != null)
             LobbyManager.Instance.LobbyOptionSet();
+    }
+
+
+
+    public void SaveGameData(int slotIndex)
+    {
+        var auth = FirebaseAuth.DefaultInstance;
+        if (auth.CurrentUser == null) // 로그인 하지 않았으면 저장 x 추후 문구 UI에 문구 추가 필요.
+        {
+            Debug.LogError("로그인된 유저가 없습니다! 저장을 취소합니다.");
+            return;
+        }
+
+        string uid = auth.CurrentUser.UserId;
+
+        currentGameData.SaveDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm"); //저장 시간 업데이트.
+
+        DocumentReference docRef = database.Collection("users").Document(uid).Collection("SaveSlots").Document($"Slot{slotIndex}"); //경로 설정
+
+        docRef.SetAsync(currentGameData).ContinueWithOnMainThread(task =>
+        {
+            if (task.IsCompleted)
+            {
+                UIManager.Instance.SaveSlotText[slotIndex].text = $"Pray : {SaveManager.Instance.currentGameData.pray}\nGold : {SaveManager.Instance.currentGameData.gold}\n[{SaveManager.Instance.currentGameData.SaveDate}]";
+            }
+            else if (task.IsFaulted)
+            {
+                Debug.LogError($"{slotIndex}번 슬롯 저장 실패: {task.Exception}");
+            }
+        });
+    }
+
+    public void LoadGameData()
+    {
+        
     }
 }

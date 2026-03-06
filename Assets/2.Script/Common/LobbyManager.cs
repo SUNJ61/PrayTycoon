@@ -12,6 +12,8 @@ public class LobbyManager : MonoBehaviour
     public GameObject OptionUI;
     public GameObject LogInUI;
     public GameObject SignInUI;
+    public GameObject LoadUI;
+    public GameObject LoadDataUI;
     public GameObject LogInMenuBTN; 
     public GameObject SignInMenuBTN;
     public GameObject LogOutBTN;
@@ -31,6 +33,10 @@ public class LobbyManager : MonoBehaviour
     public TMP_InputField SignInIdInput;
     public TMP_InputField SignInPwInput;
     public TMP_Text SignInErrorText;
+
+    public TextMeshProUGUI LoadSlot1Text;
+    public TextMeshProUGUI LoadSlot2Text;
+    public TextMeshProUGUI LoadSlot3Text;
 
     private readonly List<int> standardWidths = new List<int> { 1280, 1600, 1920, 2560, 3840 };
     private List<Resolution> filteredResolutions = new List<Resolution>();
@@ -209,6 +215,16 @@ public class LobbyManager : MonoBehaviour
         LogOutBTN.SetActive(false);
 
         SaveManager.Instance.LogInState = false;
+    }
+
+    public void SetLoadUI() //로드 UI 띄우기
+    {
+        LoadUI.SetActive(!LoadUI.activeSelf);
+    }
+
+    public void SetLoadData(int slot) // 데이터 로드 확인 UI 띄우기
+    {
+        LoadDataUI.SetActive(!LoadDataUI.activeSelf);
     }
 
     public void CloseBTN(GameObject BTN)

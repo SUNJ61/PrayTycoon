@@ -24,6 +24,8 @@ public class UIManager : Singleton<UIManager>
     public TextMeshProUGUI StoneUI;
     public TextMeshProUGUI[] GuildAmountUI;
 
+    public TextMeshProUGUI[] SaveSlotText;
+
     public TMP_Dropdown resDropdown; //해상도 가져오기 로직 넣어야함, 정렬 변경 후 추가 예정
     public Slider BGMSlider;
     public Slider SFXSlider;
@@ -41,6 +43,7 @@ public class UIManager : Singleton<UIManager>
     public GameObject MenuUI;
     public GameObject OptionUI;
     public GameObject SaveUI;
+    public GameObject SaveDataUI;
 
     private readonly int[] GuildItemIds = {14, 15, 16, 24, 25, 26, 34, 35, 36};
     private readonly List<int> standardWidths = new List<int> { 1280, 1600, 1920, 2560, 3840 };
@@ -203,10 +206,17 @@ public class UIManager : Singleton<UIManager>
         OptionUI.SetActive(!OptionUI.activeSelf);
     }
 
-    public void SaveUIControl()
+    public void SaveUIControl() // 세이브 UI 띄우기
     {
         MenuUI.SetActive(false);
         SaveUI.SetActive(!SaveUI.activeSelf);
+    }
+
+    public void SetSaveData(int slotIndex) // 데이터 세이브 확인 UI 띄우기
+    {
+        SaveDataUI.SetActive(!SaveDataUI.activeSelf);
+
+        SaveManager.Instance.SaveGameData(slotIndex); //세이브
     }
 
     public void UIOff()
