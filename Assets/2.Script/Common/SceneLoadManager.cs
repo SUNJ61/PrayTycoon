@@ -24,7 +24,7 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
         
     }
 
-    public void ExitGame(string sceneName) // 게임 종료시 씬 로드 (로비 씬 이동 + 매니저, 인게임 UI삭제 + 게임저장 필요.)
+    public void ExitGame(string sceneName) // 게임 종료시 씬 로드
     {
         SceneManager.sceneLoaded += OptionDataLoad;
 
@@ -73,6 +73,26 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
             LobbyManager.Instance.FullScreenToggle.isOn = SaveManager.Instance.currentSettings.isFullScreen;
 
             SaveManager.Instance.SetLobbyUI(); //로비 UI 변경
+        }
+    }
+
+    private void SaveLoadUI(Scene scene, LoadSceneMode mode) //씬 로드마다 세이브 로드 UI 업데이트 함수 (로그인 시 GameData 업데이트 필요.)
+    {
+        SceneManager.sceneLoaded -= SaveLoadUI;
+
+        if(Object.FindAnyObjectByType<UIManager>() != null) //세이브 슬롯 업데이트
+        {
+            foreach(GameData gameData in SaveManager.Instance.currentGameData)
+            {
+                UIManager.Instance.SaveDataSlotTextUI(gameData.SlotIndex);
+            }
+        }
+        else if(Object.FindAnyObjectByType<LobbyManager>() != null) // 로드 슬롯 업데이트
+        {
+            foreach(GameData gameData in SaveManager.Instance.currentGameData)
+            {
+                //로드 슬롯 UI 업데이트 코드 필요.
+            }
         }
     }
 

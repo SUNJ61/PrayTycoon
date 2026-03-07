@@ -13,7 +13,7 @@ public class SaveManager : Singleton<SaveManager>
     private FirebaseFirestore database;
 
     public UserSetting currentSettings = new UserSetting(); // 옵션 값 저장
-    public GameData currentGameData = new GameData(); // 게임 데이터 저장
+    public GameData[] currentGameData= new GameData[3]; // 게임 데이터 저장
 
     public bool LogInState = false;
 
@@ -89,7 +89,7 @@ public class SaveManager : Singleton<SaveManager>
             }
             else
             {
-                
+                Debug.LogError("저장된 경로에 파일이 존재하지 않습니다.");
             }
         });
     }
@@ -121,7 +121,7 @@ public class SaveManager : Singleton<SaveManager>
         {
             if (task.IsCompleted)
             {
-                UIManager.Instance.SaveSlotText[SlotIndex].text = $"Pray : {SaveManager.Instance.currentGameData.pray}\nGold : {SaveManager.Instance.currentGameData.gold}\n[{SaveManager.Instance.currentGameData.SaveDate}]";
+                UIManager.Instance.SaveDataSlotTextUI(SlotIndex);
             }
             else if (task.IsFaulted)
             {
@@ -132,32 +132,69 @@ public class SaveManager : Singleton<SaveManager>
 
     public void LoadGameData()
     {
-        
+        var auth = FirebaseAuth.DefaultInstance;
+        if (auth.CurrentUser == null) return;
+
+        string uid = auth.CurrentUser.UserId;
+
+        database.Collection("users").Document(uid).Collection("SaveSlots")
+            .GetSnapshotAsync().ContinueWithOnMainThread(task =>
+            {
+                if (task.IsFaulted)
+                {
+                    Debug.LogError("데이터 로드 실패: " + task.Exception);
+                    return;
+                }
+
+                QuerySnapshot snapshot = task.Result;
+
+                // 배열 초기화 (로그아웃 후 다시 로그인 하면 이전 데이터가 남을 수 있기 때문.)
+                for (int i = 0; i < 3; i++) currentGameData[i] = new GameData();
+
+                // 2. 서버에서 받아온 데이터로 배열 채우기
+                foreach (DocumentSnapshot doc in snapshot.Documents)
+                {
+                    // 문서 이름이 "Slot1", "Slot2", "Slot3"인 경우
+                    if (doc.Id.StartsWith("Slot"))
+                    {
+                        // "Slot1"에서 숫자만 추출해서 인덱스(0, 1, 2) 계산
+                        int slotIndex = int.Parse(doc.Id.Replace("Slot", "")) - 1;
+
+                        if (slotIndex >= 0 && slotIndex < 3)
+                        {
+                            currentGameData[slotIndex] = doc.ConvertTo<GameData>();
+                            Debug.Log($"{slotIndex + 1}번 슬롯 로드 완료");
+                        }
+                    }
+                }
+
+                // 3. 데이터 로드가 끝났으니 UI를 새로고침하는 함수를 여기서 호출하세요.
+            });
     }
 
     private void DataInput(int SlotIndex) // 저장할 데이터를 최신화
     {
-        currentGameData.SaveDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm"); //저장 시간 업데이트.
+        currentGameData[SlotIndex].SaveDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm"); //저장 시간 업데이트.
 
         //슬롯정보 저장
-        currentGameData.SlotIndex = SlotIndex;
+        currentGameData[SlotIndex].SlotIndex = SlotIndex;
 
         //재화 저장
-        currentGameData.pray = CreditManager.Instance.credit["Pray"];
-        currentGameData.stone = CreditManager.Instance.credit["Stone"];
-        currentGameData.gold = CreditManager.Instance.credit["Gold"];
+        currentGameData[SlotIndex].pray = CreditManager.Instance.credit["Pray"];
+        currentGameData[SlotIndex].stone = CreditManager.Instance.credit["Stone"];
+        currentGameData[SlotIndex].gold = CreditManager.Instance.credit["Gold"];
 
         //소환석 저장
-        currentGameData.MineWorker_N = Inventory.Instance.AmountItem(14);
-        currentGameData.MineWorker_R = Inventory.Instance.AmountItem(24);
-        currentGameData.MineWorker_U = Inventory.Instance.AmountItem(34);
+        currentGameData[SlotIndex].MineWorker_N = Inventory.Instance.AmountItem(14);
+        currentGameData[SlotIndex].MineWorker_R = Inventory.Instance.AmountItem(24);
+        currentGameData[SlotIndex].MineWorker_U = Inventory.Instance.AmountItem(34);
 
-        currentGameData.Knight_N = Inventory.Instance.AmountItem(15);
-        currentGameData.Knight_R = Inventory.Instance.AmountItem(25);
-        currentGameData.Knight_U = Inventory.Instance.AmountItem(35);
+        currentGameData[SlotIndex].Knight_N = Inventory.Instance.AmountItem(15);
+        currentGameData[SlotIndex].Knight_R = Inventory.Instance.AmountItem(25);
+        currentGameData[SlotIndex].Knight_U = Inventory.Instance.AmountItem(35);
 
-        currentGameData.Wizard_N = Inventory.Instance.AmountItem(16);
-        currentGameData.Wizard_N = Inventory.Instance.AmountItem(26);
-        currentGameData.Wizard_N = Inventory.Instance.AmountItem(36);
+        currentGameData[SlotIndex].Wizard_N = Inventory.Instance.AmountItem(16);
+        currentGameData[SlotIndex].Wizard_R = Inventory.Instance.AmountItem(26);
+        currentGameData[SlotIndex].Wizard_U = Inventory.Instance.AmountItem(36);
     }
 }

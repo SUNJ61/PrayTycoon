@@ -61,7 +61,8 @@ public class StairUpdate : MonoBehaviour, IQuest
         SaveObject Stair_B_Data = Stair_B.transform.GetComponent<SaveObject>();
         Stair_B.SetActive(false);
         Stair_B_Data.isRepaired = false;
-        SaveManager.Instance.currentGameData.Stair_Main = false;
+        foreach(GameData gameData in SaveManager.Instance.currentGameData)
+            gameData.Stair_Main = false;
 
         GameObject Stair = gameObject.transform.GetChild(1).gameObject;
         SaveObject Stair_Data = Stair.transform.GetComponent<SaveObject>();

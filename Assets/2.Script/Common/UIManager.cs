@@ -26,7 +26,7 @@ public class UIManager : Singleton<UIManager>
 
     public TextMeshProUGUI[] SaveSlotText;
 
-    public TMP_Dropdown resDropdown; //해상도 가져오기 로직 넣어야함, 정렬 변경 후 추가 예정
+    public TMP_Dropdown resDropdown;
     public Slider BGMSlider;
     public Slider SFXSlider;
     public Toggle FullScreenToggle;
@@ -350,5 +350,10 @@ public class UIManager : Singleton<UIManager>
                 GuildSolt3 = null;
                 break;
         }
+    }
+
+    public void SaveDataSlotTextUI(int SlotIndex)
+    {
+        SaveSlotText[SlotIndex].text = $"Pray : {SaveManager.Instance.currentGameData[SlotIndex].pray}\nGold : {SaveManager.Instance.currentGameData[SlotIndex].gold}\n[{SaveManager.Instance.currentGameData[SlotIndex].SaveDate}]";
     }
 }

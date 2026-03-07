@@ -62,7 +62,8 @@ public class GateUpdate : MonoBehaviour, IQuest
         SaveObject Gate_C_Data = Gate_C.transform.GetComponent<SaveObject>();
         Gate_C.SetActive(false);
         Gate_C_Data.isRepaired = false;
-        SaveManager.Instance.currentGameData.Gate = false;
+        foreach(GameData gameData in SaveManager.Instance.currentGameData)
+            gameData.Gate = false;
 
         GameObject Gate_O = gameObject.transform.GetChild(1).gameObject;
         SaveObject Gate_O_Data = Gate_O.transform.GetComponent<SaveObject>();
