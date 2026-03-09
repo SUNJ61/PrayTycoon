@@ -80,14 +80,14 @@ public class FirebaseManager : MonoBehaviour
             
             FirebaseUser user = task.Result.User;
 
+            SaveManager.Instance.LogInState = true;
             LobbyManager.Instance.LobbyLogInUI(false); //유니티 요소 함수는 메인스레드에서만 조작가능
             LobbyManager.Instance.SetLogInUI();
 
             string uid = task.Result.User.UserId;
         
-            //uid기준 데이터 불러오기 요청
-            SaveManager.Instance.LoadSettingsFromServer(uid);
-            // 여기서 세이브 데이터를 불러오는 코드 추가.
+            SaveManager.Instance.LoadSettingsFromServer(uid); // 로그인 시 옵션 데이터 가져오기.
+            SaveManager.Instance.LoadGameData(); // 로그인 시 게임 세이브 파일 데이터 가져오기.
         });
     }
 
@@ -96,6 +96,7 @@ public class FirebaseManager : MonoBehaviour
         if (auth.CurrentUser != null)
         {
             auth.SignOut();
+            SaveManager.Instance.LogInState = false;
             LobbyManager.Instance.SetLogOutUI();
         
         }

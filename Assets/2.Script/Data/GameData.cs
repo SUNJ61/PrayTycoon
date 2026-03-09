@@ -5,7 +5,7 @@ using System;
 public class GameData //게임플레이 데이터를 저장한다. (세이브 로드용)
 {
     //저장 날짜
-    [FirestoreProperty] public string SaveDate {get; set;} = "";
+    [FirestoreProperty] public string SaveDate {get; set;} = null;
 
     //슬롯 정보
     [FirestoreProperty] public int SlotIndex {get; set;} = 0;

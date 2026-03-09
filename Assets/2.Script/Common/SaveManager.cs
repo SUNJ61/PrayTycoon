@@ -148,16 +148,16 @@ public class SaveManager : Singleton<SaveManager>
 
                 QuerySnapshot snapshot = task.Result;
 
-                // 배열 초기화 (로그아웃 후 다시 로그인 하면 이전 데이터가 남을 수 있기 때문.)
+                // 데이터 배열 초기화 (로그아웃 후 다시 로그인 하면 이전 데이터가 남을 수 있기 때문.)
                 for (int i = 0; i < 3; i++) currentGameData[i] = new GameData();
 
-                // 2. 서버에서 받아온 데이터로 배열 채우기
+                // 서버에서 받아온 데이터 채우기
                 foreach (DocumentSnapshot doc in snapshot.Documents)
                 {
-                    // 문서 이름이 "Slot1", "Slot2", "Slot3"인 경우
+                    // 문서 이름에 Slot이 들어가는가
                     if (doc.Id.StartsWith("Slot"))
                     {
-                        // "Slot1"에서 숫자만 추출해서 인덱스(0, 1, 2) 계산
+                        // 들어가면 Slot을 제외하고 숫자만 추출 후 인덱스로 저장.
                         int slotIndex = int.Parse(doc.Id.Replace("Slot", "")) - 1;
 
                         if (slotIndex >= 0 && slotIndex < 3)
@@ -168,7 +168,7 @@ public class SaveManager : Singleton<SaveManager>
                     }
                 }
 
-                // 3. 데이터 로드가 끝났으니 UI를 새로고침하는 함수를 여기서 호출하세요.
+                // UI 변경 함수 호출 필요.
             });
     }
 

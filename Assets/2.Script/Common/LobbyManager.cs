@@ -34,9 +34,7 @@ public class LobbyManager : MonoBehaviour
     public TMP_InputField SignInPwInput;
     public TMP_Text SignInErrorText;
 
-    public TextMeshProUGUI LoadSlot1Text;
-    public TextMeshProUGUI LoadSlot2Text;
-    public TextMeshProUGUI LoadSlot3Text;
+    public TextMeshProUGUI[] LoadSlotText = new TextMeshProUGUI[3];
 
     private readonly List<int> standardWidths = new List<int> { 1280, 1600, 1920, 2560, 3840 };
     private List<Resolution> filteredResolutions = new List<Resolution>();
@@ -204,8 +202,6 @@ public class LobbyManager : MonoBehaviour
         LogInMenuBTN.SetActive(false);
         SignInMenuBTN.SetActive(false);
         LogOutBTN.SetActive(true);
-
-        SaveManager.Instance.LogInState = true;
     }
 
     public void SetLogOutUI() //로그아웃 했을 시
@@ -213,13 +209,22 @@ public class LobbyManager : MonoBehaviour
         LogInMenuBTN.SetActive(true);
         SignInMenuBTN.SetActive(true);
         LogOutBTN.SetActive(false);
-
-        SaveManager.Instance.LogInState = false;
     }
 
     public void SetLoadUI() //로드 UI 띄우기
     {
         LoadUI.SetActive(!LoadUI.activeSelf);
+    }
+
+    public void SetLoadDataUI() // 로드 슬롯 채우기
+    {
+        if(SaveManager.Instance.LogInState != false)
+        {
+            foreach(GameData Loaddata in SaveManager.Instance.currentGameData)
+            {
+                
+            }
+        }
     }
 
     public void SetLoadData(int slot) // 데이터 로드 확인 UI 띄우기

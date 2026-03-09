@@ -4651,9 +4651,10 @@ MonoBehaviour:
   SignInIdInput: {fileID: 267283655}
   SignInPwInput: {fileID: 1062910173}
   SignInErrorText: {fileID: 1121887801}
-  LoadSlot1Text: {fileID: 0}
-  LoadSlot2Text: {fileID: 0}
-  LoadSlot3Text: {fileID: 0}
+  LoadSlotText:
+  - {fileID: 503529963}
+  - {fileID: 2084894031}
+  - {fileID: 1575669756}
 --- !u!1 &700269156
 GameObject:
   m_ObjectHideFlags: 0
