@@ -168,7 +168,7 @@ public class SaveManager : Singleton<SaveManager>
                     }
                 }
 
-                // UI 변경 함수 호출 필요.
+                LobbyManager.Instance.SetLoadDataUI(); // 로드 UI 업데이트
             });
     }
 

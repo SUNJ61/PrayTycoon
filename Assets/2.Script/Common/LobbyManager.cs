@@ -222,7 +222,10 @@ public class LobbyManager : MonoBehaviour
         {
             foreach(GameData Loaddata in SaveManager.Instance.currentGameData)
             {
-                
+                if(Loaddata.SaveDate != null)
+                    LoadSlotText[Loaddata.SlotIndex].text = $"[{Loaddata.SaveDate}]";
+                else
+                    LoadSlotText[Loaddata.SlotIndex].text = $"(비어있음)";
             }
         }
     }

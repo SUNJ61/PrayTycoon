@@ -89,10 +89,7 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
         }
         else if(Object.FindAnyObjectByType<LobbyManager>() != null) // 로드 슬롯 업데이트
         {
-            foreach(GameData gameData in SaveManager.Instance.currentGameData)
-            {
-                //로드 슬롯 UI 업데이트 코드 필요.
-            }
+            LobbyManager.Instance.SetLoadDataUI(); // 로드 UI 업데이트
         }
     }
 
