@@ -42,7 +42,7 @@ public class FirebaseManager : MonoBehaviour
         });
     }
 
-    public void SignIn()
+    public void SignIn() //회원가입
     {
         string email = LobbyManager.Instance.SignInIdInput.text + dummyDomain;
         string password = LobbyManager.Instance.SignInPwInput.text;
@@ -65,7 +65,7 @@ public class FirebaseManager : MonoBehaviour
         });
     }
 
-    public void Login()
+    public void Login() //로그인
     {
         string email = LobbyManager.Instance.LogInIdInput.text + dummyDomain;
         string password = LobbyManager.Instance.LogInPwInput.text;
@@ -91,7 +91,7 @@ public class FirebaseManager : MonoBehaviour
         });
     }
 
-    public void LogOut()
+    public void LogOut() //로그아웃
     {
         if (auth.CurrentUser != null)
         {

@@ -15,6 +15,8 @@ public class SaveManager : Singleton<SaveManager>
     public UserSetting currentSettings = new UserSetting(); // 옵션 값 저장
     public GameData[] currentGameData= new GameData[3]; // 게임 데이터 저장
 
+    public int currentLoadIndex = -1;
+
     public bool LogInState = false;
 
     protected override void OnAwake()
@@ -22,7 +24,7 @@ public class SaveManager : Singleton<SaveManager>
         database = FirebaseFirestore.DefaultInstance;
     }
 
-    public void SaveMap() //맵 오브젝트 데이터 저장, 씬 넘어가기 전에 호출.
+    public void SaveMap() //맵 오브젝트 데이터 저장, 맵(씬)) 넘어가기 전에 호출.
     {
         string sceneName = SceneManager.GetActiveScene().name;
 

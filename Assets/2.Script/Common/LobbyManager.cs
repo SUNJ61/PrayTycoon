@@ -230,9 +230,19 @@ public class LobbyManager : MonoBehaviour
         }
     }
 
-    public void SetLoadData(int slot) // 데이터 로드 확인 UI 띄우기
+    public void SetLoadData(int slot) // 데이터 로드 확인 UI 띄우기 (빈 데이터는 작동하면 안됨)
+    {
+        if(SaveManager.Instance.currentGameData[slot].SaveDate != null)
+        {
+            LoadDataUI.SetActive(!LoadDataUI.activeSelf);
+            SaveManager.Instance.currentLoadIndex = slot;
+        }
+    }
+
+    public void LoadData() // 데이터 로드, 씬 이동
     {
         LoadDataUI.SetActive(!LoadDataUI.activeSelf);
+        SceneLoadManager.Instance.LoadGame("TycoonMainMap");
     }
 
     public void CloseBTN(GameObject BTN)
@@ -269,6 +279,6 @@ public class LobbyManager : MonoBehaviour
     3. firebaase서버 연동하기. (완)
     4. 로그인 시스템 만들기. (완)
     5. 유저 id 기반으로 설정 데이터를 저장하고 로그인시 불러오는 기능 만들기. (완)
-    6. 유저 id 기반으로 게임 세이브, 로드 기능 만들기.
+    6. 유저 id 기반으로 게임 세이브, 로드 기능 만들기. (로드 데이터를 기반으로 씬이동 기능 제작해야함.)
     */
 }

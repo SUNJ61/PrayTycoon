@@ -21,7 +21,10 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
 
     public void LoadGame(string sceneName) // 저장된 게임 시작시 씬 로드
     {
-        
+        SceneManager.sceneLoaded += OptionDataLoad;
+        SceneManager.sceneLoaded += GameDataLoad;
+
+        SceneManager.LoadScene(sceneName);
     }
 
     public void ExitGame(string sceneName) // 게임 종료시 씬 로드
@@ -76,9 +79,19 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
         }
     }
 
-    private void SaveLoadUI(Scene scene, LoadSceneMode mode) //씬 로드마다 세이브 로드 UI 업데이트 함수 (로그인 시 GameData 업데이트 필요.)
+    private void GameDataLoad(Scene scene, LoadSceneMode mode) // 메인 게임 시작시 슬롯데이터에 따라 데이터 로드.
     {
-        SceneManager.sceneLoaded -= SaveLoadUI;
+        SceneManager.sceneLoaded -= GameDataLoad;
+
+        int index = SaveManager.Instance.currentLoadIndex;
+        SaveManager.Instance.currentLoadIndex = -1; // 한번 로드 후 로드 인덱스 초기화
+
+        //게임데이터 적용 코드 필요. (인벤토리에 UI 생성등 연결할게 많음. 방법 고려할 것)
+    }
+
+    private void SaveLoadUIUpdate(Scene scene, LoadSceneMode mode) //씬 로드마다 세이브 로드 UI 업데이트 함수 (로그인 시 GameData 업데이트 필요.)
+    {
+        SceneManager.sceneLoaded -= SaveLoadUIUpdate;
 
         if(Object.FindAnyObjectByType<UIManager>() != null) //세이브 슬롯 업데이트
         {
