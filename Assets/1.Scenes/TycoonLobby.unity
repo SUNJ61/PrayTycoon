@@ -439,13 +439,14 @@ GameObject:
   - component: {fileID: 132116365}
   - component: {fileID: 132116367}
   - component: {fileID: 132116366}
+  - component: {fileID: 132116368}
   m_Layer: 5
   m_Name: LoadUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &132116365
 RectTransform:
   m_ObjectHideFlags: 0
@@ -508,6 +509,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 132116364}
   m_CullTransparentMesh: 1
+--- !u!225 &132116368
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132116364}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &153377134
 GameObject:
   m_ObjectHideFlags: 0
@@ -1096,6 +1109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c3ae1e2cb1149c41a8ee9f876aed735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentLoadIndex: -1
   LogInState: 0
 --- !u!4 &216715623
 Transform:
@@ -1991,7 +2005,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 339805714}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 602465913}
+        m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
+        m_MethodName: LoadData
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &339805714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4655,10 +4681,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa6cbb2b4922b0c4ba4db31c6e670134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LoadUI: {fileID: 132116368}
   OptionUI: {fileID: 1841428874}
   LogInUI: {fileID: 1500724226}
   SignInUI: {fileID: 515943675}
-  LoadUI: {fileID: 132116364}
   LoadDataUI: {fileID: 2002160543}
   LogInMenuBTN: {fileID: 1282361897}
   SignInMenuBTN: {fileID: 946567139}
@@ -14246,13 +14272,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 602465911}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 602465913}
+        m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
+        m_MethodName: SetLoadUI
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

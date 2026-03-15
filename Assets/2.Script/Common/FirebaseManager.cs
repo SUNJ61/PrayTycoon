@@ -87,7 +87,7 @@ public class FirebaseManager : MonoBehaviour
             string uid = task.Result.User.UserId;
         
             SaveManager.Instance.LoadSettingsFromServer(uid); // 로그인 시 옵션 데이터 가져오기.
-            SaveManager.Instance.LoadGameData(); // 로그인 시 게임 세이브 파일 데이터 가져오기.
+            SaveManager.Instance.LoadGameDataFromServer(); // 로그인 시 게임 세이브 파일 데이터 가져오기.
         });
     }
 

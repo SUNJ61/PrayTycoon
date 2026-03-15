@@ -119,7 +119,7 @@ public class SaveManager : Singleton<SaveManager>
 
         DocumentReference docRef = database.Collection("users").Document(uid).Collection("SaveSlots").Document($"Slot{SlotIndex}"); //경로 설정
 
-        docRef.SetAsync(currentGameData).ContinueWithOnMainThread(task =>
+        docRef.SetAsync(currentGameData[SlotIndex]).ContinueWithOnMainThread(task =>
         {
             if (task.IsCompleted)
             {
@@ -132,7 +132,7 @@ public class SaveManager : Singleton<SaveManager>
         });
     }
 
-    public void LoadGameData()
+    public void LoadGameDataFromServer()
     {
         var auth = FirebaseAuth.DefaultInstance;
         if (auth.CurrentUser == null) return;
@@ -160,7 +160,7 @@ public class SaveManager : Singleton<SaveManager>
                     if (doc.Id.StartsWith("Slot"))
                     {
                         // 들어가면 Slot을 제외하고 숫자만 추출 후 인덱스로 저장.
-                        int slotIndex = int.Parse(doc.Id.Replace("Slot", "")) - 1;
+                        int slotIndex = int.Parse(doc.Id.Replace("Slot", ""));
 
                         if (slotIndex >= 0 && slotIndex < 3)
                         {
@@ -172,6 +172,31 @@ public class SaveManager : Singleton<SaveManager>
 
                 LobbyManager.Instance.SetLoadDataUI(); // 로드 UI 업데이트
             });
+    }
+
+    public void UpdateGameData() // 로드 게임 시 아이템 업데이트 코드
+    {
+        CreditManager.Instance.credit["Pray"] = currentGameData[currentLoadIndex].pray;
+        CreditManager.Instance.credit["Stone"] = currentGameData[currentLoadIndex].stone;
+        CreditManager.Instance.credit["Gold"] = currentGameData[currentLoadIndex].gold;
+
+        Inventory.Instance.AddItem(1, currentGameData[currentLoadIndex].pray);
+        Inventory.Instance.AddItem(2, currentGameData[currentLoadIndex].stone);
+        Inventory.Instance.AddItem(3, currentGameData[currentLoadIndex].gold);
+
+        UIManager.Instance.CreditUIEdit();
+
+        Inventory.Instance.AddItem(14, currentGameData[currentLoadIndex].MineWorker_N);
+        Inventory.Instance.AddItem(24, currentGameData[currentLoadIndex].MineWorker_R);
+        Inventory.Instance.AddItem(34, currentGameData[currentLoadIndex].MineWorker_U);
+
+        Inventory.Instance.AddItem(15, currentGameData[currentLoadIndex].Knight_N);
+        Inventory.Instance.AddItem(25, currentGameData[currentLoadIndex].Knight_R);
+        Inventory.Instance.AddItem(35, currentGameData[currentLoadIndex].Knight_U);
+
+        Inventory.Instance.AddItem(16, currentGameData[currentLoadIndex].Wizard_N);
+        Inventory.Instance.AddItem(26, currentGameData[currentLoadIndex].Wizard_R);
+        Inventory.Instance.AddItem(36, currentGameData[currentLoadIndex].Wizard_U);
     }
 
     private void DataInput(int SlotIndex) // 저장할 데이터를 최신화

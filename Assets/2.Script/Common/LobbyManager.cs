@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,10 +8,11 @@ public class LobbyManager : MonoBehaviour
 {
     public static LobbyManager Instance;
 
+    public CanvasGroup LoadUI;
+
     public GameObject OptionUI;
     public GameObject LogInUI;
     public GameObject SignInUI;
-    public GameObject LoadUI;
     public GameObject LoadDataUI;
     public GameObject LogInMenuBTN; 
     public GameObject SignInMenuBTN;
@@ -34,7 +34,7 @@ public class LobbyManager : MonoBehaviour
     public TMP_InputField SignInPwInput;
     public TMP_Text SignInErrorText;
 
-    public TextMeshProUGUI[] LoadSlotText = new TextMeshProUGUI[3];
+    public TextMeshProUGUI[] LoadSlotText;
 
     private readonly List<int> standardWidths = new List<int> { 1280, 1600, 1920, 2560, 3840 };
     private List<Resolution> filteredResolutions = new List<Resolution>();
@@ -211,21 +211,30 @@ public class LobbyManager : MonoBehaviour
         LogOutBTN.SetActive(false);
     }
 
-    public void SetLoadUI() //로드 UI 띄우기
+    public void SetLoadUI() //로드 UI 띄우기 내리기.
     {
-        LoadUI.SetActive(!LoadUI.activeSelf);
+        if(LoadUI.alpha == 1)
+        {
+            LoadUI.alpha = 0;
+            LoadUI.interactable = false;
+            LoadUI.blocksRaycasts = false;
+        }
+        else
+        {
+            LoadUI.alpha = 1;
+            LoadUI.interactable = true;
+            LoadUI.blocksRaycasts = true;
+        }
     }
 
     public void SetLoadDataUI() // 로드 슬롯 채우기
     {
-        if(SaveManager.Instance.LogInState != false)
+        if(SaveManager.Instance.LogInState == true) //UI 변경이 안됨. (0번슬롯을 계속 업데이트 함.)
         {
             foreach(GameData Loaddata in SaveManager.Instance.currentGameData)
             {
-                if(Loaddata.SaveDate != null)
-                    LoadSlotText[Loaddata.SlotIndex].text = $"[{Loaddata.SaveDate}]";
-                else
-                    LoadSlotText[Loaddata.SlotIndex].text = $"(비어있음)";
+                if(Loaddata.SlotIndex != -1)
+                    LoadSlotText[Loaddata.SlotIndex].text = $"pray : {Loaddata.pray}\ngold : {Loaddata.gold}\n[{Loaddata.SaveDate}]";
             }
         }
     }
@@ -280,5 +289,7 @@ public class LobbyManager : MonoBehaviour
     4. 로그인 시스템 만들기. (완)
     5. 유저 id 기반으로 설정 데이터를 저장하고 로그인시 불러오는 기능 만들기. (완)
     6. 유저 id 기반으로 게임 세이브, 로드 기능 만들기. (로드 데이터를 기반으로 씬이동 기능 제작해야함.)
+
+    수정 해야할 것 : 로드시 인덱스가 벗어나는 오류 발생, 로그아웃시 Gamedata초기화, load UI 비어있음으로 초기화 하는 기능 만들 것.
     */
 }

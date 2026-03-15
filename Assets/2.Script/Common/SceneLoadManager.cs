@@ -85,8 +85,7 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
 
         int index = SaveManager.Instance.currentLoadIndex;
         SaveManager.Instance.currentLoadIndex = -1; // 한번 로드 후 로드 인덱스 초기화
-
-        //게임데이터 적용 코드 필요. (인벤토리에 UI 생성등 연결할게 많음. 방법 고려할 것)
+        SaveManager.Instance.UpdateGameData(); //게임데이터 적용
     }
 
     private void SaveLoadUIUpdate(Scene scene, LoadSceneMode mode) //씬 로드마다 세이브 로드 UI 업데이트 함수 (로그인 시 GameData 업데이트 필요.)
