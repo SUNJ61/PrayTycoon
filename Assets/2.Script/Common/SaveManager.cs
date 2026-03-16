@@ -174,7 +174,7 @@ public class SaveManager : Singleton<SaveManager>
             });
     }
 
-    public void UpdateGameData() // 로드 게임 시 아이템 업데이트 코드
+    public void UpdateGameData() // 로드 게임 시 플레이 데이터 업데이트 코드
     {
         CreditManager.Instance.credit["Pray"] = currentGameData[currentLoadIndex].pray;
         CreditManager.Instance.credit["Stone"] = currentGameData[currentLoadIndex].stone;
@@ -197,6 +197,8 @@ public class SaveManager : Singleton<SaveManager>
         Inventory.Instance.AddItem(16, currentGameData[currentLoadIndex].Wizard_N);
         Inventory.Instance.AddItem(26, currentGameData[currentLoadIndex].Wizard_R);
         Inventory.Instance.AddItem(36, currentGameData[currentLoadIndex].Wizard_U);
+
+        //지형 업데이트 필요
     }
 
     private void DataInput(int SlotIndex) // 저장할 데이터를 최신화

@@ -41,6 +41,7 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
             }
         }
 
+        SaveManager.Instance.currentLoadIndex = -1; // 로비로 이동시 로드 인덱스 초기화
         SceneManager.LoadScene(sceneName); //씬로드
     }
 
@@ -83,8 +84,6 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
     {
         SceneManager.sceneLoaded -= GameDataLoad;
 
-        int index = SaveManager.Instance.currentLoadIndex;
-        SaveManager.Instance.currentLoadIndex = -1; // 한번 로드 후 로드 인덱스 초기화
         SaveManager.Instance.UpdateGameData(); //게임데이터 적용
     }
 

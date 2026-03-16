@@ -32,11 +32,6 @@ public class CreditManager : Singleton<CreditManager>
     private int AddGold = 10;
     private int AddStone = 10;
 
-    private void Start()
-    {
-        //추후 데이터를 받아서 크레딧 불러오기 함수를 만들면 추가 필요.
-    }
-
     public void PrayCountCheck() //Pray(기도력) 증가하는지 확인, 증가 실행과 정지를를 하는 함수.
     {
         if (PrayCoroutine != null)

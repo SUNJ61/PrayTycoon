@@ -229,12 +229,18 @@ public class LobbyManager : MonoBehaviour
 
     public void SetLoadDataUI() // 로드 슬롯 채우기
     {
+        int textIndex = 0;
+
         if(SaveManager.Instance.LogInState == true) //UI 변경이 안됨. (0번슬롯을 계속 업데이트 함.)
         {
             foreach(GameData Loaddata in SaveManager.Instance.currentGameData)
             {
                 if(Loaddata.SlotIndex != -1)
                     LoadSlotText[Loaddata.SlotIndex].text = $"pray : {Loaddata.pray}\ngold : {Loaddata.gold}\n[{Loaddata.SaveDate}]";
+                else
+                    LoadSlotText[textIndex].text = "(비어있음)";
+
+                textIndex += 1;
             }
         }
     }
@@ -245,6 +251,7 @@ public class LobbyManager : MonoBehaviour
         {
             LoadDataUI.SetActive(!LoadDataUI.activeSelf);
             SaveManager.Instance.currentLoadIndex = slot;
+            Debug.Log($"현재 인덱스 : {SaveManager.Instance.currentLoadIndex}");
         }
     }
 

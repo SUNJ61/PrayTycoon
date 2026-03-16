@@ -49,7 +49,7 @@ public class UIManager : Singleton<UIManager>
     private readonly List<int> standardWidths = new List<int> { 1280, 1600, 1920, 2560, 3840 };
     private List<Resolution> filteredResolutions = new List<Resolution>();
 
-    void Start()
+    protected override void OnAwake()
     {
         GuideUI_List = ObjectManager.Instance.GetObject("UI", 1);
         FailUI_List = ObjectManager.Instance.GetObject("UI", 3);
@@ -59,7 +59,10 @@ public class UIManager : Singleton<UIManager>
         GuideUIText = GuideUI_List[0].GetComponent<TextMeshProUGUI>();
         GuideCondition = GuideUI_List[1].GetComponent<TextMeshProUGUI>();
         failCondition = FailUI_List[1].GetComponent<TextMeshProUGUI>();
+    }
 
+    void Start()
+    {
         BGMSlider.onValueChanged.AddListener(BGMsetting);
         SFXSlider.onValueChanged.AddListener(SFXsetting);
 

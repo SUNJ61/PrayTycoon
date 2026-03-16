@@ -43,6 +43,6 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
     protected virtual void OnAwake()
     {
-        //싱글톤 생성시 추가로 필요한 
+        //awake함수에 추가로 필요한 코드 있을시 추가하기 위한 함수.
     }
 }

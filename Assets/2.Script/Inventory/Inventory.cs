@@ -7,7 +7,7 @@ public class Inventory : Singleton<Inventory>
 
     public InventorySlot[] Slots;
 
-    void Start()
+    protected override void OnAwake()
     {
         Slots = new InventorySlot[SlotCount]; // 인벤토리 슬롯 리스트 생성, 길이는 SlotCount.
 
@@ -17,6 +17,8 @@ public class Inventory : Singleton<Inventory>
 
     public bool AddItem(int ItemId, int Amount)
     {
+        if (Amount <= 0) return false;
+
         ItemData data = ObjectManager.Instance.itemDatabase.GetItem(ItemId); // 저장할 아이템 찾기.
         if (data == null) return false;
 
