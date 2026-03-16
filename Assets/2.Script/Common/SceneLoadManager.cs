@@ -23,6 +23,7 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
     {
         SceneManager.sceneLoaded += OptionDataLoad;
         SceneManager.sceneLoaded += GameDataLoad;
+        SceneManager.sceneLoaded += MapLoad;
 
         SceneManager.LoadScene(sceneName);
     }
