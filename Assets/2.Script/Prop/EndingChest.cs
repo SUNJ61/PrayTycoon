@@ -62,8 +62,7 @@ public class EndingChest : MonoBehaviour, IQuest
         EndingChest_C.SetActive(EndingChest_C_Data.isRepaired);
 
         GameObject EndingChest_O = gameObject.transform.GetChild(1).gameObject;
-        SaveObject EndingChest_O_Data = EndingChest_O.GetComponent<SaveObject>();
-        EndingChest_O.SetActive(EndingChest_O_Data.isRepaired);
+        EndingChest_O.SetActive(!EndingChest_C_Data.isRepaired);
     }
 
     public void SetQuestClear() // 퀘스트가 성공하면 발생하는 이벤트. (상자 열림)
@@ -78,8 +77,6 @@ public class EndingChest : MonoBehaviour, IQuest
             gameData.EndingChest = false;
 
         GameObject EndingChest_O = gameObject.transform.GetChild(1).gameObject;
-        SaveObject EndingChest_O_Data = EndingChest_O.GetComponent<SaveObject>();
         EndingChest_O.SetActive(true);
-        EndingChest_O_Data.isRepaired = true;
     }
 }

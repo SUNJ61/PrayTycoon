@@ -49,9 +49,8 @@ public class GateUpdate : MonoBehaviour, IQuest
         QuestTrigger.enabled = Gate_C_Data.isRepaired;
 
         GameObject Gate_O = gameObject.transform.GetChild(1).gameObject;
-        SaveObject Gate_O_Data = Gate_O.transform.GetComponent<SaveObject>();
-        Gate_O.SetActive(Gate_O_Data.isRepaired);
-        QuestClear = Gate_O_Data.isRepaired;
+        Gate_O.SetActive(!Gate_C_Data.isRepaired);
+        QuestClear = !Gate_C_Data.isRepaired;
     }
 
     public void SetQuestClear() // 퀘스트가 성공하면 발생하는 이벤트. (오브젝트 변경, 아이템 뽑기 같은 함수 넣으면 될 듯.)
@@ -66,9 +65,7 @@ public class GateUpdate : MonoBehaviour, IQuest
             gameData.Gate = false;
 
         GameObject Gate_O = gameObject.transform.GetChild(1).gameObject;
-        SaveObject Gate_O_Data = Gate_O.transform.GetComponent<SaveObject>();
         Gate_O.SetActive(true);
-        Gate_O_Data.isRepaired = true;
 
         QuestTrigger.enabled = false;
     }
