@@ -355,7 +355,30 @@ public class UIManager : Singleton<UIManager>
         }
     }
 
-    public void SaveDataSlotTextUI(int SlotIndex)
+    public void SaveSlotUpdate() // 씬로드시 세이브 UI 업데이트
+    {
+        int textIndex = 0;
+
+        if(SaveManager.Instance.LogInState == true)
+        {
+            foreach(GameData Loaddata in SaveManager.Instance.currentGameData)
+            {
+                if(Loaddata.SlotIndex != -1)
+                    SaveSlotText[Loaddata.SlotIndex].text = $"pray : {Loaddata.pray}\ngold : {Loaddata.gold}\n[{Loaddata.SaveDate}]";
+                else
+                    SaveSlotText[textIndex].text = "(비어있음)";
+
+                textIndex += 1;
+            }
+        }
+        else
+        {
+            for (int i = 0; i < 3; i++)
+                SaveSlotText[i].text = "(비어있음)";
+        }
+    }
+
+    public void SaveUpdate(int SlotIndex) // 세이브시 UI 업데이트
     {
         SaveSlotText[SlotIndex].text = $"Pray : {SaveManager.Instance.currentGameData[SlotIndex].pray}\nGold : {SaveManager.Instance.currentGameData[SlotIndex].gold}\n[{SaveManager.Instance.currentGameData[SlotIndex].SaveDate}]";
     }

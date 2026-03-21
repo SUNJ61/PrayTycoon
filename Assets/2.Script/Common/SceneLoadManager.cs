@@ -22,6 +22,7 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
     public void LoadGame(string sceneName) // 저장된 게임 시작시 씬 로드
     {
         SceneManager.sceneLoaded += OptionDataLoad;
+        SceneManager.sceneLoaded += SaveLoadUIUpdate;
         SceneManager.sceneLoaded += GameDataLoad;
         SceneManager.sceneLoaded += MapLoad;
 
@@ -31,6 +32,7 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
     public void ExitGame(string sceneName) // 게임 종료시 씬 로드
     {
         SceneManager.sceneLoaded += OptionDataLoad;
+        SceneManager.sceneLoaded += SaveLoadUIUpdate;
 
         GameObject[] ManagerObjects = FindObjectsByType<GameObject>(FindObjectsSortMode.None); // DontDestroyOnLoad로 등록된 오브젝트 모두 찾기.
         foreach (GameObject ManagerObject in ManagerObjects)
@@ -94,10 +96,7 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
 
         if(Object.FindAnyObjectByType<UIManager>() != null) //세이브 슬롯 업데이트
         {
-            foreach(GameData gameData in SaveManager.Instance.currentGameData)
-            {
-                UIManager.Instance.SaveDataSlotTextUI(gameData.SlotIndex);
-            }
+            UIManager.Instance.SaveSlotUpdate();
         }
         else if(Object.FindAnyObjectByType<LobbyManager>() != null) // 로드 슬롯 업데이트
         {

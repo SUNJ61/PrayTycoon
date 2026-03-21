@@ -60,7 +60,12 @@ public class StairUpdate : MonoBehaviour, IQuest
         SaveObject Stair_B_Data = Stair_B.transform.GetComponent<SaveObject>();
         Stair_B.SetActive(false);
         Stair_B_Data.isRepaired = false;
-        foreach(GameData gameData in SaveManager.Instance.currentGameData)
+
+        if(SaveManager.Instance.currentGameData[0] == null)
+            Debug.Log("게임데이터 초기화 안됨.");
+
+        
+        foreach(GameData gameData in SaveManager.Instance.currentGameData) //여기서 null 발생 SaveManager가 없거나 currentGameData가 배열로 선언되어있지 않거나 일듯?
             gameData.Stair_Main = false;
 
         GameObject Stair = gameObject.transform.GetChild(1).gameObject;

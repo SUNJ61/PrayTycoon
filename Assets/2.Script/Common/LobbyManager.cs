@@ -231,7 +231,7 @@ public class LobbyManager : MonoBehaviour
     {
         int textIndex = 0;
 
-        if(SaveManager.Instance.LogInState == true) //UI 변경이 안됨. (0번슬롯을 계속 업데이트 함.)
+        if(SaveManager.Instance.LogInState == true) // UI 업데이트
         {
             foreach(GameData Loaddata in SaveManager.Instance.currentGameData)
             {
@@ -242,6 +242,11 @@ public class LobbyManager : MonoBehaviour
 
                 textIndex += 1;
             }
+        }
+        else
+        {
+            for (int i = 0; i < 3; i++)
+                LoadSlotText[i].text = "(비어있음)";
         }
     }
 

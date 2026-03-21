@@ -243,6 +243,7 @@ public class ButtonManager : Singleton<ButtonManager>
     }
     public void SaveData() //세이브
     {
+        UIManager.Instance.SaveDataUI.SetActive(!UIManager.Instance.SaveDataUI.activeSelf);
         UIManager.Instance.SaveUIControl();
         SaveManager.Instance.SaveGameData(CurrentSaveSlot);
     }

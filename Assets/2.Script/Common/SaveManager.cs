@@ -22,6 +22,9 @@ public class SaveManager : Singleton<SaveManager>
     protected override void OnAwake()
     {
         database = FirebaseFirestore.DefaultInstance;
+
+        for (int i = 0; i < 3; i++) //게임 첫 실행시 데이터 초기화
+            currentGameData[i] = new GameData();
     }
 
     public void SaveMap() //맵 오브젝트 데이터 저장, 맵(씬)) 넘어가기 전에 호출.
@@ -76,8 +79,7 @@ public class SaveManager : Singleton<SaveManager>
         });
     }
 
-    // 데이터를 서버에서 불러오기
-    public void LoadSettingsFromServer(string uid)
+    public void LoadSettingsFromServer(string uid) // 데이터를 서버에서 불러오기
     {
         DocumentReference docRef = database.Collection("users").Document(uid);
 
@@ -123,7 +125,7 @@ public class SaveManager : Singleton<SaveManager>
         {
             if (task.IsCompleted)
             {
-                UIManager.Instance.SaveDataSlotTextUI(SlotIndex);
+                UIManager.Instance.SaveUpdate(SlotIndex);
             }
             else if (task.IsFaulted)
             {
@@ -198,7 +200,23 @@ public class SaveManager : Singleton<SaveManager>
         Inventory.Instance.AddItem(26, currentGameData[currentLoadIndex].Wizard_R);
         Inventory.Instance.AddItem(36, currentGameData[currentLoadIndex].Wizard_U);
 
-        //지형 업데이트 필요
+        //미션이 클리어 되었으면 지형 업데이트
+        if(currentGameData[currentLoadIndex].Stair_Main == false)
+        {
+            
+        }
+        if(currentGameData[currentLoadIndex].Gate == false)
+        {
+            
+        }
+        if(currentGameData[currentLoadIndex].Grave == false)
+        {
+            
+        }
+        if(currentGameData[currentLoadIndex].EndingChest == false)
+        {
+            
+        }
     }
 
     private void DataInput(int SlotIndex) // 저장할 데이터를 최신화

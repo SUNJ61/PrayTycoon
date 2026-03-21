@@ -97,8 +97,11 @@ public class FirebaseManager : MonoBehaviour
         {
             auth.SignOut();
             SaveManager.Instance.LogInState = false;
+            for (int i = 0; i < 3; i++) //데이터 초기화
+                SaveManager.Instance.currentGameData[i] = new GameData(); 
+            
             LobbyManager.Instance.SetLogOutUI();
-        
+            LobbyManager.Instance.SetLoadDataUI();
         }
         else
         {
