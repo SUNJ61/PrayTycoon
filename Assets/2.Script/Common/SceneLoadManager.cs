@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class SceneLoadManager : Singleton<SceneLoadManager>
 {
     private Vector3 PlayerspawnPoint;
-    private readonly HashSet<string> WhiteList = new HashSet<string>
+    private readonly HashSet<string> WhiteList = new HashSet<string> //로비로 이동해도 삭제하면 안돼는 매니저들
     {
       "SceneLoadManager",
       "SaveManager",

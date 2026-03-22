@@ -8,7 +8,7 @@ using System;
 
 public class SaveManager : Singleton<SaveManager>
 {
-    private MapSaveData currentSave = new MapSaveData();
+    private MapSaveData currentMapSave = new MapSaveData();
     
     private FirebaseFirestore database;
 
@@ -36,19 +36,46 @@ public class SaveManager : Singleton<SaveManager>
         foreach (var obj in FindObjectsOfType<SaveObject>(true)) //맵에 존재하는 SaveObject 스크립트가 존재하는 오브젝트의 현재 데이터를 모두 저장. 
             list.Add(obj.GetData());
         
-        currentSave.sceneObjects[sceneName] = list; //위에서 저장한 데이터를 딕셔너리에 씬별로 저장
+        currentMapSave.sceneObjects[sceneName] = list; //위에서 저장한 데이터를 딕셔너리에 씬별로 저장
     }
 
     public void LoadMap(string sceneName) //맵 오브젝트 데이터 로드, 씬 넘어온 직후 호출.
     {
-        if (currentSave.sceneObjects.ContainsKey(sceneName))
+        if (currentMapSave.sceneObjects.ContainsKey(sceneName)) // 한번이라도 씬이동, 맵데이터 로드를 했을 경우
         {
             foreach (var obj in FindObjectsOfType<SaveObject>(true))
             {
-                var data = currentSave.sceneObjects[sceneName].Find(d => d.objectId == obj.ObjectId); //MapSaveData 딕셔너리에 저장된 맵 데이터에서 로드된 씬에 있는 오브젝트의 같은 ID를 찾아 데이터를 저장. 
+                var data = currentMapSave.sceneObjects[sceneName].Find(d => d.objectId == obj.ObjectId); //MapSaveData 딕셔너리에 저장된 맵 데이터에서 로드된 씬에 있는 오브젝트의 같은 ID를 찾아 데이터를 저장. 
 
                 if (data != null)
                     obj.LoadFromData(data); //불러와진 씬 오브젝트에 딕셔너리에 저장된 데이터 덮어쓰기.
+            }
+        }
+        else // 씬이동 이후 처음 맵을 로드할 경우. (세이브 파일 로드시)
+        {
+            Debug.Log("첫 맵 로드 진행중");
+            string current_sceneName = SceneManager.GetActiveScene().name;
+
+            List<MapObjectData> list = new List<MapObjectData>();
+
+            foreach (SaveObject obj in FindObjectsOfType<SaveObject>(true)) // 서버에서 로드한 데이터 삽입
+            {
+                if(current_sceneName == "TycoonMainMap")
+                    MainMapIdCheck(obj);
+                else if(current_sceneName == "TycoonGrave")
+                    GraveMapIdCheck(obj);
+                
+                list.Add(obj.GetData());
+            }
+        
+            currentMapSave.sceneObjects[current_sceneName] = list;
+
+            foreach (var obj in FindObjectsOfType<SaveObject>(true)) // 로드한 데이터 적용
+            {
+                var data = currentMapSave.sceneObjects[sceneName].Find(d => d.objectId == obj.ObjectId);
+
+                if (data != null)
+                    obj.LoadFromData(data);
             }
         }
     }
@@ -200,23 +227,7 @@ public class SaveManager : Singleton<SaveManager>
         Inventory.Instance.AddItem(26, currentGameData[currentLoadIndex].Wizard_R);
         Inventory.Instance.AddItem(36, currentGameData[currentLoadIndex].Wizard_U);
 
-        //미션이 클리어 되었으면 지형 업데이트
-        if(currentGameData[currentLoadIndex].Stair_Main == false)
-        {
-            
-        }
-        if(currentGameData[currentLoadIndex].Gate == false)
-        {
-            
-        }
-        if(currentGameData[currentLoadIndex].Grave == false)
-        {
-            
-        }
-        if(currentGameData[currentLoadIndex].EndingChest == false)
-        {
-            
-        }
+        //지형 업데이트는 씬 로드시 작동하도록 다른곳에 작성
     }
 
     private void DataInput(int SlotIndex) // 저장할 데이터를 최신화
@@ -243,5 +254,35 @@ public class SaveManager : Singleton<SaveManager>
         currentGameData[SlotIndex].Wizard_N = Inventory.Instance.AmountItem(16);
         currentGameData[SlotIndex].Wizard_R = Inventory.Instance.AmountItem(26);
         currentGameData[SlotIndex].Wizard_U = Inventory.Instance.AmountItem(36);
+    }
+
+    private void MainMapIdCheck(SaveObject obj)
+    {
+        if(obj.ObjectId == "Stair Broken - Main")
+            obj.isRepaired = currentGameData[currentLoadIndex].Stair_Main;
+
+        if(obj.ObjectId == "Stair - Main")
+            obj.isRepaired = !currentGameData[currentLoadIndex].Stair_Main;
+
+        if(obj.ObjectId == "Gate Close")
+            obj.isRepaired = currentGameData[currentLoadIndex].Gate;
+
+        if(obj.ObjectId == "Gate Open")
+            obj.isRepaired = !currentGameData[currentLoadIndex].Gate;
+
+        if(obj.ObjectId == "EndingChest_Close")
+            obj.isRepaired = currentGameData[currentLoadIndex].EndingChest;
+
+        if(obj.ObjectId == "EndingChest_Open")
+            obj.isRepaired = !currentGameData[currentLoadIndex].EndingChest;
+    }
+
+    private void GraveMapIdCheck(SaveObject obj)
+    {
+        if(obj.ObjectId == "Broken Pillar")
+            obj.isRepaired = currentGameData[currentLoadIndex].Grave;
+
+        if(obj.ObjectId == "Pillar")
+            obj.isRepaired = !currentGameData[currentLoadIndex].Grave;
     }
 }

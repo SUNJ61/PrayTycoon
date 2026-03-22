@@ -48,8 +48,9 @@ public class StairUpdate : MonoBehaviour, IQuest
         QuestTrigger.enabled = Stair_B_Data.isRepaired;
 
         GameObject Stair = gameObject.transform.GetChild(1).gameObject;
-        Stair.SetActive(!Stair_B_Data.isRepaired);
-        QuestClear = !Stair_B_Data.isRepaired;
+        SaveObject Stair_Data = Stair.transform.GetComponent<SaveObject>();
+        Stair.SetActive(Stair_Data.isRepaired);
+        QuestClear = Stair_Data.isRepaired;
     }
 
     public void SetQuestClear() // 퀘스트가 성공하면 발생하는 이벤트. (오브젝트 변경, 아이템 뽑기 같은 함수 넣으면 될 듯.)
@@ -69,7 +70,9 @@ public class StairUpdate : MonoBehaviour, IQuest
             gameData.Stair_Main = false;
 
         GameObject Stair = gameObject.transform.GetChild(1).gameObject;
+        SaveObject Stair_Data = Stair.transform.GetComponent<SaveObject>();
         Stair.SetActive(true);
+        Stair_Data.isRepaired = true;
 
         QuestTrigger.enabled = false;
     }
