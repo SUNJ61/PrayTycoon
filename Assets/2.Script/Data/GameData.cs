@@ -1,5 +1,6 @@
 using Firebase.Firestore;
 using System;
+using System.Collections.Generic;
 
 [FirestoreData]
 public class GameData //게임플레이 데이터를 저장한다. (세이브 로드용)
@@ -7,7 +8,7 @@ public class GameData //게임플레이 데이터를 저장한다. (세이브 �
     //저장 날짜
     [FirestoreProperty] public string SaveDate {get; set;} = null;
 
-    //슬롯 정보
+    //세이브 슬롯 정보
     [FirestoreProperty] public int SlotIndex {get; set;} = -1;
 
     //재화 저장
@@ -27,6 +28,9 @@ public class GameData //게임플레이 데이터를 저장한다. (세이브 �
     [FirestoreProperty] public int  Wizard_N{get; set;} = 0;
     [FirestoreProperty] public int  Wizard_R{get; set;} = 0;
     [FirestoreProperty] public int  Wizard_U{get; set;} = 0;
+
+    //길드 용병 등록 정보
+    [FirestoreProperty] public List<int> MercenaryIds { get; set; } = new List<int> { -1, -1, -1 };
 
     //진행도 저장 (bool 값)
     [FirestoreProperty] public bool Stair_Main {get; set;} = true;

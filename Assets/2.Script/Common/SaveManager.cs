@@ -16,6 +16,9 @@ public class SaveManager : Singleton<SaveManager>
     public GameData[] currentGameData= new GameData[3]; // 게임 데이터 저장
 
     public int currentLoadIndex = -1;
+    public int GuildSlot0_ItemId;
+    public int GuildSlot1_ItemId;
+    public int GuildSlot2_ItemId;
 
     public bool LogInState = false;
 
@@ -227,6 +230,9 @@ public class SaveManager : Singleton<SaveManager>
         Inventory.Instance.AddItem(26, currentGameData[currentLoadIndex].Wizard_R);
         Inventory.Instance.AddItem(36, currentGameData[currentLoadIndex].Wizard_U);
 
+        for(int i = 0; i < 2; i++)
+            UIManager.Instance.GuildSlotEdit(currentGameData[currentLoadIndex].MercenaryIds[i],i); //테스트 필요
+
         //지형 업데이트는 씬 로드시 작동하도록 다른곳에 작성
     }
 
@@ -254,6 +260,11 @@ public class SaveManager : Singleton<SaveManager>
         currentGameData[SlotIndex].Wizard_N = Inventory.Instance.AmountItem(16);
         currentGameData[SlotIndex].Wizard_R = Inventory.Instance.AmountItem(26);
         currentGameData[SlotIndex].Wizard_U = Inventory.Instance.AmountItem(36);
+
+        //길드 용병 저장 추가 필요
+        currentGameData[SlotIndex].MercenaryIds[0] = GuildSlot0_ItemId;
+        currentGameData[SlotIndex].MercenaryIds[1] = GuildSlot1_ItemId;
+        currentGameData[SlotIndex].MercenaryIds[2] = GuildSlot2_ItemId;
     }
 
     private void MainMapIdCheck(SaveObject obj)

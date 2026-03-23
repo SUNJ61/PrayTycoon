@@ -302,6 +302,8 @@ public class UIManager : Singleton<UIManager>
             case 0:
                 if (GuildSolt1 != null)
                     GuildSolt1 = null;
+
+                SaveManager.Instance.GuildSlot0_ItemId = ItemID;
                 GuildSolt1 = Instantiate(Item.Icon, GuildSlot_List[Index].transform);
                 Size = GuildSolt1.GetComponent<RectTransform>();
 
@@ -311,6 +313,8 @@ public class UIManager : Singleton<UIManager>
             case 1:
                 if (GuildSolt2 != null)
                     GuildSolt2 = null;
+
+                SaveManager.Instance.GuildSlot1_ItemId = ItemID;
                 GuildSolt2 = Instantiate(Item.Icon, GuildSlot_List[Index].transform);
                 Size = GuildSolt2.GetComponent<RectTransform>();
 
@@ -320,6 +324,8 @@ public class UIManager : Singleton<UIManager>
             case 2:
                 if (GuildSolt3 != null)
                     GuildSolt3 = null;
+
+                SaveManager.Instance.GuildSlot2_ItemId = ItemID;
                 GuildSolt3 = Instantiate(Item.Icon, GuildSlot_List[Index].transform);
                 Size = GuildSolt3.GetComponent<RectTransform>();
 
@@ -336,6 +342,7 @@ public class UIManager : Singleton<UIManager>
                 if (GuildSolt1 != null)
                     Destroy(GuildSolt1);
                 
+                SaveManager.Instance.GuildSlot0_ItemId = -1;
                 GuildSolt1 = null;
                 break;
 
@@ -343,6 +350,7 @@ public class UIManager : Singleton<UIManager>
                 if (GuildSolt2 != null)
                     Destroy(GuildSolt2);
                 
+                SaveManager.Instance.GuildSlot1_ItemId = -1;
                 GuildSolt2 = null;
                 break;
 
@@ -350,6 +358,7 @@ public class UIManager : Singleton<UIManager>
                 if (GuildSolt3 != null)
                     Destroy(GuildSolt3);
                 
+                SaveManager.Instance.GuildSlot2_ItemId = -1;
                 GuildSolt3 = null;
                 break;
         }
