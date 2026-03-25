@@ -15,6 +15,7 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
     public void StartGame(string sceneName) // 새 게임 시작시 씬 로드
     {
         SceneManager.sceneLoaded += OptionDataLoad;
+        SceneManager.sceneLoaded += SaveLoadUIUpdate;
 
         SceneManager.LoadScene(sceneName);
     }
@@ -93,6 +94,9 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
     private void SaveLoadUIUpdate(Scene scene, LoadSceneMode mode) //씬 로드마다 세이브 로드 UI 업데이트 함수 (로그인 시 GameData 업데이트 필요.)
     {
         SceneManager.sceneLoaded -= SaveLoadUIUpdate;
+
+        if(SaveManager.Instance.LogInState == false) //비로그인 시 세이브 슬롯 업데이트 하지 않음.
+            return;
 
         if(Object.FindAnyObjectByType<UIManager>() != null) //세이브 슬롯 업데이트
         {

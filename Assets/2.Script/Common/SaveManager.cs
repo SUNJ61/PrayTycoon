@@ -16,9 +16,9 @@ public class SaveManager : Singleton<SaveManager>
     public GameData[] currentGameData= new GameData[3]; // 게임 데이터 저장
 
     public int currentLoadIndex = -1;
-    public int GuildSlot0_ItemId;
-    public int GuildSlot1_ItemId;
-    public int GuildSlot2_ItemId;
+    public int GuildSlot0_ItemId = -1;
+    public int GuildSlot1_ItemId = -1;
+    public int GuildSlot2_ItemId = -1;
 
     public bool LogInState = false;
 
@@ -56,6 +56,9 @@ public class SaveManager : Singleton<SaveManager>
         }
         else // 씬이동 이후 처음 맵을 로드할 경우. (세이브 파일 로드시)
         {
+            if(currentLoadIndex == -1) // 세이브 파일을 로드하지 않았을 경우
+                return;
+            
             Debug.Log("첫 맵 로드 진행중");
             string current_sceneName = SceneManager.GetActiveScene().name;
 
@@ -195,10 +198,7 @@ public class SaveManager : Singleton<SaveManager>
                         int slotIndex = int.Parse(doc.Id.Replace("Slot", ""));
 
                         if (slotIndex >= 0 && slotIndex < 3)
-                        {
                             currentGameData[slotIndex] = doc.ConvertTo<GameData>();
-                            Debug.Log($"{slotIndex + 1}번 슬롯 로드 완료");
-                        }
                     }
                 }
 
@@ -230,8 +230,15 @@ public class SaveManager : Singleton<SaveManager>
         Inventory.Instance.AddItem(26, currentGameData[currentLoadIndex].Wizard_R);
         Inventory.Instance.AddItem(36, currentGameData[currentLoadIndex].Wizard_U);
 
-        for(int i = 0; i < 2; i++)
-            UIManager.Instance.GuildSlotEdit(currentGameData[currentLoadIndex].MercenaryIds[i],i); //테스트 필요
+        for(int i = 0; i < 3; i++)
+        {
+            if(currentGameData[currentLoadIndex].MercenaryIds[i] != -1) //빈 슬롯이 아닐 경우
+            {
+                Debug.Log($"로드시 용병 등록 [아이템 ID : {currentGameData[currentLoadIndex].MercenaryIds[i]}] [등록 인덱스 : {i}]");
+                CreditManager.Instance.GuildSlotAdd(currentGameData[currentLoadIndex].MercenaryIds[i],i);
+                UIManager.Instance.GuildSlotEdit(currentGameData[currentLoadIndex].MercenaryIds[i],i);
+            }
+        }
 
         //지형 업데이트는 씬 로드시 작동하도록 다른곳에 작성
     }

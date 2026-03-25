@@ -256,7 +256,6 @@ public class LobbyManager : MonoBehaviour
         {
             LoadDataUI.SetActive(!LoadDataUI.activeSelf);
             SaveManager.Instance.currentLoadIndex = slot;
-            Debug.Log($"현재 인덱스 : {SaveManager.Instance.currentLoadIndex}");
         }
     }
 

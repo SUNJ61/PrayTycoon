@@ -1110,6 +1110,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentLoadIndex: -1
+  GuildSlot0_ItemId: -1
+  GuildSlot1_ItemId: -1
+  GuildSlot2_ItemId: -1
   LogInState: 0
 --- !u!4 &216715623
 Transform:
