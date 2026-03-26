@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/1.Scenes/TycoonGuild.unity
     guid: 73e0fed00f07fd546b19be2116cfe697
+  - enabled: 1
+    path: Assets/1.Scenes/TycoonEnding.unity
+    guid: 0734df2294efd234baa0652a3944fe8f
   m_configObjects: {}

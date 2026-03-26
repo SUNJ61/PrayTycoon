@@ -59,7 +59,6 @@ public class SaveManager : Singleton<SaveManager>
             if(currentLoadIndex == -1) // 세이브 파일을 로드하지 않았을 경우
                 return;
             
-            Debug.Log("첫 맵 로드 진행중");
             string current_sceneName = SceneManager.GetActiveScene().name;
 
             List<MapObjectData> list = new List<MapObjectData>();
@@ -234,13 +233,15 @@ public class SaveManager : Singleton<SaveManager>
         {
             if(currentGameData[currentLoadIndex].MercenaryIds[i] != -1) //빈 슬롯이 아닐 경우
             {
-                Debug.Log($"로드시 용병 등록 [아이템 ID : {currentGameData[currentLoadIndex].MercenaryIds[i]}] [등록 인덱스 : {i}]");
                 CreditManager.Instance.GuildSlotAdd(currentGameData[currentLoadIndex].MercenaryIds[i],i);
                 UIManager.Instance.GuildSlotEdit(currentGameData[currentLoadIndex].MercenaryIds[i],i);
             }
         }
 
-        //지형 업데이트는 씬 로드시 작동하도록 다른곳에 작성
+        if(currentGameData[currentLoadIndex].EndingChest == false) //엔딩 상호작용이 이미 되었을 경우.
+            SceneLoadManager.Instance.EndingSceneLoad();
+        
+        //지형, 사물 업데이트는 맵 로드시 작동.
     }
 
     private void DataInput(int SlotIndex) // 저장할 데이터를 최신화

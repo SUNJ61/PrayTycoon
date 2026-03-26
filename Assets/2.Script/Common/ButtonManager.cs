@@ -142,6 +142,7 @@ public class ButtonManager : Singleton<ButtonManager>
             CreditManager.Instance.UseCredit(EndingPray,"Gold"); //gold 차감.
 
             //엔딩 요소 작동 코드 필요.
+            SceneLoadManager.Instance.EndingSceneLoad();
         }
         else //엔딩 조건에 만족하지 않을 경우.
         {

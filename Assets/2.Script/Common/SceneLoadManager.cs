@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -58,6 +59,11 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
         SceneManager.sceneLoaded += DataClear;
 
         SceneManager.LoadScene(sceneName); //씬로드
+    }
+
+    public void EndingSceneLoad() //3초 뒤 엔딩 씬 이동
+    {
+        StartCoroutine(EndingStart());
     }
 
     private void OptionDataLoad(Scene scene, LoadSceneMode mode) // 씬 이동 시 설정 데이터 이동 (로비 -> 메인 / 메인 -> 로비) + 로그인시 데이터 적용
@@ -124,5 +130,26 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
     {
         SceneManager.sceneLoaded -= DataClear;
         QuestManager.Instance.ResetData();
+    }
+
+    private IEnumerator EndingStart() // 3초뒤 엔딩씬으로 이동
+    {
+        yield return new WaitForSeconds(3.0f);
+
+        GameObject[] ManagerObjects = FindObjectsByType<GameObject>(FindObjectsSortMode.None); // DontDestroyOnLoad로 등록된 오브젝트 모두 찾기.
+        foreach (GameObject ManagerObject in ManagerObjects)
+        {
+            if(ManagerObject.transform.parent == null && ManagerObject.scene.name == "DontDestroyOnLoad") // 부모가 없고 DontDestroyOnLoad씬에 있는 오브젝트만 남김
+            {
+                if(!WhiteList.Contains(ManagerObject.name)) // 화이트 리스트에 없으면 매니저 삭제
+                    Destroy(ManagerObject);
+            }
+        }
+
+        SaveManager.Instance.currentLoadIndex = -1; // 로비로 이동시 로드 인덱스 초기화
+
+        yield return null;
+
+        SceneManager.LoadScene("TycoonEnding");
     }
 }
