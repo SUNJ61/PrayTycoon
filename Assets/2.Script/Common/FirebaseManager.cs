@@ -67,6 +67,8 @@ public class FirebaseManager : MonoBehaviour
 
     public void Login() //로그인
     {
+        // 로그인 시도 전, Firebase가 정상 작동 중인지 체크
+
         string email = LobbyManager.Instance.LogInIdInput.text + dummyDomain;
         string password = LobbyManager.Instance.LogInPwInput.text;
 

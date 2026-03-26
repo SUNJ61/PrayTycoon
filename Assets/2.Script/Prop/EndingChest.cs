@@ -13,7 +13,7 @@ public class EndingChest : MonoBehaviour, IQuest
     private string FixKey = "Chest";
     private string EndingKey = "Ending";
     private string FixCreditType = "Stone";
-    private string EndingCreditType = "Gold";
+    //private string EndingCreditType = "Gold";
 
     private bool QuestClear = false;
     private void Start()
