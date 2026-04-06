@@ -141,6 +141,9 @@ public class LobbyManager : MonoBehaviour
         SFXSlider.value = SaveManager.Instance.currentSettings.Volume_SFX;
         resDropdown.value = SaveManager.Instance.currentSettings.ResolutionIndex;
         FullScreenToggle.isOn = SaveManager.Instance.currentSettings.isFullScreen;
+
+        SoundManager.Instance.SetVolume("BGM",BGMSlider.value);
+        SoundManager.Instance.SetVolume("SFX",SFXSlider.value);
     }
 
     public void SetResolution(int index)
@@ -164,11 +167,15 @@ public class LobbyManager : MonoBehaviour
     public void BGMsetting(float value)
     {
         SaveManager.Instance.currentSettings.Volume_BGM = value;
+
+        SoundManager.Instance.SetVolume("BGM",BGMSlider.value);
     }
 
     public void SFXsetting(float value)
     {
         SaveManager.Instance.currentSettings.Volume_SFX = value;
+
+        SoundManager.Instance.SetVolume("SFX",SFXSlider.value);
     }
 
     public void LobbyOptionUI(bool isActive)
