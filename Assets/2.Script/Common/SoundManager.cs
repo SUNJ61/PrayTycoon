@@ -29,6 +29,9 @@ public class SoundManager : Singleton<SoundManager>
 
     public void SetVolume(string name, float sliderValue) //옵션으로 소리 조절시 소리값 조절
     {
-        audioMixer.SetFloat(name, Mathf.Log10(sliderValue) * 20);
+        if(sliderValue <= 0.0001f)
+            audioMixer.SetFloat(name, -80f);
+        else
+            audioMixer.SetFloat(name, Mathf.Log10(sliderValue) * 20);
     }
 }
