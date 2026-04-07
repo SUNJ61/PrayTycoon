@@ -14873,9 +14873,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40faba87e4cf7e849ba491f09d1135bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgmSource: {fileID: 0}
-  sfxSource: {fileID: 0}
+  GameSound: []
   audioMixer: {fileID: 24100000, guid: 303029bdbdd56c54fb98799e3b2cbbcb, type: 2}
+  BGM: {fileID: -1597412713698491741, guid: 303029bdbdd56c54fb98799e3b2cbbcb, type: 2}
+  SFX: {fileID: -116423190547204753, guid: 303029bdbdd56c54fb98799e3b2cbbcb, type: 2}
 --- !u!4 &1914465420
 Transform:
   m_ObjectHideFlags: 0
