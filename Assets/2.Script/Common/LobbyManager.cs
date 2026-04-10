@@ -53,6 +53,8 @@ public class LobbyManager : MonoBehaviour
         if(SaveManager.Instance != null)
             SaveManager.Instance.SetLobbyUI(); //로비 UI 변경
         
+        SoundManager.Instance.PlaySound("Room");
+        
         LobbyBTNSet();
         InitResolution();
         LobbyOptionSet();
@@ -180,6 +182,8 @@ public class LobbyManager : MonoBehaviour
 
     public void LobbyOptionUI(bool isActive)
     {
+        SoundManager.Instance.PlaySound("Button");
+
         if(isActive == false && SaveManager.Instance.LogInState == true)
         {
             string uid = Firebase.Auth.FirebaseAuth.DefaultInstance.CurrentUser.UserId;
@@ -192,6 +196,8 @@ public class LobbyManager : MonoBehaviour
 
     public void LobbyLogInUI(bool isActive)
     {
+        SoundManager.Instance.PlaySound("Button");
+
         LogInIdInput.text = "Id...";
         LogInPwInput.text = "Pw...";
         LogInUI.SetActive(isActive);
@@ -199,6 +205,8 @@ public class LobbyManager : MonoBehaviour
 
     public void LobbySignInUI(bool isActive)
     {
+        SoundManager.Instance.PlaySound("Button");
+
         SignInIdInput.text = "Id...";
         SignInPwInput.text = "Pw...";
         SignInUI.SetActive(isActive);
@@ -220,6 +228,8 @@ public class LobbyManager : MonoBehaviour
 
     public void SetLoadUI() //로드 UI 띄우기 내리기.
     {
+        SoundManager.Instance.PlaySound("Button");
+
         if(LoadUI.alpha == 1)
         {
             LoadUI.alpha = 0;
@@ -268,6 +278,8 @@ public class LobbyManager : MonoBehaviour
 
     public void LoadData() // 데이터 로드, 씬 이동
     {
+        SoundManager.Instance.PlaySound("Button");
+
         LoadDataUI.SetActive(!LoadDataUI.activeSelf);
         SceneLoadManager.Instance.LoadGame("TycoonMainMap");
     }
@@ -275,6 +287,8 @@ public class LobbyManager : MonoBehaviour
     public void CloseBTN(GameObject BTN)
     {
         GameObject parentObj = BTN.transform.parent.gameObject;
+
+        SoundManager.Instance.PlaySound("Button");
 
         if(parentObj != null)
         {
@@ -308,6 +322,8 @@ public class LobbyManager : MonoBehaviour
     5. 유저 id 기반으로 설정 데이터를 저장하고 로그인시 불러오는 기능 만들기. (완)
     6. 유저 id 기반으로 게임 세이브, 로드 기능 만들기. (완)
     7. 유저 Id 기반으로 길드에 등록된 용병 세이브 로드 기능 만들기. (완)
-    8. 엔딩 만들기. (진행 중)
+    8. 엔딩 만들기. (완)
+    9. 사운드 매니저 제작하기. (완)
+    10. 사운드 연결하기. (진행 중)
     */
 }

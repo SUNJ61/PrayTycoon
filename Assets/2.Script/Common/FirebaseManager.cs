@@ -47,6 +47,8 @@ public class FirebaseManager : MonoBehaviour
         string email = LobbyManager.Instance.SignInIdInput.text + dummyDomain;
         string password = LobbyManager.Instance.SignInPwInput.text;
 
+        SoundManager.Instance.PlaySound("Button");
+
         if (password.Length < 6 || email.Length < 6) //아이디 비밀번호 6자 이하 회원가입 불가.
         {
             LobbyManager.Instance.ShowErrorText(LobbyManager.Instance.SignInErrorText.gameObject);
@@ -67,10 +69,10 @@ public class FirebaseManager : MonoBehaviour
 
     public void Login() //로그인
     {
-        // 로그인 시도 전, Firebase가 정상 작동 중인지 체크
-
         string email = LobbyManager.Instance.LogInIdInput.text + dummyDomain;
         string password = LobbyManager.Instance.LogInPwInput.text;
+
+        SoundManager.Instance.PlaySound("Button");
 
         auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread(task =>
         {
@@ -95,6 +97,8 @@ public class FirebaseManager : MonoBehaviour
 
     public void LogOut() //로그아웃
     {
+        SoundManager.Instance.PlaySound("Button");
+
         if (auth.CurrentUser != null)
         {
             auth.SignOut();

@@ -7,10 +7,10 @@ public class SoundManager : Singleton<SoundManager>
 {
     private List<AudioSource> SoundBoxPool = new List<AudioSource>();
     private List<AudioSource> LoopSoundBox = new List<AudioSource>();
-    private GameObject SoundBoxPrefab;
     private int PoolCount = 10;
 
     public List<SoundData> GameSound;
+    public GameObject SoundBoxPrefab;
 
     public AudioMixer audioMixer;
     public AudioMixerGroup BGM;
@@ -18,8 +18,6 @@ public class SoundManager : Singleton<SoundManager>
 
     protected override void OnAwake()
     {
-        // 사운드 박스 프리팹 리소스에서 가져오기.
-
         SoundBoxPooling(); //사운드 박스 오브젝트 풀링
     }
     public void PlaySound(string name) // 게임 배경음 재생
@@ -29,7 +27,7 @@ public class SoundManager : Singleton<SoundManager>
         if(data != null)
         {
             if(data.clip == null) return;
-            //사운드 박스 소환, 사운드 플레이 코드 필요 
+            
             AudioSource source = SoundBoxPool.Find(s => !s.gameObject.activeSelf); //폴링된 리스트에서 비활성화 된 사운드 박스 찾기.
 
             if(source == null) source = CreateNewSoundBox(); //사운드 박스가 부족할 시 추가 생성.
@@ -55,6 +53,8 @@ public class SoundManager : Singleton<SoundManager>
                 StartCoroutine(EndSFX(source));
             else
                 LoopSoundBox.Add(source);
+
+            source.Play(); //재생
         }
     }
 
@@ -68,7 +68,17 @@ public class SoundManager : Singleton<SoundManager>
 
     public void EndBGM() //루프로 돌고있는 BGM 끄기
     {
-        //소스에 할당된 BGM, SFX초기화 필요, 할당된 클립 제거 필요, 사운드 박스 비활성화 필요
+        for(int i = 0; i < LoopSoundBox.Count; i++)
+        {
+            AudioSource source = LoopSoundBox[i];
+
+            source.Stop();
+            source.clip = null;
+            source.loop = false;
+            source.outputAudioMixerGroup = null;
+
+            source.gameObject.SetActive(false);
+        }
     }
 
     private void SoundBoxPooling()

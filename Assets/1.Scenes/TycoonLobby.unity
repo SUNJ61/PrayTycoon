@@ -14873,7 +14873,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40faba87e4cf7e849ba491f09d1135bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameSound: []
+  GameSound:
+  - {fileID: 11400000, guid: ab099a87c09668e40ad5580f695ea544, type: 2}
+  - {fileID: 11400000, guid: f4f70a744b4e7ab4a8c6f50cdb20560d, type: 2}
+  - {fileID: 11400000, guid: 0d1bf4c69b7ade04498d125bb1830ee4, type: 2}
+  - {fileID: 11400000, guid: 801b4ff001ff0c647a7e3a2338dd2677, type: 2}
+  - {fileID: 11400000, guid: b73c8b9f1e8f17f4e989da4a60a9dbd8, type: 2}
+  - {fileID: 11400000, guid: 9a8c1eb4fdcd9ad4c84ece43a3f7dfa3, type: 2}
+  - {fileID: 11400000, guid: e847d1dc8efca95478d818a1b72d27d5, type: 2}
+  - {fileID: 11400000, guid: a85a9b06a85e33c47a5b67973f404152, type: 2}
+  SoundBoxPrefab: {fileID: 273764359454971655, guid: 74a9d442e1064934c862a4f5bf1dedc7,
+    type: 3}
   audioMixer: {fileID: 24100000, guid: 303029bdbdd56c54fb98799e3b2cbbcb, type: 2}
   BGM: {fileID: -1597412713698491741, guid: 303029bdbdd56c54fb98799e3b2cbbcb, type: 2}
   SFX: {fileID: -116423190547204753, guid: 303029bdbdd56c54fb98799e3b2cbbcb, type: 2}

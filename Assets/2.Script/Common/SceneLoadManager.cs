@@ -11,11 +11,16 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
       "SceneLoadManager",
       "SaveManager",
       "FirebaseManager",
-      "Firebase Services"
+      "Firebase Services",
+      "SoundManager"
     };
 
     public void StartGame(string sceneName) // 새 게임 시작시 씬 로드
     {
+        SoundManager.Instance.PlaySound("Button");
+        SoundManager.Instance.EndBGM();
+        SoundManager.Instance.PlaySound("Main");
+
         SceneManager.sceneLoaded += OptionDataLoad;
         SceneManager.sceneLoaded += SaveLoadUIUpdate;
 
