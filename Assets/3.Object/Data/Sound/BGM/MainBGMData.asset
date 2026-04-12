@@ -15,5 +15,5 @@ MonoBehaviour:
   SoundType: BGM
   ClipName: Main
   clip: {fileID: 8300000, guid: b9ef9227ad2633442bc31d7369e9e248, type: 3}
-  Voulume: 0.5
+  Voulume: 0.2
   loop: 1

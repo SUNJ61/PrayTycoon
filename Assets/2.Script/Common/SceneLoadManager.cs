@@ -29,6 +29,9 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
 
     public void LoadGame(string sceneName) // 저장된 게임 시작시 씬 로드
     {
+        SoundManager.Instance.EndBGM();
+        SoundManager.Instance.PlaySound("Main");
+
         SceneManager.sceneLoaded += OptionDataLoad;
         SceneManager.sceneLoaded += SaveLoadUIUpdate;
         SceneManager.sceneLoaded += GameDataLoad;
@@ -39,6 +42,8 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
 
     public void ExitGame(string sceneName) // 게임 종료시 씬 로드
     {
+        SoundManager.Instance.EndBGM();
+
         SceneManager.sceneLoaded += OptionDataLoad;
         SceneManager.sceneLoaded += SaveLoadUIUpdate;
 

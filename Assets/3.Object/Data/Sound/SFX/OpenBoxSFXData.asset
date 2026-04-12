@@ -15,5 +15,5 @@ MonoBehaviour:
   SoundType: SFX
   ClipName: OpenBox
   clip: {fileID: 8300000, guid: accd5dcd79a4f6e42b7fde9b61b63fa0, type: 3}
-  Voulume: 0.5
+  Voulume: 1
   loop: 0

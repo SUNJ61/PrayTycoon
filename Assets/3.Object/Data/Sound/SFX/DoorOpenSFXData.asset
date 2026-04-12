@@ -15,5 +15,5 @@ MonoBehaviour:
   SoundType: SFX
   ClipName: DoorOpen
   clip: {fileID: 8300000, guid: 6e19508bc014d3647b1e09aabf6df119, type: 3}
-  Voulume: 0.5
+  Voulume: 1
   loop: 0

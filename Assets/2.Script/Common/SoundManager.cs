@@ -47,6 +47,7 @@ public class SoundManager : Singleton<SoundManager>
 
             source.clip = data.clip;
             source.loop = data.loop;
+            source.volume = data.Voulume;
             source.Play();
 
             if(data.loop == false)

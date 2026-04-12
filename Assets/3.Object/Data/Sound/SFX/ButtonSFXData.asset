@@ -15,5 +15,5 @@ MonoBehaviour:
   SoundType: SFX
   ClipName: Button
   clip: {fileID: 8300000, guid: d751ee9c400a5224e98d878cb463e67e, type: 3}
-  Voulume: 0.5
+  Voulume: 1
   loop: 0

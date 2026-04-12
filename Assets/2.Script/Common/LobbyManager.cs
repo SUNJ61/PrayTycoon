@@ -212,6 +212,11 @@ public class LobbyManager : MonoBehaviour
         SignInUI.SetActive(isActive);
     }
 
+    public void GameStartBTN(string sceneName) //시작 버튼 클릭시
+    {
+        SceneLoadManager.Instance.StartGame(sceneName);
+    }
+
     public void SetLogInUI() //로그인 했을 시
     {
         LogInMenuBTN.SetActive(false);
@@ -269,6 +274,8 @@ public class LobbyManager : MonoBehaviour
 
     public void SetLoadData(int slot) // 데이터 로드 확인 UI 띄우기 (빈 데이터는 작동하면 안됨)
     {
+        SoundManager.Instance.PlaySound("Button");
+
         if(SaveManager.Instance.currentGameData[slot].SaveDate != null)
         {
             LoadDataUI.SetActive(!LoadDataUI.activeSelf);

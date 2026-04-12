@@ -15,5 +15,5 @@ MonoBehaviour:
   SoundType: SFX
   ClipName: FixStone
   clip: {fileID: 8300000, guid: b9a93064c17fa7d4296aa2079d1e6afd, type: 3}
-  Voulume: 0.5
+  Voulume: 1
   loop: 0

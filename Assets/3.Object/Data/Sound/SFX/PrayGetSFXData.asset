@@ -15,5 +15,5 @@ MonoBehaviour:
   SoundType: SFX
   ClipName: PrayGet
   clip: {fileID: 8300000, guid: 6dfefd3527c297142a950d214634380f, type: 3}
-  Voulume: 0.5
+  Voulume: 1
   loop: 0
