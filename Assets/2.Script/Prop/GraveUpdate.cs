@@ -70,6 +70,7 @@ public class GraveUpdate : MonoBehaviour, IQuest
         if (QuestClear == false) // 퀘스트 완료 전 작동 함수.
         {
             QuestClear = true;
+            SoundManager.Instance.PlaySound("FixStone");
 
             GameObject Grave_B = gameObject.transform.GetChild(0).gameObject;
             SaveObject Grave_B_Data = Grave_B.transform.GetComponent<SaveObject>();

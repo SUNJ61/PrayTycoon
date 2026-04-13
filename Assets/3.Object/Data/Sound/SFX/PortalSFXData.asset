@@ -15,5 +15,5 @@ MonoBehaviour:
   SoundType: SFX
   ClipName: Portal
   clip: {fileID: 8300000, guid: 1fcad06d1f30ec94a93da0a64613edd7, type: 3}
-  Voulume: 1
+  Voulume: 0.6
   loop: 0

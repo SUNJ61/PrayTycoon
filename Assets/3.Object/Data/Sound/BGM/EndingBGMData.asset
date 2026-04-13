@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 53985f304cd38744aafc4febd7e38c0d, type: 3}
-  m_Name: RoomBGMData
+  m_Name: EndingBGMData
   m_EditorClassIdentifier: 
   SoundType: BGM
-  ClipName: Room
-  clip: {fileID: 8300000, guid: 494520064309fd14997aceb7ca5e5b82, type: 3}
+  ClipName: Ending
+  clip: {fileID: 8300000, guid: 79576dff6e68148488cf4069c1dbdb39, type: 3}
   Voulume: 0.4
   loop: 1

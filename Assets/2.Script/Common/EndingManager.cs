@@ -22,9 +22,15 @@ public class EndingManager : MonoBehaviour
     private void Awake()
     {
         LobbyBTN = LobbyBTNImg.gameObject.GetComponent<Button>();
-        LobbyBTN.onClick.AddListener(()=>SceneLoadManager.Instance.ExitGame("TycoonLobby"));
+        LobbyBTN.onClick.AddListener(()=>EndingBTN());
 
         StartCoroutine(EndingActive());
+    }
+
+    private void EndingBTN()
+    {
+        SoundManager.Instance.PlaySound("Button");
+        SceneLoadManager.Instance.ExitGame("TycoonLobby");
     }
 
     private IEnumerator EndingActive()

@@ -199,6 +199,8 @@ public class UIManager : Singleton<UIManager>
 
     public void OptionUIControl()
     {
+        SoundManager.Instance.PlaySound("Button");
+
         if(OptionUI.activeSelf == true && SaveManager.Instance.LogInState == true)
         {
             string uid = Firebase.Auth.FirebaseAuth.DefaultInstance.CurrentUser.UserId;
@@ -211,12 +213,16 @@ public class UIManager : Singleton<UIManager>
 
     public void SaveUIControl() // 세이브 확정 UI 띄우기
     {
+        SoundManager.Instance.PlaySound("Button");
+
         MenuUI.SetActive(false);
         SaveUI.SetActive(!SaveUI.activeSelf);
     }
 
     public void SetSaveData(int slotIndex) // 데이터 세이브 확인 UI 띄우기
     {
+        SoundManager.Instance.PlaySound("Button");
+        
         ButtonManager.Instance.SaveSlotIndex(slotIndex);
         SaveDataUI.SetActive(!SaveDataUI.activeSelf);
     }

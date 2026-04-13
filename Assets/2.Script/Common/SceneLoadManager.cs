@@ -147,6 +147,9 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
     {
         yield return new WaitForSeconds(3.0f);
 
+        SoundManager.Instance.EndBGM();
+        SoundManager.Instance.PlaySound("Ending");
+
         GameObject[] ManagerObjects = FindObjectsByType<GameObject>(FindObjectsSortMode.None); // DontDestroyOnLoad로 등록된 오브젝트 모두 찾기.
         foreach (GameObject ManagerObject in ManagerObjects)
         {

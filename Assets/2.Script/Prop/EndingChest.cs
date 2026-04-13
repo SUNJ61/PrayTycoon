@@ -67,6 +67,7 @@ public class EndingChest : MonoBehaviour, IQuest
     public void SetQuestClear() // 퀘스트가 성공하면 발생하는 이벤트. (상자 열림)
     {
         QuestClear = true;
+        SoundManager.Instance.PlaySound("OpenBox");
 
         GameObject EndingChest_C = gameObject.transform.GetChild(0).gameObject;
         SaveObject EndingChest_C_Data = EndingChest_C.GetComponent<SaveObject>();

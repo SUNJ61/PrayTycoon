@@ -87,6 +87,8 @@ public class ButtonManager : Singleton<ButtonManager>
 
     private void QuestButtonClick() //퀘스트 버튼 클릭시 발동하는 함수.
     {
+        SoundManager.Instance.PlaySound("Button");
+
         if (CreditManager.Instance.UseCredit
         (QuestManager.Instance.questCredit[QuestManager.Instance.currentKey], QuestManager.Instance.questCreditType[QuestManager.Instance.currentKey])) //현재 미션에 대해 크레딧이 소모 가능으로 판단하면 미션 업데이트.
         {
@@ -105,6 +107,8 @@ public class ButtonManager : Singleton<ButtonManager>
 
     private void SummonButtonClick() //소환 버튼 클릭시 발동하는 함수.
     {
+        SoundManager.Instance.PlaySound("Button");
+
         if (CreditManager.Instance.UseCredit
         (QuestManager.Instance.questCredit[QuestManager.Instance.currentKey], QuestManager.Instance.questCreditType[QuestManager.Instance.currentKey])) //현재 미션에 대해 크레딧이 소모 가능으로 판단하면 미션 업데이트. (소환 구분 법 필요.)
         {
@@ -134,6 +138,8 @@ public class ButtonManager : Singleton<ButtonManager>
 
     private void EndingButtonClick()
     {
+        SoundManager.Instance.PlaySound("Button");
+
         if(CreditManager.Instance.credit["Pray"] >= EndingPray && CreditManager.Instance.credit["Gold"] >= EndingGold) //엔딩 조건에 만족할 경우.
         {
             UIManager.Instance.GuideUIControl(false);
@@ -154,6 +160,9 @@ public class ButtonManager : Singleton<ButtonManager>
 
     private void PortalButtonClick() //포탈 버튼 클릭시 발동하는 함수.
     {
+        SoundManager.Instance.PlaySound("Button");
+        SoundManager.Instance.PlaySound("Portal");
+
         OnTeleport?.Invoke();
         
         UIManager.Instance.GuideUIControl(false);
@@ -165,18 +174,24 @@ public class ButtonManager : Singleton<ButtonManager>
 
     private void GuideCloseButtonClick()
     {
+        SoundManager.Instance.PlaySound("Button");
+
         GuideButton.onClick.RemoveAllListeners();
         UIManager.Instance.GuideUIControl(false);
     }
 
     private void GuildSlotAddBT(int index) //길드 슬롯에 용병추가 버튼
     {
+        SoundManager.Instance.PlaySound("Button");
+
         CurrnetGuildSlot = index;
         UIManager.Instance.GuilAddUIControl(true);
     }
 
     private void GuildSoltRemoveBT(int index) //길드 슬롯에 용병 제거
     {
+        SoundManager.Instance.PlaySound("Button");
+
         CreditManager.Instance.RemoveGuildSlot(index);
 
         UIManager.Instance.GuildSlotRemove(index);
@@ -187,6 +202,8 @@ public class ButtonManager : Singleton<ButtonManager>
 
     private void AddMercenary(int caseId) //용병 등록
     {
+        SoundManager.Instance.PlaySound("Button");
+
         int itemId = GuildItemIds[caseId];
 
         if(Inventory.Instance.HasItem(itemId, 1) && CreditManager.Instance.CheckGuildSlot(CurrnetGuildSlot)) //슬롯에 용병이 있을 때 등록 성공시 (해당 슬롯에 아이콘 등록 필요.)
@@ -244,6 +261,8 @@ public class ButtonManager : Singleton<ButtonManager>
     }
     public void SaveData() //세이브
     {
+        SoundManager.Instance.PlaySound("Button");
+
         UIManager.Instance.SaveDataUI.SetActive(!UIManager.Instance.SaveDataUI.activeSelf);
         UIManager.Instance.SaveUIControl();
         SaveManager.Instance.SaveGameData(CurrentSaveSlot);
