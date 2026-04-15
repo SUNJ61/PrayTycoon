@@ -29,9 +29,6 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
 
     public void LoadGame(string sceneName) // 저장된 게임 시작시 씬 로드
     {
-        SoundManager.Instance.EndBGM();
-        SoundManager.Instance.PlaySound("Main");
-
         SceneManager.sceneLoaded += OptionDataLoad;
         SceneManager.sceneLoaded += SaveLoadUIUpdate;
         SceneManager.sceneLoaded += GameDataLoad;
@@ -134,6 +131,13 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
     private void MapLoad(Scene scene, LoadSceneMode mode) // 씬 로드 후 콜백함수. 맵로드
     {
         SceneManager.sceneLoaded -= MapLoad;
+        
+        SoundManager.Instance.EndBGM();
+        if(scene.name == "TycoonMainMap")
+            SoundManager.Instance.PlaySound("Main");
+        else
+            SoundManager.Instance.PlaySound("Room");
+
         SaveManager.Instance.LoadMap(scene.name);
     }
 

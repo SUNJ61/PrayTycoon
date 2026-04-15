@@ -41045,6 +41045,7 @@ MonoBehaviour:
   - {fileID: 1202276422}
   - {fileID: 2046666135}
   - {fileID: 1329525081}
+  EndingChest: {fileID: 1442051346}
 --- !u!1 &1801629945
 GameObject:
   m_ObjectHideFlags: 0

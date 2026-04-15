@@ -19,6 +19,8 @@ public class ButtonManager : Singleton<ButtonManager>
 
     private Vector3 CurrentspawnPoint;
 
+    private BoxCollider2D EndingChest;
+
     private readonly int[] GuildItemIds = {14, 24, 34, 15, 25, 35, 16, 26, 36};
 
     private int CurrentQuestId;
@@ -56,6 +58,8 @@ public class ButtonManager : Singleton<ButtonManager>
             int index = i; //버튼 등록시 i로 등록하면 for문이 끝난후의 i값이 일괄적용 즉, 9가 적용됨.
             GuildAddButton[i].onClick.AddListener(() => AddMercenary(index));
         }
+
+        EndingChest = GameObject.Find("EndingCheat").GetComponent<BoxCollider2D>();
     }
 
     public void ButtonUpdate(int caseId) //가이드 버튼 설정 함수.
@@ -146,6 +150,8 @@ public class ButtonManager : Singleton<ButtonManager>
 
             CreditManager.Instance.UseCredit(EndingPray,"pray"); //pray 차감.
             CreditManager.Instance.UseCredit(EndingPray,"Gold"); //gold 차감.
+
+            EndingChest.enabled = false;
 
             //엔딩 요소 작동 코드 필요.
             SceneLoadManager.Instance.EndingSceneLoad();
