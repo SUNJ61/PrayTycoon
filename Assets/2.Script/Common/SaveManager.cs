@@ -140,12 +140,9 @@ public class SaveManager : Singleton<SaveManager>
 
     public void SaveGameData(int SlotIndex)
     {
+        if(LogInState == false) return;
+
         var auth = FirebaseAuth.DefaultInstance;
-        if (auth.CurrentUser == null) // 로그인 하지 않았으면 저장 x 추후 문구 UI에 문구 추가 필요.
-        {
-            Debug.LogError("로그인된 유저가 없습니다! 저장을 취소합니다.");
-            return;
-        }
 
         string uid = auth.CurrentUser.UserId;
 
@@ -168,8 +165,9 @@ public class SaveManager : Singleton<SaveManager>
 
     public void LoadGameDataFromServer()
     {
+        if(LogInState == false) return;
+        
         var auth = FirebaseAuth.DefaultInstance;
-        if (auth.CurrentUser == null) return;
 
         string uid = auth.CurrentUser.UserId;
 
