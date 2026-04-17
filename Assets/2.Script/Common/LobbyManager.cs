@@ -14,6 +14,7 @@ public class LobbyManager : MonoBehaviour
     public GameObject LogInUI;
     public GameObject SignInUI;
     public GameObject LoadDataUI;
+    public GameObject ExitGameUI;
     public GameObject LogInMenuBTN; 
     public GameObject SignInMenuBTN;
     public GameObject LogOutBTN;
@@ -309,6 +310,16 @@ public class LobbyManager : MonoBehaviour
             StopCoroutine(ErrorCorutine);
 
         ErrorCorutine = StartCoroutine(ShowError(ErrorObj, delay));
+    }
+
+    public void ExitGameUICtrl()
+    {
+        ExitGameUI.SetActive(!ExitGameUI.activeSelf);
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 
     private IEnumerator ShowError(GameObject ErrorObj, float delay)
