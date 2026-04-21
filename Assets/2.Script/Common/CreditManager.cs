@@ -48,6 +48,7 @@ public class CreditManager : Singleton<CreditManager>
         {
             Credit["Pray"] += PrayAdd;
             UIManager.Instance.CreditUIEdit();
+            SoundManager.Instance.PlaySound("PrayGet");
             Inventory.Instance.AddItem(CreditItemCode["Pray"], PrayAdd);
             yield return new WaitForSeconds(PrayDelay);
         }
