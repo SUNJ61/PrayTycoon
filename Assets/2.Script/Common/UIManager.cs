@@ -44,6 +44,7 @@ public class UIManager : Singleton<UIManager>
     public GameObject OptionUI;
     public GameObject SaveUI;
     public GameObject SaveDataUI;
+    public JoyStick JoyStickUI;
 
     private readonly int[] GuildItemIds = {14, 15, 16, 24, 25, 26, 34, 35, 36};
     private readonly List<int> standardWidths = new List<int> { 1280, 1600, 1920, 2560, 3840 };

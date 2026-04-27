@@ -25971,13 +25971,14 @@ GameObject:
   - component: {fileID: 869720056}
   - component: {fileID: 869720058}
   - component: {fileID: 869720057}
+  - component: {fileID: 869720059}
   m_Layer: 5
   m_Name: JoyStick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &869720056
 RectTransform:
   m_ObjectHideFlags: 0
@@ -26036,6 +26037,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 869720055}
   m_CullTransparentMesh: 1
+--- !u!114 &869720059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869720055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59de374600ef39543a64e0fcc771938f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Horizontal: 0
+  Vertical: 0
 --- !u!1 &875203611
 GameObject:
   m_ObjectHideFlags: 0
@@ -26453,6 +26468,7 @@ MonoBehaviour:
   OptionUI: {fileID: 173681653}
   SaveUI: {fileID: 1279887556}
   SaveDataUI: {fileID: 2081862330}
+  JoyStickUI: {fileID: 869720059}
 --- !u!1 &899449450
 GameObject:
   m_ObjectHideFlags: 0

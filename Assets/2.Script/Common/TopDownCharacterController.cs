@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 namespace Cainos.PixelArtTopDown_Basic
@@ -9,17 +8,31 @@ namespace Cainos.PixelArtTopDown_Basic
         public float speed;
 
         private Animator animator;
+        private JoyStick Joystick;
+
+        private Action MoveLogic;
 
         private void Start()
         {
             animator = GetComponent<Animator>();
+
+            #if UNITY_EDITOR || UNITY_ANDROID
+                if (UIManager.Instance != null && UIManager.Instance.JoyStickUI != null)
+                {
+                    UIManager.Instance.JoyStickUI.gameObject.SetActive(true);
+                    Joystick = UIManager.Instance.JoyStickUI;
+                    MoveLogic = MobileMove;
+                }
+            #else
+                UIManager.Instance.JoyStickUI.gameObject.SetActive(false);
+                MoveLogic = PCMove;
+            #endif
         }
 
 
         private void Update()
         {
-            PlayerMove();
-            PlayerUI();
+            MoveLogic?.Invoke(); // Action이 null이 아니면 실행.
         }
 
         private void PlayerMove()
@@ -66,6 +79,43 @@ namespace Cainos.PixelArtTopDown_Basic
 
                     UIManager.Instance.MenuUIControl();
             }
+        }
+
+        private void PCMove()
+        {
+            PlayerMove();
+            PlayerUI();
+        }
+
+        private void MobileMove()
+        {
+            Vector2 dir = Vector2.zero;
+            if (Joystick.Horizontal == -1)
+            {
+                dir.x = -1;
+                animator.SetInteger("Direction", 3);
+            }
+            else if (Joystick.Horizontal == 1)
+            {
+                dir.x = 1;
+                animator.SetInteger("Direction", 2);
+            }
+
+            if (Joystick.Vertical == 1)
+            {
+                dir.y = 1;
+                animator.SetInteger("Direction", 1);
+            }
+            else if (Joystick.Vertical == -1)
+            {
+                dir.y = -1;
+                animator.SetInteger("Direction", 0);
+            }
+
+            dir.Normalize();
+            animator.SetBool("IsMoving", dir.magnitude > 0);
+
+            GetComponent<Rigidbody2D>().velocity = speed * dir;
         }
     }
 }
