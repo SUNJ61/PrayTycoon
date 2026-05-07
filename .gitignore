@@ -76,6 +76,7 @@ crashlytics-build.properties
 **/google-services*.json.meta
 **/GoogleService-Info.plist
 **/serviceAccountKey.json
+**/google-services.xml
 
 # Firebase Admin SDK (Secret)
 *.config.json
