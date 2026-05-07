@@ -18,6 +18,7 @@ public class LobbyManager : MonoBehaviour
     public GameObject LogInMenuBTN; 
     public GameObject SignInMenuBTN;
     public GameObject LogOutBTN;
+    public GameObject ScreenOptionUI;
 
     public Button LogInBTN;
     public Button SignInBTN;
@@ -144,6 +145,11 @@ public class LobbyManager : MonoBehaviour
         SFXSlider.value = SaveManager.Instance.currentSettings.Volume_SFX;
         resDropdown.value = SaveManager.Instance.currentSettings.ResolutionIndex;
         FullScreenToggle.isOn = SaveManager.Instance.currentSettings.isFullScreen;
+
+        //모바일이면 전체화면 옵션 사용 x
+        #if UNITY_EDITOR || UNITY_ANDROID
+        ScreenOptionUI.SetActive(false);
+        #endif
 
         SoundManager.Instance.SetVolume("BGM",BGMSlider.value);
         SoundManager.Instance.SetVolume("SFX",SFXSlider.value);
@@ -342,9 +348,8 @@ public class LobbyManager : MonoBehaviour
     7. 유저 Id 기반으로 길드에 등록된 용병 세이브 로드 기능 만들기. (완)
     8. 엔딩 만들기. (완)
     9. 사운드 매니저 제작하기. (완)
-    10. 사운드 연결하기. (진행 중)
-    11. PC환경 테스트 / 모바일 환경 확대
+    10. 사운드 연결하기. (완)
+    11. PC환경 테스트 / 모바일 환경 확대 (진행 중)
 
-    버그 픽스 필요. 플레이어가 트리거 위에서 엔딩씬으로 이동시 싱글톤 매니저가 사라져 오류 발생. 플레이어를 이동후 고정하는 것으로 해결해야할 듯. 
     */
 }

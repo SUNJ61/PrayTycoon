@@ -11604,6 +11604,7 @@ MonoBehaviour:
   LogInMenuBTN: {fileID: 1282361897}
   SignInMenuBTN: {fileID: 946567139}
   LogOutBTN: {fileID: 160311253}
+  ScreenOptionUI: {fileID: 647573}
   LogInBTN: {fileID: 184854337}
   SignInBTN: {fileID: 1320990654}
   resDropdown: {fileID: 1867177706}
