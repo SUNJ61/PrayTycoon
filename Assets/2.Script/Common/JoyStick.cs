@@ -40,8 +40,6 @@ public class JoyStick : MonoBehaviour,IDragHandler, IPointerDownHandler, IPointe
 
     public void OnPointerDown(PointerEventData eventData) // 누르는 순간 실행 함수
     {
-        Debug.Log(gameObject.name + " 터치 성공!");
-
         OnDrag(eventData);
     }
 

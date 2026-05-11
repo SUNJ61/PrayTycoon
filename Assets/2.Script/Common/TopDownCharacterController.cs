@@ -23,19 +23,19 @@ namespace Cainos.PixelArtTopDown_Basic
                     Joystick = UIManager.Instance.JoyStickUI;
                     MoveLogic = MobileMove;
                 }
-            #else
+            #elif UNITY_STANDALONE
                 UIManager.Instance.JoyStickUI.gameObject.SetActive(false);
                 MoveLogic = PCMove;
             #endif
         }
 
 
-        private void Update()
+        private void FixedUpdate()
         {
             MoveLogic?.Invoke(); // Action이 null이 아니면 실행.
         }
 
-        private void PlayerMove()
+        private void PlayerMovePC()
         {
             Vector2 dir = Vector2.zero;
             if (Input.GetKey(KeyCode.A))
@@ -66,28 +66,7 @@ namespace Cainos.PixelArtTopDown_Basic
             GetComponent<Rigidbody2D>().velocity = speed * dir;
         }
 
-        private void PlayerUI()
-        {
-            if (Input.GetKeyDown(KeyCode.Tab))
-            {
-                UIManager.Instance.InventoryUIControl();
-            }
-            else if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                if(!UIManager.Instance.MenuUI.activeSelf)
-                    UIManager.Instance.UIOff();
-
-                    UIManager.Instance.MenuUIControl();
-            }
-        }
-
-        private void PCMove()
-        {
-            PlayerMove();
-            PlayerUI();
-        }
-
-        private void MobileMove()
+        private void PlayerMoveMobile()
         {
             Vector2 dir = Vector2.zero;
             if (Joystick.Horizontal == -1)
@@ -116,6 +95,33 @@ namespace Cainos.PixelArtTopDown_Basic
             animator.SetBool("IsMoving", dir.magnitude > 0);
 
             GetComponent<Rigidbody2D>().velocity = speed * dir;
+        }
+
+        private void PlayerUI()
+        {
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                UIManager.Instance.InventoryUIControl();
+            }
+            else if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if(!UIManager.Instance.MenuUI.activeSelf)
+                    UIManager.Instance.UIOff();
+
+                UIManager.Instance.MenuUIControl();
+            }
+        }
+
+        private void PCMove()
+        {
+            PlayerMovePC();
+            PlayerUI();
+        }
+
+        private void MobileMove()
+        {
+            PlayerMoveMobile();
+            PlayerUI();
         }
     }
 }

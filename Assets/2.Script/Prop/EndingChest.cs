@@ -7,13 +7,13 @@ public class EndingChest : MonoBehaviour, IQuest
 
     private int FixCredit = 5;
     private int FixID = 0;
-    //private int EndingCredit = 5;
+    private int EndingCredit = 5;
     private int EndingID = 3;
 
     private string FixKey = "Chest";
     private string EndingKey = "Ending";
     private string FixCreditType = "Stone";
-    //private string EndingCreditType = "Gold";
+    private string EndingCreditType = "Gold";
 
     private bool QuestClear = false;
     private void Start()
@@ -41,7 +41,7 @@ public class EndingChest : MonoBehaviour, IQuest
             ButtonManager.Instance.ButtonUpdate(EndingID);
 
             UIManager.Instance.QuestUIEdit(EndingKey);
-            //QuestManager.Instance.QuestCheck(EndingKey, EndingCreditType, EndingCredit, this); //필요 없어보임. 엔딩 버튼 함수는 지정되서 연결되어있음.
+            QuestManager.Instance.QuestCheck(EndingKey, EndingCreditType, EndingCredit, this); //필요 없어보임. 엔딩 버튼 함수는 지정되서 연결되어있음.
 
             UIManager.Instance.GuideUIControl(true);
         }

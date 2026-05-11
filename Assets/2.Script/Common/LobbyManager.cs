@@ -144,11 +144,12 @@ public class LobbyManager : MonoBehaviour
         BGMSlider.value = SaveManager.Instance.currentSettings.Volume_BGM;
         SFXSlider.value = SaveManager.Instance.currentSettings.Volume_SFX;
         resDropdown.value = SaveManager.Instance.currentSettings.ResolutionIndex;
-        FullScreenToggle.isOn = SaveManager.Instance.currentSettings.isFullScreen;
 
         //모바일이면 전체화면 옵션 사용 x
         #if UNITY_EDITOR || UNITY_ANDROID
         ScreenOptionUI.SetActive(false);
+        #elif UNITY_STANDALONE
+        FullScreenToggle.isOn = SaveManager.Instance.currentSettings.isFullScreen;
         #endif
 
         SoundManager.Instance.SetVolume("BGM",BGMSlider.value);

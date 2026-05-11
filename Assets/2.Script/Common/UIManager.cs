@@ -44,6 +44,8 @@ public class UIManager : Singleton<UIManager>
     public GameObject OptionUI;
     public GameObject SaveUI;
     public GameObject SaveDataUI;
+    public GameObject ScreenOptionUI;
+    public GameObject InventoryBTN;
     public JoyStick JoyStickUI;
 
     private readonly int[] GuildItemIds = {14, 15, 16, 24, 25, 26, 34, 35, 36};
@@ -60,6 +62,13 @@ public class UIManager : Singleton<UIManager>
         GuideUIText = GuideUI_List[0].GetComponent<TextMeshProUGUI>();
         GuideCondition = GuideUI_List[1].GetComponent<TextMeshProUGUI>();
         failCondition = FailUI_List[1].GetComponent<TextMeshProUGUI>();
+
+        #if UNITY_EDITOR || UNITY_ANDROID
+            ScreenOptionUI.SetActive(false);
+            InventoryBTN.SetActive(true);
+
+            Application.targetFrameRate = 60;
+        #endif
     }
 
     void Start()
