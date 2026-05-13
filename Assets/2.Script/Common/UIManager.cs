@@ -54,6 +54,11 @@ public class UIManager : Singleton<UIManager>
 
     protected override void OnAwake()
     {
+        //실행 오류가 있을 수 있으므로 아래로 옮김
+    }
+
+    void Start()
+    {
         GuideUI_List = ObjectManager.Instance.GetObject("UI", 1);
         FailUI_List = ObjectManager.Instance.GetObject("UI", 3);
         InventorySlot_List = ObjectManager.Instance.GetObject(InventoryUI, 0);
@@ -69,10 +74,7 @@ public class UIManager : Singleton<UIManager>
 
             Application.targetFrameRate = 60;
         #endif
-    }
 
-    void Start()
-    {
         BGMSlider.onValueChanged.AddListener(BGMsetting);
         SFXSlider.onValueChanged.AddListener(SFXsetting);
 
@@ -82,6 +84,22 @@ public class UIManager : Singleton<UIManager>
 
     private void LoadTextData()
     {
+        TextAsset jsonFile = Resources.Load<TextAsset>("UITextData");
+
+        if(jsonFile == null)
+            return;
+        
+        string json = jsonFile.text;
+        database = JsonUtility.FromJson<UITextDatabase>(json);
+
+        textDictionary.Clear();
+        foreach (var data in database.Texts)
+        {
+            if(!textDictionary.ContainsKey(data.Key))
+                textDictionary.Add(data.Key, data);
+        }
+        
+        /* 이전 텍스트 로드 방식, pc에서만 사용가능.
         string path = Path.Combine(Application.streamingAssetsPath, "UITextData.json");
 
         if (!File.Exists(path)) //데이터 파일이 없을 경우.
@@ -100,6 +118,7 @@ public class UIManager : Singleton<UIManager>
             if (!textDictionary.ContainsKey(data.Key))
                 textDictionary.Add(data.Key, data);
         }
+        */
     }
 
     private void InitResolution()
