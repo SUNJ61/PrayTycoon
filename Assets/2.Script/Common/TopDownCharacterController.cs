@@ -30,7 +30,7 @@ namespace Cainos.PixelArtTopDown_Basic
         }
 
 
-        private void FixedUpdate()
+        private void Update()
         {
             MoveLogic?.Invoke(); // Action이 null이 아니면 실행.
         }

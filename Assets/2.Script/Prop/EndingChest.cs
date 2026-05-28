@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class EndingChest : MonoBehaviour, IQuest
 {
+    private BoxCollider2D EndingCol;
+
     public int QuestID { get; private set; }
     public bool IQuestClear => QuestClear;
 
@@ -16,6 +18,16 @@ public class EndingChest : MonoBehaviour, IQuest
     private string EndingCreditType = "Gold";
 
     private bool QuestClear = false;
+    private void Awake()
+    {
+        EndingCol = GetComponent<BoxCollider2D>();
+    }
+
+    private void OnEnable()
+    {
+        ButtonManager.OnEnding += HandleEnding;
+    }
+
     private void Start()
     {
         QuestID = 4;
@@ -81,5 +93,16 @@ public class EndingChest : MonoBehaviour, IQuest
         SaveObject EndingChest_O_Data = EndingChest_O.GetComponent<SaveObject>();
         EndingChest_O.SetActive(true);
         EndingChest_O_Data.isRepaired = true;
+    }
+
+    private void HandleEnding()
+    {
+        if(EndingCol != null)
+            EndingCol.enabled = false;
+    }
+
+    private void OnDisable()
+    {
+        ButtonManager.OnEnding -= HandleEnding;
     }
 }

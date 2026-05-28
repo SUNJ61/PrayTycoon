@@ -36268,7 +36268,7 @@ GameObject:
   - component: {fileID: 1442051347}
   - component: {fileID: 1442051350}
   m_Layer: 21
-  m_Name: EndingCheat
+  m_Name: EndingChest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

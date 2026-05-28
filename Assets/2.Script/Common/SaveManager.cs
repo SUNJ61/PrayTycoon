@@ -87,7 +87,7 @@ public class SaveManager : Singleton<SaveManager>
 
 
 
-    public void SetLobbyUI() //로그인 유무 확인후 UI 업데이트 (로비씬 호출 시 마다 작동해야함)
+    public void SetLobbyUI() //로그인 유무 확인후 UI 업데이트
     {
         if(LogInState == true)
             LobbyManager.Instance.SetLogInUI();
@@ -95,7 +95,7 @@ public class SaveManager : Singleton<SaveManager>
             LobbyManager.Instance.SetLogOutUI();
     }
 
-    public void SaveSettingsToServer(string uid)
+    public void SaveSettingsToServer(string uid) // 옵션 데이터를 서버에 저장
     {
         if(string.IsNullOrEmpty(uid))
         {
@@ -111,7 +111,7 @@ public class SaveManager : Singleton<SaveManager>
         });
     }
 
-    public void LoadSettingsFromServer(string uid) // 데이터를 서버에서 불러오기
+    public void LoadSettingsFromServer(string uid) // 옵션 데이터를 서버에서 불러오기
     {
         DocumentReference docRef = database.Collection("users").Document(uid);
 
@@ -130,7 +130,7 @@ public class SaveManager : Singleton<SaveManager>
         });
     }
 
-    private void ApplyLoadedSettings()
+    private void ApplyLoadedSettings() // 불러온 옵션 데이터 적용 (로비)
     {
         if(LobbyManager.Instance != null)
             LobbyManager.Instance.LobbyOptionSet();
@@ -138,7 +138,7 @@ public class SaveManager : Singleton<SaveManager>
 
 
 
-    public void SaveGameData(int SlotIndex)
+    public void SaveGameData(int SlotIndex) // 서버에 게임 데이터 저장
     {
         if(LogInState == false) return;
 
@@ -163,7 +163,7 @@ public class SaveManager : Singleton<SaveManager>
         });
     }
 
-    public void LoadGameDataFromServer()
+    public void LoadGameDataFromServer() // 서버에서 게임 데이터 불러오기
     {
         if(LogInState == false) return;
         
@@ -273,7 +273,7 @@ public class SaveManager : Singleton<SaveManager>
         currentGameData[SlotIndex].MercenaryIds[2] = GuildSlot2_ItemId;
     }
 
-    private void MainMapIdCheck(SaveObject obj)
+    private void MainMapIdCheck(SaveObject obj) // 메인 맵 진행도 불러오기
     {
         if(obj.ObjectId == "Stair Broken - Main")
             obj.isRepaired = currentGameData[currentLoadIndex].Stair_Main;
@@ -294,7 +294,7 @@ public class SaveManager : Singleton<SaveManager>
             obj.isRepaired = !currentGameData[currentLoadIndex].EndingChest;
     }
 
-    private void GraveMapIdCheck(SaveObject obj)
+    private void GraveMapIdCheck(SaveObject obj) // 무덤 맵 진행도 불러오기
     {
         if(obj.ObjectId == "Broken Pillar")
             obj.isRepaired = currentGameData[currentLoadIndex].Grave;

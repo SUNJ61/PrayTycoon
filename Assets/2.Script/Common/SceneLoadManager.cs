@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -108,7 +109,7 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
     {
         SceneManager.sceneLoaded -= GameDataLoad;
 
-        SaveManager.Instance.UpdateGameData(); //게임데이터 적용
+        StartCoroutine(WaitForReadyAndLoadData());//게임데이터 적용
     }
 
     private void SaveLoadUIUpdate(Scene scene, LoadSceneMode mode) //씬 로드마다 세이브 로드 UI 업데이트 함수 (로그인 시 GameData 업데이트 필요.)
@@ -175,5 +176,22 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
         yield return null;
 
         SceneManager.LoadScene("TycoonEnding");
+    }
+
+    private IEnumerator WaitForReadyAndLoadData() // 인벤토리가 준비 될때까지 로드 미루기
+    {
+        while(Inventory.Instance == null || UIManager.Instance == null || ObjectManager.Instance == null)
+        {
+            yield return null;
+        }
+
+        while(Inventory.Instance.Slots == null || Inventory.Instance.Slots.Length == 0)
+        {
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(0.1f);
+
+        SaveManager.Instance.UpdateGameData();
     }
 }

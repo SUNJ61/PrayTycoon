@@ -15,12 +15,6 @@ public class QuestManager : Singleton<QuestManager>
     }
     private Dictionary<int, IQuest> QuestObj = new Dictionary<int, IQuest>();
 
-    private BoxCollider2D CurrentCol = null;
-    public BoxCollider2D currentCol
-    {
-        get { return CurrentCol; }
-    }
-
     private string CurrentKey = null;
     public string currentKey
     {
